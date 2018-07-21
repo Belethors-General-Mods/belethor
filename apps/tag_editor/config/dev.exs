@@ -53,6 +53,6 @@ config :tag_editor, TagEditor.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "tag_editor_dev",
+  database: "belethor_dev",
   hostname: "localhost",
   pool_size: 10

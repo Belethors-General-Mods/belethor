@@ -53,6 +53,6 @@ config :website, Website.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "website_dev",
+  database: "belethor_dev",
   hostname: "localhost",
   pool_size: 10
