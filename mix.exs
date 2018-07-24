@@ -15,6 +15,10 @@ defmodule Belethor.MixProject do
   #
   # Run "mix help deps" for examples and options.
   defp deps do
-    []
+    [
+      {:credo, "~> 0.9", runtime: false},
+      {:dialyxir, ">= 1.0.0-rc.3", runtime: false},
+      {:distillery, "~> 1.5", runtime: false}
+    ]
   end
 end
