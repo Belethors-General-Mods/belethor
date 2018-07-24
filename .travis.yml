@@ -1,0 +1,21 @@
+language: elixir
+elixir:
+  - 1.6
+otp_release:
+  - 20.3
+  - 21.0
+sudo: false
+env:
+  global:
+    - ELIXIR_ASSERT_TIMEOUT=2000
+install:
+  - mix local.rebar --force
+  - mix local.hex --force
+  - mix deps.get
+  - MIX_ENV=prod mix deps.compile
+script:
+  - MIX_ENV=prod mix compile --warnings-as-errors
+  - mix format --check-formatted
+  - mix credo --strict
+  - mix dialyzer
+  - mix test --trace
