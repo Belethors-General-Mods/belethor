@@ -13,9 +13,9 @@
 alias Website.{Repo, Mod, ModTag, Modfile}
 alias Ecto.Changeset
 
-mod_a = Repo.insert!(%Mod{ name: "Mod A", desc: "aaaaaaaaaaaaaaa" }) |> Repo.preload([:tags, :oldrim, :sse])
-mod_b = Repo.insert!(%Mod{ name: "Mod B", desc: "bbbbbbbbbbbbbbb" }) |> Repo.preload([:tags, :oldrim, :sse])
-mod_c = Repo.insert!(%Mod{ name: "Mod C", desc: "ccccccccccccccc" }) |> Repo.preload([:tags, :oldrim, :sse])
+mod_a = Repo.insert!(%Mod{ name: "Mod A", desc: "aaaaaaaaaaaaaaa", pic: "/favicon.ico" }) |> Repo.preload([:tags, :oldrim, :sse])
+mod_b = Repo.insert!(%Mod{ name: "Mod B", desc: "bbbbbbbbbbbbbbb", pic: "/favicon.ico" }) |> Repo.preload([:tags, :oldrim, :sse])
+mod_c = Repo.insert!(%Mod{ name: "Mod C", desc: "ccccccccccccccc", pic: "/favicon.ico" }) |> Repo.preload([:tags, :oldrim, :sse])
 
 
 tag_a = Repo.insert!(%ModTag{ name: "Tag A" }) |> Repo.preload(:mods)
@@ -35,4 +35,3 @@ mod_b = Changeset.change(mod_b) |> Changeset.put_assoc(:sse, file_b_sse) |> Repo
 mod_a = Changeset.change(mod_a) |> Changeset.put_assoc(:tags, [tag_a, tag_c])        |> Repo.update!()
 mod_b = Changeset.change(mod_b) |> Changeset.put_assoc(:tags, [tag_a, tag_b, tag_c]) |> Repo.update!()
 mod_c = Changeset.change(mod_c) |> Changeset.put_assoc(:tags, [tag_b])               |> Repo.update!()
-

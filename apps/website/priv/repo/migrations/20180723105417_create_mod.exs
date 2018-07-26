@@ -5,6 +5,7 @@ defmodule Website.Repo.Migrations.CreateMod do
     create table(:mod) do
       add :name, :string
       add :desc, :string
+      add :pic,  :string
     end
   end
 end

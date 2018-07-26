@@ -3,6 +3,7 @@ defmodule Website.Mod do
 
   schema "mod" do
     field :name, :string
+    field :pic,  :string
     field :desc, :string
 
     belongs_to :oldrim, Website.Modfile
