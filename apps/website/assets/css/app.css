@@ -1,1 +1,15 @@
 /* This file is for your main application css. */
+
+.mod-card {
+    width: 10rem;
+    margin: 1rem;
+}
+
+.mod-card img {
+    width: 9rem;
+}
+
+.modtag {
+    padding: 2px;
+    margin: 4px;
+}

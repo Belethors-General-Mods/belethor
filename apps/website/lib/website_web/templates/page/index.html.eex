@@ -1,4 +1,5 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "Belethors General Mods" %></h2>
   <p class="lead">A website inspired by G.E.M.S. in early development.</p>
+  <p><a href="/mods.html">/mods.html</a> can list all(!) the mods in the database.</p>
 </div>
