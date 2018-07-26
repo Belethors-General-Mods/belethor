@@ -1,0 +1,11 @@
+<div class="card mod-card">
+    <img class="rounded mx-auto d-block" src="<%= @mod.pic %>">
+    <div class="card-body">
+        <h5 class="card-title"><%= @mod.name %></h5>
+        <div class="modtags d-flex flex-wrap">
+        <%= for tag <- @mod.tags do %>
+            <span class="border border-dark rounded modtag"><%= tag.name %></span>
+        <% end %>
+        </div>
+    </div>
+</div>
