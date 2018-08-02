@@ -1,23 +1,24 @@
 language: elixir
 elixir:
-  - 1.6
+  - '1.6'
+  - '1.7'
 otp_release:
-  - 20.3
-  - 21.0
+  - '20.3'
+  - '21.0'
 sudo: false
 env:
   global:
     - ELIXIR_ASSERT_TIMEOUT=2000
 install:
-  - mix local.rebar --force
-  - mix local.hex --force
+  - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
-  - echo "use Mix.Config" > ${TRAVIS_BUILD_DIR}/apps/tag_editor/config/prod.secret.exs
-  - echo "use Mix.Config" > ${TRAVIS_BUILD_DIR}/apps/website/config/prod.secret.exs
-  - MIX_ENV=prod mix deps.compile
+  - MIX_ENV=test mix deps.compile
 script:
-  - MIX_ENV=prod mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/website && MIX_ENV=test mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/database && MIX_ENV=test mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/tag_editor && MIX_ENV=test mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR} && MIX_ENV=test mix compile --warnings-as-errors
   - mix format --check-formatted
   - mix credo --strict
   - mix dialyzer
-  - mix test --trace
+  - mix test --trace --cover

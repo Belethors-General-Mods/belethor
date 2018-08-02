@@ -10,6 +10,9 @@
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
 
+# Coverage output
+**/cover/
+
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
 
@@ -18,4 +21,3 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
-

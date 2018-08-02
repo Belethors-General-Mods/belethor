@@ -15,8 +15,7 @@ config :tag_editor, TagEditorWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "uxxxziQwE11eNSm9+J/rT4PKyQsKMHQ/ab0ZAqsjLuxLWd98aAw8baQKO6+sGbNy",
   render_errors: [view: TagEditorWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: TagEditor.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: TagEditor.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,4 +24,4 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
