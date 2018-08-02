@@ -15,11 +15,11 @@ install:
   - mix deps.get
   - mix deps.compile
 script:
-  - cd ${TRAVIS_BUILD_DIR}/apps/website && mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR}/apps/database && mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR}/apps/tag_editor && mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR} && mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/website && mix compile --warnings-as-errors --all-warnings
+  - cd ${TRAVIS_BUILD_DIR}/apps/database && mix compile --warnings-as-errors --all-warnings
+  - cd ${TRAVIS_BUILD_DIR}/apps/tag_editor && mix compile --warnings-as-errors --all-warnings
+  - cd ${TRAVIS_BUILD_DIR} && mix compile --warnings-as-errors --all-warnings
   - mix format --check-formatted
+  - mix coveralls.travis -u
   - mix credo --strict
   - mix dialyzer
-  - mix coveralls.travis -u
