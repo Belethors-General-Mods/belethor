@@ -5,7 +5,8 @@ defmodule Belethor.MixProject do
     [
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -16,9 +17,10 @@ defmodule Belethor.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:credo, "~> 0.9", runtime: false},
-      {:dialyxir, ">= 1.0.0-rc.3", runtime: false},
-      {:distillery, "~> 1.5", runtime: false}
+      {:credo, "~> 0.9", runtime: false, only: [:dev, :test]},
+      {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
+      {:distillery, "~> 1.5", runtime: false},
+      {:excoveralls, "~> 0.9", runtime: false, only: :test}
     ]
   end
 end

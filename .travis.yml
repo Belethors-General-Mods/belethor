@@ -9,16 +9,17 @@ sudo: false
 env:
   global:
     - ELIXIR_ASSERT_TIMEOUT=2000
+    - MIX_ENV=test
 install:
   - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
-  - MIX_ENV=test mix deps.compile
+  - mix deps.compile
 script:
-  - cd ${TRAVIS_BUILD_DIR}/apps/website && MIX_ENV=test mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR}/apps/database && MIX_ENV=test mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR}/apps/tag_editor && MIX_ENV=test mix compile --warnings-as-errors
-  - cd ${TRAVIS_BUILD_DIR} && MIX_ENV=test mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/website && mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/database && mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR}/apps/tag_editor && mix compile --warnings-as-errors
+  - cd ${TRAVIS_BUILD_DIR} && mix compile --warnings-as-errors
   - mix format --check-formatted
   - mix credo --strict
   - mix dialyzer
-  - mix test --trace --cover
+  - mix coveralls.travis -u
