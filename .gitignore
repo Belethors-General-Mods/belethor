@@ -18,3 +18,6 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
+
+/apps/tag_editor/assets/package-lock.json
+/apps/website/assets/package-lock.json

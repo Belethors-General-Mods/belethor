@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Website.{Repo, Mod, ModTag, Modfile}
+alias Database.{Repo, Mod, ModTag, Modfile}
 alias Ecto.Changeset
 
 mod_a = Repo.insert!(%Mod{ name: "Mod A", desc: "aaaaaaaaaaaaaaa", pic: "/favicon.ico" }) |> Repo.preload([:tags, :oldrim, :sse])

@@ -1,4 +1,4 @@
-defmodule Website.Repo.Migrations.CreateModfile do
+defmodule Database.Repo.Migrations.CreateModfile do
   use Ecto.Migration
 
   def change do

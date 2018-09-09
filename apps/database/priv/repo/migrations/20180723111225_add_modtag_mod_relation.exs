@@ -1,4 +1,4 @@
-defmodule Website.Repo.Migrations.CreateModtagModRelation do
+defmodule Database.Repo.Migrations.CreateModtagModRelation do
   use Ecto.Migration
 
   def change do

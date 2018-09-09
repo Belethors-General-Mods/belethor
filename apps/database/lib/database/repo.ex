@@ -1,4 +1,4 @@
-defmodule Website.Repo do
+defmodule Database.Repo do
   use Ecto.Repo, otp_app: :website
 
   @doc """

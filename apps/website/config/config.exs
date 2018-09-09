@@ -7,8 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :website,
-  namespace: Website,
-  ecto_repos: [Website.Repo]
+  namespace: Website
 
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,

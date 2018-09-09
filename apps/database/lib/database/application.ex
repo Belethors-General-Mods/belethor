@@ -6,8 +6,12 @@ defmodule Database.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
+
     # List all child processes to be supervised
     children = [
+      # Start the Ecto repository
+      supervisor(Database.Repo, []),
       # Starts a worker by calling: Database.Worker.start_link(arg)
       # {Database.Worker, arg},
     ]

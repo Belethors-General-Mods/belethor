@@ -1,6 +1,6 @@
 defmodule WebsiteWeb.PageController do
   use WebsiteWeb, :controller
-  alias Website.{Repo, Mod}
+  alias Database.{Repo, Mod}
 
   def index(conn, _params) do
     render(conn, "index.html")

@@ -7,8 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :tag_editor,
-  namespace: TagEditor,
-  ecto_repos: [TagEditor.Repo]
+  namespace: TagEditor
 
 # Configures the endpoint
 config :tag_editor, TagEditorWeb.Endpoint,
