@@ -8,12 +8,3 @@ config :tag_editor, TagEditorWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :tag_editor, TagEditor.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "tag_editor_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
