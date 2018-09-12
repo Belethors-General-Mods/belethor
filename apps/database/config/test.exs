@@ -10,4 +10,4 @@ config :website, Database.Repo,
   password: "postgres",
   database: "belethor_test",
   hostname: "localhost",
-  pool_size: 10
+  pool: Ecto.Adapters.SQL.Sandbox
