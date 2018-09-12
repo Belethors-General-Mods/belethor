@@ -11,6 +11,7 @@ defmodule Database.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls]
     ]
@@ -28,7 +29,7 @@ defmodule Database.MixProject do
   defp deps do
     [
       {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, ">= 0.0.0"}
     ]
   end
 
