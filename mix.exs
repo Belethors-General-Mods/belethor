@@ -26,6 +26,7 @@ defmodule Belethor.MixProject do
 
     [
       main: "readme",
+      api_reference: Mix.env() != :prod,
       # source_ref: "v#{@version}",
       source_url: "https://github.com/Belethors-General-Mods/belethor",
       # logo: "guides/assets/images/bgm_white_64.png",
@@ -57,7 +58,10 @@ defmodule Belethor.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:ex_doc, "~> 0.19", runtime: false},
+      # {:ex_doc, "~> 0.19", runtime: false},
+      {:ex_doc,
+       git: "https://github.com/elixir-lang/ex_doc",
+       ref: "5c5acfac61a311ec4fb61a42d956075bcfddbc44"},
       {:credo, "~> 0.10", runtime: false, only: [:dev, :test]},
       {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
       {:distillery, "~> 1.5", runtime: false},
