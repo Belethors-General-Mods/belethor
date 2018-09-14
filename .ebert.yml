@@ -5,13 +5,9 @@ engines:
     enabled: true
   fixme:
     enabled: true
-  duplication:
-    enabled: true
   eslint:
     enabled: true
   csslint:
-    enabled: true
-  stylelint:
     enabled: true
   shellcheck:
     enabled: true
