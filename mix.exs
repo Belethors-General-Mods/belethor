@@ -6,18 +6,19 @@ defmodule Belethor.MixProject do
 
   def project do
     [
-      apps_path: "apps",
       version: @version,
-      start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      test_coverage: [tool: ExCoveralls],
-      docs: docs(),
       name: "Belethor's General Mods",
-      homepage_url: "http://bgm.tetrarch.co"
+      homepage_url: "http://bgm.tetrarch.co",
+      apps_path: "apps",
+      aliases: aliases(),
+      deps: deps(),
+      docs: docs(),
+      start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
-  def docs do
+  defp docs do
     ignored =
       case Mix.env() do
         :prod -> [:database, :tag_editor, :crawler, :website]
@@ -66,6 +67,12 @@ defmodule Belethor.MixProject do
       {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
       {:distillery, "~> 1.5", runtime: false},
       {:excoveralls, "~> 0.10", runtime: false, only: :test}
+    ]
+  end
+
+  defp aliases do
+    [
+      digest: "cmd --app website --app tag_editor mix phx.digest"
     ]
   end
 end
