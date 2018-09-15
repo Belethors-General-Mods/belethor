@@ -1,4 +1,5 @@
-alias Database.{Repo, ModTag}
+alias Database.Repo
+alias Database.ModTag
 
 # import our tags
 Repo.insert_all(

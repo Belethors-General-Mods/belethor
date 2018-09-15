@@ -1,6 +1,7 @@
 #!/bin/sh
 
-echo "alias Database.{Repo, ModTag}
+echo "alias Database.Repo
+alias Database.ModTag
 
 # import our tags
 Repo.insert_all(

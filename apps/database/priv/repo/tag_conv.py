@@ -8,11 +8,9 @@ def replace_quotes(string: str) -> str:
     return string.replace("'", '"')
 
 def main() -> None:
-    config = """
-use Mix.Config
+    config = """use Mix.Config
 
-config :database, :tag_translations,
-  %{
+config :database, :tag_translations, %{
 """
 
     tag_map: Dict[str, List[str]] = {}
@@ -34,9 +32,9 @@ config :database, :tag_translations,
                 tag_map[tag].append(internal)
 
     for nexus_tag, our_tags in tag_map.items():
-        config = f'{config}    "{nexus_tag}" => {replace_quotes(str(our_tags))},\n'
+        config = f'{config}  "{nexus_tag}" => {replace_quotes(str(our_tags))},\n'
 
-    config = f'{config}  }}'
+    config = f'{config}}}'
 
     print(config)
 
