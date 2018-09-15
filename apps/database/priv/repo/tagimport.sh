@@ -1,1 +1,12 @@
-cat taglist.txt | awk '{ print "Repo.insert!(%ModTag{ name: \"" $0 "\" })" }'
+#!/bin/sh
+
+echo "alias Database.{Repo, ModTag}
+
+# import our tags
+Repo.insert_all(
+  ModTag,
+  ["
+cut -d';' -f1 < taglist.txt | awk '{ print "    %{name: \"" $0 "\"}," }'
+echo "  ],
+  []
+)"
