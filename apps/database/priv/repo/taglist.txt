@@ -1,155 +1,178 @@
-Animation
+Animation;Animation;Animation - Modified;Animation - New
 Animation.Actions
-Animation.Combat
+Animation.Combat;Combat
 Animation.Combat.Melee
 Animation.Combat.Ranged
 Animation.Idle
 Animation.Magic
 Animation.Movement
 Animation.Movement.Sneak
-Audio
+Audio;Audio;Audio - SFX, Music, and Voice
 Audio.Ambient
-Audio.Music
+Audio.Music;Audio - Music
 Audio.Overhaul
-Audio.SFX
-Audio.Voice
-Characters
-Characters.Attributes
-Characters.Body
-Characters.Body.Face
-Characters.Body.Hair
-Characters.Classes
-Characters.Clothing
-Characters.Clothing.Female
-Characters.Clothing.Jewelry
-Characters.Clothing.Male
-Characters.NPC
-Characters.NPC.Followers
-Characters.NPC.Trainers
-Characters.NPC.Vendors
-Characters.Poses
-Characters.Races
+Audio.SFX;Audio - Sound FX
+Audio.Voice;Audio - Voices
+Characters;Chargen;Character Presets;RaceMenu preset;Races, Classes, and Birthsigns
+Characters.Attributes;Attributes
+Characters.Birthsigns;Birthsigns
+Characters.Body;Body;Body models;Body, Face, and Hair;Bodyslide, OutfitStudio, and TexBlend Presets;Seraphim Bodybase;SevenBase Bodybase;UNP Bodybase;UNPB Bodybase
+Characters.Body.Face;Face models
+Characters.Body.Hair;Hair
+Characters.Classes;Classes component
+Characters.Female;Only for Female Characters
+Characters.Male;Only for Male Characters
+Characters.NPC;NPC;NPCs
+Characters.NPC.Children;NPC - Children
+Characters.NPC.Followers;Companions;Companions - Creatures;Companions/Followers;Followers
+Characters.NPC.Trainers;NPC Trainers
+Characters.NPC.Vendors;NPC Vendors
+Characters.Poses;Poses
+Characters.Races;Races - Modified;Races - New
+Characters.Races.Vampires;Related to vampires
 Combat
+Combat.Magic
 Combat.Melee
 Combat.Ranged
-Combat.Magic
 Combat.Tweaks
-Crafting
-Crafting.Alchemy
+Crafting;Crafting
+Crafting.Alchemy;Alchemy
 Crafting.Alchemy.Ingridients
 Crafting.Smithery
 Crafting.Smithery.Ingridients
 Crafting.Smithery.Ingridients.Ingots
 Crafting.Smithery.Ingridients.Leather
-Creatures
+Creatures;Companions - Creatures;Creatures
 Creatures.Domesticated
-Creatures.Mounts
+Creatures.Mounts;Related to horses;Creatures - Rideable;Mounts
 Creatures.Wild
-Faction
-Faction.College_of_Winterhold
-Faction.Companions
-Faction.Dark_Brotherhood
-Faction.Dawnguard
-Faction.Thieves_Guild
-Faction.Volkihar
-Gameplay
-Gameplay.Balanced
-Gameplay.Effects_and_Changes
-Gameplay.Immersion
-Gameplay.Immersion.Lore-Friendly
-Gameplay.Immersion.Realism
-Gameplay.Leveled_Lists
-Gameplay.Leveling
+DLC
+DLC.Dawnguard;Dawnguard
+DLC.Dragonborn;Dragonborn
+DLC.Hearthfire;Hearthfire
+Faction;Guilds / Factions;Guilds/Factions
+Faction.College_of_Winterhold;Faction: College of Winterhold
+Faction.Companions;Faction: Companions
+Faction.Dark_Brotherhood;Faction: Dark Brotherhood
+Faction.Dawnguard;Faction: Dawnguard
+Faction.Thieves_Guild;Faction: Thieves Guild
+Faction.Volkihar;Faction: Volkihar
+Gameplay;Magic - Gameplay
+Gameplay.Balance;Balance;Fair and balanced;Unbalanced
+Gameplay.Cheats_and_God_items;Cheats and God items;Enderal: Cheats and God items
+Gameplay.Collectables_Treasure_Hunts;Collectables, Treasure Hunts, and Puzzles
+Gameplay.Effects_and_Changes;Gameplay Effects/Changes;Gameplay Effects and Changes
+Gameplay.Immersion;Immersion
+Gameplay.Immersion.Lore-Friendly;Lore-Friendly
+Gameplay.Immersion.Realism;Content and realism
+Gameplay.Leveled_Lists;Leveled Lists
+Gameplay.Leveling;Skills and Leveling
 Gameplay.New_Content
 Gameplay.Overhaul
-Gameplay.Save_Games
-Gameplay.Scripted
-Gameplay.User_Interface
-Gameplay.Cheats_and_God_items
-Gameplay.Collectables_Treasure_Hunts
-Graphics
-Graphics.ENB_Preset
-Graphics.Lighting
-Graphics.Models
+Gameplay.Save_Games;Save Games;Saved games
+Gameplay.Scripted;Scripted Events
+Gameplay.User_Interface;Enderal: User Interface;User Interface
+Gameplay.User_Interface.MCM;Mod Configuration Menu (MCM)
+Graphics;Models and Textures;Visuals and Graphics
+Graphics.ENB_Preset;ENB Preset
+Graphics.Reshade;Reshade
+Graphics.Lighting;Lighting
+Graphics.Models;Body models;Body, Face, and Hair;Bodyslide, OutfitStudio, and TexBlend Presets;Face models;New models
 Graphics.Overhaul
-Graphics.Textures
-Items
-Items.Armour
+Graphics.Textures;New textures
+Items;Items - Leveled;Items and Objects - Player;Items and Objects - World;Weapons and Armour
+Items.Armour;Armour;Armour & Shields;Enderal: Armour
 Items.Armour.Female
 Items.Armour.Male
-Items.Armour.Shields
-Items.Books
+Items.Armour.Shields;Armour - Shields;Armour & Shields
+Items.Books;Books;Books and Scrolls
 Items.Books.Scrolls
 Items.Books.Skill
 Items.Books.Spell
-Items.Weapons
+Items.Clothing;Clothing
+Items.Clothing.Female;Clothing - Female
+Items.Clothing.Jewelry;Clothing - Jewelry
+Items.Clothing.Male;Clothing - Male
+Items.Clutter;Items - Clutter
+Items.Magic
+Items.Magic.Potions;Magic - Potions
+Items.Magic.Staffs
+Items.Weapons;Enderal: Weapons;Weapons
 Items.Weapons.One-handed
 Items.Weapons.Ranged
 Items.Weapons.Two-handed
-Items.Magic
-Items.Magic.Staffs
-Language
-Language.Czech
-Language.English
-Language.French
-Language.German
-Language.Hungarian
-Language.Italian
-Language.Japanese
-Language.Other
-Language.Polish
-Language.Russian
-Language.Spanish
-Language.Translation
-Magic
-Magic.Birthsigns
-Magic.Enchantments
-Magic.Shouts
-Magic.Spells
+Language;Language
+Language.Czech;Czech
+Language.English;English
+Language.French;French
+Language.German;German
+Language.Hungarian;Hungarian
+Language.Italian;Italian
+Language.Japanese;Japanese
+Language.Other;Other languages
+Language.Polish;Polish
+Language.Russian;Russian
+Language.Spanish;Spanish
+Language.Translation;Translation
+Magic;Enderal: Spells & Enchantments;Magic - Spells & Enchantments
+Magic.Enchantments;Magic - Enchantments
+Magic.Shouts;Shouts
+Magic.Spells;Magic - Spells
 Magic.StandingStones
-MI.Compilation
 MI.Dirty
-MI.ENB
-MI.ENB.DLL
-MI.Official
-MI.Replacer
-MI.Resources
-Miscellaneous
-Miscellaneous.Anime
-Miscellaneous.Humor
-MI.SKSE
-MI.SKSE.DLL
-MI.Tutorials
-MI.Unrealistic
-MI.Utilities
-MI.Vanilla
-MI.Videos_and_Trailers
-Not_Safe_For_Work
-Not_Safe_For_Work.Extreme_violence/gore
-Not_Safe_For_Work.Nudity
-Not_Safe_For_Work.Sexy/Skimpy
-Patches
-Patches.Bug_Fixes
-Patches.Performance
-Skills
+MI.Overhaul;Overhauls;Overhaul
+Misc;Enderal: Miscellaneous;Miscellaneous
+Misc.Compilation;Compilation
+Misc.Humor;Humour, Joke or Just for Fun
+Misc.Not_Lore-Friendly;Not Lore-Friendly
+Misc.Not_Lore-Friendly.Anime;Anime
+Misc.Not_Lore-Friendly.Other;Related to Movies/TV/Other Games
+Misc.Official;Official
+Misc.Replacer;Replacer
+Misc.Resources;Modder's Resource;Non-Playable Resource;Resources
+Misc.Tutorials;Modders Resources and Tutorials;Tutorials for Modders;Tutorials for Players
+Misc.Unrealistic;Cheating;Unrealistic
+Misc.Utilities;Utilities;Utilities for Modders;Utilities for Players
+Misc.Vanilla
+Misc.Videos_and_Trailers;Video;Videos and Trailers
+Not_Safe_For_Work;Not Safe For Work
+Not_Safe_For_Work.Extreme_violence/gore;Extreme violence/gore
+Not_Safe_For_Work.Nudity;Nudity;Sexualised content;Sexy/Skimpy
+Patches;Patches
+Patches.Bug_Fixes;Bug Fixes;Enderal: Bug Fixes
+Patches.Performance;Performance Optimization
+Skills;Skills and Leveling
 Skills.Magic
-Skills.Stealth
+Skills.Stealth;Stealth
 Skills.Warrior
-Total_Conversions
-Total_Conversions.Enderal
-World
-World.Buildings
-World.Buildings.Castles_Palaces_Mansions_Estates
-World.Buildings.Forts_Ruins_Abandoned_Structures
-World.Buildings.Mercantiles_(shops_stores_inns_taverns)
-World.Buildings.Player_Homes
-World.Cities_Towns_Villages
-World.Environment
-World.Environment.Foliage
+Tools.CBBE;Bodyslide, OutfitStudio, and TexBlend Presets;CBBE Bodybase
+Tools.ENB;ENB Preset
+Tools.Library
+Tools.Library.MCM;Mod Configuration Menu (MCM)
+Tools.Library.SkyUI;SkyUI
+Tools.SKSE;SKSE (Skyrim Script Extender)
+Tools.SKSE.DLL
+World;Items and Objects - World
+World.Buildings;Buildings;Locations - Buildings
+World.Buildings.Castles_Palaces_Mansions_Estates;Castles, Palaces, Mansions, and Estates
+World.Buildings.Forts_Ruins_Abandoned_Structures;Forts, Ruins, and Abandoned Structures
+World.Buildings.Mercantiles_(shops_stores_inns_taverns);Mercantiles (shops, stores, inns, taverns, etc)
+World.Buildings.Player_Homes;Enderal: Player Homes;Player homes
+World.Cities_Towns_Villages;Cities, Towns, Villages, and Hamlets
+World.Environment;Environment - Other;Environmental
+World.Environment.Foliage;Plants / Foliage
 World.Environment.Overhaul
-World.Landscape
-World.Locations
-World.Locations.Dungeons
+World.Environment.Sky;Environment - Sky
+World.Environment.Water;Environment - Water
+World.Environment.Weather;Environment - Weather
+World.Landscape;Landscape Changes
+World.Locations;Locations - New;Locations - Vanilla;Locations - World Map
+World.Locations.Caverns;Locations - Caverns
+World.Locations.Dungeons;Dungeons - New;Dungeons - Vanilla;Locations - Dungeons
+World.Locations.Mercantiles;Mercantiles (shops, stores, inns, taverns, etc)
+World.Locations.Player_Owned;Locations - Player-Owned;Player homes
 World.Objects
-World.Quests
-World.Solstheim
+World.Quests;Quests;Quests and Adventures
+World.Setting;New Lands;Total Conversion
+World.Setting.Enderal;Enderal: Armour;Enderal: Bug Fixes;Enderal: Cheats and God items;Enderal: Miscellaneous;Enderal: Player Homes;Enderal: Spells & Enchantments;Enderal: User Interface;Enderal: Weapons
+World.Setting.Solstheim;Solstheim

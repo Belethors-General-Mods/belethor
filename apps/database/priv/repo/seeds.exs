@@ -1,160 +1,168 @@
-alias Database.{Repo, Mod, ModTag, Modfile}
-alias Ecto.Changeset
+alias Database.Repo
+alias Database.ModTag
 
 # import our tags
-Repo.insert!(%ModTag{ name: "Tag A" })
-Repo.insert!(%ModTag{ name: "Animation" })
-Repo.insert!(%ModTag{ name: "Animation.Actions" })
-Repo.insert!(%ModTag{ name: "Animation.Combat" })
-Repo.insert!(%ModTag{ name: "Animation.Combat.Melee" })
-Repo.insert!(%ModTag{ name: "Animation.Combat.Ranged" })
-Repo.insert!(%ModTag{ name: "Animation.Idle" })
-Repo.insert!(%ModTag{ name: "Animation.Magic" })
-Repo.insert!(%ModTag{ name: "Animation.Movement" })
-Repo.insert!(%ModTag{ name: "Animation.Movement.Sneak" })
-Repo.insert!(%ModTag{ name: "Audio" })
-Repo.insert!(%ModTag{ name: "Audio.Ambient" })
-Repo.insert!(%ModTag{ name: "Audio.Music" })
-Repo.insert!(%ModTag{ name: "Audio.Overhaul" })
-Repo.insert!(%ModTag{ name: "Audio.SFX" })
-Repo.insert!(%ModTag{ name: "Audio.Voice" })
-Repo.insert!(%ModTag{ name: "Characters" })
-Repo.insert!(%ModTag{ name: "Characters.Attributes" })
-Repo.insert!(%ModTag{ name: "Characters.Body" })
-Repo.insert!(%ModTag{ name: "Characters.Body.Face" })
-Repo.insert!(%ModTag{ name: "Characters.Body.Hair" })
-Repo.insert!(%ModTag{ name: "Characters.Classes" })
-Repo.insert!(%ModTag{ name: "Characters.Clothing" })
-Repo.insert!(%ModTag{ name: "Characters.Clothing.Female" })
-Repo.insert!(%ModTag{ name: "Characters.Clothing.Jewelry" })
-Repo.insert!(%ModTag{ name: "Characters.Clothing.Male" })
-Repo.insert!(%ModTag{ name: "Characters.NPC" })
-Repo.insert!(%ModTag{ name: "Characters.NPC.Followers" })
-Repo.insert!(%ModTag{ name: "Characters.NPC.Trainers" })
-Repo.insert!(%ModTag{ name: "Characters.NPC.Vendors" })
-Repo.insert!(%ModTag{ name: "Characters.Poses" })
-Repo.insert!(%ModTag{ name: "Characters.Races" })
-Repo.insert!(%ModTag{ name: "Combat" })
-Repo.insert!(%ModTag{ name: "Combat.Melee" })
-Repo.insert!(%ModTag{ name: "Combat.Ranged" })
-Repo.insert!(%ModTag{ name: "Combat.Magic" })
-Repo.insert!(%ModTag{ name: "Combat.Tweaks" })
-Repo.insert!(%ModTag{ name: "Crafting" })
-Repo.insert!(%ModTag{ name: "Crafting.Alchemy" })
-Repo.insert!(%ModTag{ name: "Crafting.Alchemy.Ingridients" })
-Repo.insert!(%ModTag{ name: "Crafting.Smithery" })
-Repo.insert!(%ModTag{ name: "Crafting.Smithery.Ingridients" })
-Repo.insert!(%ModTag{ name: "Crafting.Smithery.Ingridients.Ingots" })
-Repo.insert!(%ModTag{ name: "Crafting.Smithery.Ingridients.Leather" })
-Repo.insert!(%ModTag{ name: "Creatures" })
-Repo.insert!(%ModTag{ name: "Creatures.Domesticated" })
-Repo.insert!(%ModTag{ name: "Creatures.Mounts" })
-Repo.insert!(%ModTag{ name: "Creatures.Wild" })
-Repo.insert!(%ModTag{ name: "Faction" })
-Repo.insert!(%ModTag{ name: "Faction.College_of_Winterhold" })
-Repo.insert!(%ModTag{ name: "Faction.Companions" })
-Repo.insert!(%ModTag{ name: "Faction.Dark_Brotherhood" })
-Repo.insert!(%ModTag{ name: "Faction.Dawnguard" })
-Repo.insert!(%ModTag{ name: "Faction.Thieves_Guild" })
-Repo.insert!(%ModTag{ name: "Faction.Volkihar" })
-Repo.insert!(%ModTag{ name: "Gameplay" })
-Repo.insert!(%ModTag{ name: "Gameplay.Balanced" })
-Repo.insert!(%ModTag{ name: "Gameplay.Effects_and_Changes" })
-Repo.insert!(%ModTag{ name: "Gameplay.Immersion" })
-Repo.insert!(%ModTag{ name: "Gameplay.Immersion.Lore-Friendly" })
-Repo.insert!(%ModTag{ name: "Gameplay.Immersion.Realism" })
-Repo.insert!(%ModTag{ name: "Gameplay.Leveled_Lists" })
-Repo.insert!(%ModTag{ name: "Gameplay.Leveling" })
-Repo.insert!(%ModTag{ name: "Gameplay.New_Content" })
-Repo.insert!(%ModTag{ name: "Gameplay.Overhaul" })
-Repo.insert!(%ModTag{ name: "Gameplay.Save_Games" })
-Repo.insert!(%ModTag{ name: "Gameplay.Scripted" })
-Repo.insert!(%ModTag{ name: "Gameplay.User_Interface" })
-Repo.insert!(%ModTag{ name: "Gameplay.Cheats_and_God_items" })
-Repo.insert!(%ModTag{ name: "Gameplay.Collectables_Treasure_Hunts" })
-Repo.insert!(%ModTag{ name: "Graphics" })
-Repo.insert!(%ModTag{ name: "Graphics.ENB_Preset" })
-Repo.insert!(%ModTag{ name: "Graphics.Lighting" })
-Repo.insert!(%ModTag{ name: "Graphics.Models" })
-Repo.insert!(%ModTag{ name: "Graphics.Overhaul" })
-Repo.insert!(%ModTag{ name: "Graphics.Textures" })
-Repo.insert!(%ModTag{ name: "Items" })
-Repo.insert!(%ModTag{ name: "Items.Armour" })
-Repo.insert!(%ModTag{ name: "Items.Armour.Female" })
-Repo.insert!(%ModTag{ name: "Items.Armour.Male" })
-Repo.insert!(%ModTag{ name: "Items.Armour.Shields" })
-Repo.insert!(%ModTag{ name: "Items.Books" })
-Repo.insert!(%ModTag{ name: "Items.Books.Scrolls" })
-Repo.insert!(%ModTag{ name: "Items.Books.Skill" })
-Repo.insert!(%ModTag{ name: "Items.Books.Spell" })
-Repo.insert!(%ModTag{ name: "Items.Weapons" })
-Repo.insert!(%ModTag{ name: "Items.Weapons.One-handed" })
-Repo.insert!(%ModTag{ name: "Items.Weapons.Ranged" })
-Repo.insert!(%ModTag{ name: "Items.Weapons.Two-handed" })
-Repo.insert!(%ModTag{ name: "Items.Magic" })
-Repo.insert!(%ModTag{ name: "Items.Magic.Staffs" })
-Repo.insert!(%ModTag{ name: "Language" })
-Repo.insert!(%ModTag{ name: "Language.Czech" })
-Repo.insert!(%ModTag{ name: "Language.English" })
-Repo.insert!(%ModTag{ name: "Language.French" })
-Repo.insert!(%ModTag{ name: "Language.German" })
-Repo.insert!(%ModTag{ name: "Language.Hungarian" })
-Repo.insert!(%ModTag{ name: "Language.Italian" })
-Repo.insert!(%ModTag{ name: "Language.Japanese" })
-Repo.insert!(%ModTag{ name: "Language.Other" })
-Repo.insert!(%ModTag{ name: "Language.Polish" })
-Repo.insert!(%ModTag{ name: "Language.Russian" })
-Repo.insert!(%ModTag{ name: "Language.Spanish" })
-Repo.insert!(%ModTag{ name: "Language.Translation" })
-Repo.insert!(%ModTag{ name: "Magic" })
-Repo.insert!(%ModTag{ name: "Magic.Birthsigns" })
-Repo.insert!(%ModTag{ name: "Magic.Enchantments" })
-Repo.insert!(%ModTag{ name: "Magic.Shouts" })
-Repo.insert!(%ModTag{ name: "Magic.Spells" })
-Repo.insert!(%ModTag{ name: "Magic.StandingStones" })
-Repo.insert!(%ModTag{ name: "MI.Compilation" })
-Repo.insert!(%ModTag{ name: "MI.Dirty" })
-Repo.insert!(%ModTag{ name: "MI.ENB" })
-Repo.insert!(%ModTag{ name: "MI.ENB.DLL" })
-Repo.insert!(%ModTag{ name: "MI.Official" })
-Repo.insert!(%ModTag{ name: "MI.Replacer" })
-Repo.insert!(%ModTag{ name: "MI.Resources" })
-Repo.insert!(%ModTag{ name: "Miscellaneous" })
-Repo.insert!(%ModTag{ name: "Miscellaneous.Anime" })
-Repo.insert!(%ModTag{ name: "Miscellaneous.Humor" })
-Repo.insert!(%ModTag{ name: "MI.SKSE" })
-Repo.insert!(%ModTag{ name: "MI.SKSE.DLL" })
-Repo.insert!(%ModTag{ name: "MI.Tutorials" })
-Repo.insert!(%ModTag{ name: "MI.Unrealistic" })
-Repo.insert!(%ModTag{ name: "MI.Utilities" })
-Repo.insert!(%ModTag{ name: "MI.Vanilla" })
-Repo.insert!(%ModTag{ name: "MI.Videos_and_Trailers" })
-Repo.insert!(%ModTag{ name: "Not_Safe_For_Work" })
-Repo.insert!(%ModTag{ name: "Not_Safe_For_Work.Extreme_violence/gore" })
-Repo.insert!(%ModTag{ name: "Not_Safe_For_Work.Nudity" })
-Repo.insert!(%ModTag{ name: "Not_Safe_For_Work.Sexy/Skimpy" })
-Repo.insert!(%ModTag{ name: "Patches" })
-Repo.insert!(%ModTag{ name: "Patches.Bug_Fixes" })
-Repo.insert!(%ModTag{ name: "Patches.Performance" })
-Repo.insert!(%ModTag{ name: "Skills" })
-Repo.insert!(%ModTag{ name: "Skills.Magic" })
-Repo.insert!(%ModTag{ name: "Skills.Stealth" })
-Repo.insert!(%ModTag{ name: "Skills.Warrior" })
-Repo.insert!(%ModTag{ name: "Total_Conversions" })
-Repo.insert!(%ModTag{ name: "Total_Conversions.Enderal" })
-Repo.insert!(%ModTag{ name: "World" })
-Repo.insert!(%ModTag{ name: "World.Buildings" })
-Repo.insert!(%ModTag{ name: "World.Buildings.Castles_Palaces_Mansions_Estates" })
-Repo.insert!(%ModTag{ name: "World.Buildings.Forts_Ruins_Abandoned_Structures" })
-Repo.insert!(%ModTag{ name: "World.Buildings.Mercantiles_(shops_stores_inns_taverns)" })
-Repo.insert!(%ModTag{ name: "World.Buildings.Player_Homes" })
-Repo.insert!(%ModTag{ name: "World.Cities_Towns_Villages" })
-Repo.insert!(%ModTag{ name: "World.Environment" })
-Repo.insert!(%ModTag{ name: "World.Environment.Foliage" })
-Repo.insert!(%ModTag{ name: "World.Environment.Overhaul" })
-Repo.insert!(%ModTag{ name: "World.Landscape" })
-Repo.insert!(%ModTag{ name: "World.Locations" })
-Repo.insert!(%ModTag{ name: "World.Locations.Dungeons" })
-Repo.insert!(%ModTag{ name: "World.Objects" })
-Repo.insert!(%ModTag{ name: "World.Quests" })
-Repo.insert!(%ModTag{ name: "World.Solstheim" })
+Repo.insert_all(
+  ModTag,
+  [
+    %{name: "Tag A"},
+    %{name: "Tag B"},
+    %{name: "Tag C"},
+    %{name: "Animation"},
+    %{name: "Animation.Actions"},
+    %{name: "Animation.Combat"},
+    %{name: "Animation.Combat.Melee"},
+    %{name: "Animation.Combat.Ranged"},
+    %{name: "Animation.Idle"},
+    %{name: "Animation.Magic"},
+    %{name: "Animation.Movement"},
+    %{name: "Animation.Movement.Sneak"},
+    %{name: "Audio"},
+    %{name: "Audio.Ambient"},
+    %{name: "Audio.Music"},
+    %{name: "Audio.Overhaul"},
+    %{name: "Audio.SFX"},
+    %{name: "Audio.Voice"},
+    %{name: "Characters"},
+    %{name: "Characters.Attributes"},
+    %{name: "Characters.Body"},
+    %{name: "Characters.Body.Face"},
+    %{name: "Characters.Body.Hair"},
+    %{name: "Characters.Classes"},
+    %{name: "Characters.Clothing"},
+    %{name: "Characters.Clothing.Female"},
+    %{name: "Characters.Clothing.Jewelry"},
+    %{name: "Characters.Clothing.Male"},
+    %{name: "Characters.NPC"},
+    %{name: "Characters.NPC.Followers"},
+    %{name: "Characters.NPC.Trainers"},
+    %{name: "Characters.NPC.Vendors"},
+    %{name: "Characters.Poses"},
+    %{name: "Characters.Races"},
+    %{name: "Combat"},
+    %{name: "Combat.Melee"},
+    %{name: "Combat.Ranged"},
+    %{name: "Combat.Magic"},
+    %{name: "Combat.Tweaks"},
+    %{name: "Crafting"},
+    %{name: "Crafting.Alchemy"},
+    %{name: "Crafting.Alchemy.Ingridients"},
+    %{name: "Crafting.Smithery"},
+    %{name: "Crafting.Smithery.Ingridients"},
+    %{name: "Crafting.Smithery.Ingridients.Ingots"},
+    %{name: "Crafting.Smithery.Ingridients.Leather"},
+    %{name: "Creatures"},
+    %{name: "Creatures.Domesticated"},
+    %{name: "Creatures.Mounts"},
+    %{name: "Creatures.Wild"},
+    %{name: "Faction"},
+    %{name: "Faction.College_of_Winterhold"},
+    %{name: "Faction.Companions"},
+    %{name: "Faction.Dark_Brotherhood"},
+    %{name: "Faction.Dawnguard"},
+    %{name: "Faction.Thieves_Guild"},
+    %{name: "Faction.Volkihar"},
+    %{name: "Gameplay"},
+    %{name: "Gameplay.Balanced"},
+    %{name: "Gameplay.Effects_and_Changes"},
+    %{name: "Gameplay.Immersion"},
+    %{name: "Gameplay.Immersion.Lore-Friendly"},
+    %{name: "Gameplay.Immersion.Realism"},
+    %{name: "Gameplay.Leveled_Lists"},
+    %{name: "Gameplay.Leveling"},
+    %{name: "Gameplay.New_Content"},
+    %{name: "Gameplay.Overhaul"},
+    %{name: "Gameplay.Save_Games"},
+    %{name: "Gameplay.Scripted"},
+    %{name: "Gameplay.User_Interface"},
+    %{name: "Gameplay.Cheats_and_God_items"},
+    %{name: "Gameplay.Collectables_Treasure_Hunts"},
+    %{name: "Graphics"},
+    %{name: "Graphics.ENB_Preset"},
+    %{name: "Graphics.Lighting"},
+    %{name: "Graphics.Models"},
+    %{name: "Graphics.Overhaul"},
+    %{name: "Graphics.Textures"},
+    %{name: "Items"},
+    %{name: "Items.Armour"},
+    %{name: "Items.Armour.Female"},
+    %{name: "Items.Armour.Male"},
+    %{name: "Items.Armour.Shields"},
+    %{name: "Items.Books"},
+    %{name: "Items.Books.Scrolls"},
+    %{name: "Items.Books.Skill"},
+    %{name: "Items.Books.Spell"},
+    %{name: "Items.Weapons"},
+    %{name: "Items.Weapons.One-handed"},
+    %{name: "Items.Weapons.Ranged"},
+    %{name: "Items.Weapons.Two-handed"},
+    %{name: "Items.Magic"},
+    %{name: "Items.Magic.Staffs"},
+    %{name: "Language"},
+    %{name: "Language.Czech"},
+    %{name: "Language.English"},
+    %{name: "Language.French"},
+    %{name: "Language.German"},
+    %{name: "Language.Hungarian"},
+    %{name: "Language.Italian"},
+    %{name: "Language.Japanese"},
+    %{name: "Language.Other"},
+    %{name: "Language.Polish"},
+    %{name: "Language.Russian"},
+    %{name: "Language.Spanish"},
+    %{name: "Language.Translation"},
+    %{name: "Magic"},
+    %{name: "Magic.Birthsigns"},
+    %{name: "Magic.Enchantments"},
+    %{name: "Magic.Shouts"},
+    %{name: "Magic.Spells"},
+    %{name: "Magic.StandingStones"},
+    %{name: "MI.Compilation"},
+    %{name: "MI.Dirty"},
+    %{name: "MI.ENB"},
+    %{name: "MI.ENB.DLL"},
+    %{name: "MI.Official"},
+    %{name: "MI.Replacer"},
+    %{name: "MI.Resources"},
+    %{name: "Miscellaneous"},
+    %{name: "Miscellaneous.Anime"},
+    %{name: "Miscellaneous.Humor"},
+    %{name: "MI.SKSE"},
+    %{name: "MI.SKSE.DLL"},
+    %{name: "MI.Tutorials"},
+    %{name: "MI.Unrealistic"},
+    %{name: "MI.Utilities"},
+    %{name: "MI.Vanilla"},
+    %{name: "MI.Videos_and_Trailers"},
+    %{name: "Not_Safe_For_Work"},
+    %{name: "Not_Safe_For_Work.Extreme_violence/gore"},
+    %{name: "Not_Safe_For_Work.Nudity"},
+    %{name: "Not_Safe_For_Work.Sexy/Skimpy"},
+    %{name: "Patches"},
+    %{name: "Patches.Bug_Fixes"},
+    %{name: "Patches.Performance"},
+    %{name: "Skills"},
+    %{name: "Skills.Magic"},
+    %{name: "Skills.Stealth"},
+    %{name: "Skills.Warrior"},
+    %{name: "Total_Conversions"},
+    %{name: "Total_Conversions.Enderal"},
+    %{name: "World"},
+    %{name: "World.Buildings"},
+    %{name: "World.Buildings.Castles_Palaces_Mansions_Estates"},
+    %{name: "World.Buildings.Forts_Ruins_Abandoned_Structures"},
+    %{name: "World.Buildings.Mercantiles_(shops_stores_inns_taverns)"},
+    %{name: "World.Buildings.Player_Homes"},
+    %{name: "World.Cities_Towns_Villages"},
+    %{name: "World.Environment"},
+    %{name: "World.Environment.Foliage"},
+    %{name: "World.Environment.Overhaul"},
+    %{name: "World.Landscape"},
+    %{name: "World.Locations"},
+    %{name: "World.Locations.Dungeons"},
+    %{name: "World.Objects"},
+    %{name: "World.Quests"},
+    %{name: "World.Solstheim"}
+  ],
+  []
+)
