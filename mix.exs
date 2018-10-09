@@ -1,4 +1,5 @@
 defmodule Belethor.MixProject do
+  @moduledoc false
   use Mix.Project
 
   # major.minor.patch-docs
@@ -13,8 +14,29 @@ defmodule Belethor.MixProject do
       aliases: aliases(),
       deps: deps(),
       docs: docs(),
+      dialyzer: dialyzer(),
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls]
+    ]
+  end
+
+  defp dialyzer do
+    plt =
+      case Mix.env() do
+        # this fixes a failure when dialyxir is run in a test env
+        :test -> [:ex_unit]
+        _ -> []
+      end
+
+    [
+      plt_add_apps: plt,
+      flags: [
+        :unmatched_returns,
+        :error_handling,
+        :race_conditions,
+        :no_opaque,
+        :underspecs
+      ]
     ]
   end
 
@@ -55,8 +77,6 @@ defmodule Belethor.MixProject do
   # Dependencies listed here are available only for this
   # project and cannot be accessed from applications inside
   # the apps folder.
-  #
-  # Run "mix help deps" for examples and options.
   defp deps do
     [
       # {:ex_doc, "~> 0.19", runtime: false},
