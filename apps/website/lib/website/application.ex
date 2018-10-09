@@ -1,4 +1,8 @@
 defmodule Website.Application do
+  @moduledoc """
+  The main module for the Webist application
+  """
+  alias WebsiteWeb.Endpoint
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -6,12 +10,8 @@ defmodule Website.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Define workers and child supervisors to be supervised
     children = [
-      # Start the endpoint when the application starts
-      supervisor(WebsiteWeb.Endpoint, []),
-      # Start your own worker by calling: Website.Worker.start_link(arg1, arg2, arg3)
-      # worker(Website.Worker, [arg1, arg2, arg3]),
+      supervisor(WebsiteWeb.Endpoint, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -23,7 +23,7 @@ defmodule Website.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    WebsiteWeb.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end

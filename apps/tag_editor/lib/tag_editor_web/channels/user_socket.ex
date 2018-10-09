@@ -5,7 +5,7 @@ defmodule TagEditorWeb.UserSocket do
   # channel "room:*", TagEditorWeb.RoomChannel
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport(:websocket, Phoenix.Transports.WebSocket)
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
@@ -23,7 +23,7 @@ defmodule TagEditorWeb.UserSocket do
     {:ok, socket}
   end
 
-  # Socket id's are topics that allow you to identify all sockets for a given user:
+  # Socket IDs are topics that allow you to identify all sockets for given user:
   #
   #     def id(socket), do: "user_socket:#{socket.assigns.user_id}"
   #
