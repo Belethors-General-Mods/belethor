@@ -33,7 +33,7 @@
       # If you want to enforce a style guide and need a more traditional linting
       # experience, you can change `strict` to `true` below:
       #
-      strict: false,
+      strict: true,
       #
       # If you want to use uncolored output by default, you can change `color`
       # to `false` below:
@@ -73,11 +73,11 @@
         #
         {Credo.Check.Design.DuplicatedCode, excluded_macros: []},
         # You can also customize the exit_status of each check.
-        # If you don't want TODO comments to cause `mix credo` to fail, just
+        # If you don't want TO-DO comments to cause `mix credo` to fail, just
         # set this value to 0 (zero).
         #
         {Credo.Check.Design.TagTODO, exit_status: 0},
-        {Credo.Check.Design.TagFIXME, exit_status: 0},
+        {Credo.Check.Design.TagFIXME, exit_status: 1},
 
         #
         ## Readability Checks
@@ -115,7 +115,13 @@
         {Credo.Check.Refactor.NegatedConditionsWithElse},
         {Credo.Check.Refactor.Nesting},
         {Credo.Check.Refactor.PipeChainStart,
-         excluded_argument_types: [:atom, :binary, :fn, :keyword], excluded_functions: []},
+         excluded_argument_types: [
+           :atom,
+           :binary,
+           :fn,
+           :keyword
+         ],
+         excluded_functions: []},
         {Credo.Check.Refactor.UnlessWithElse},
 
         #
