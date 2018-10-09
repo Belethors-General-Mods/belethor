@@ -46,5 +46,4 @@ defmodule Database.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
-
 end

@@ -11,7 +11,7 @@ defmodule Database.Application do
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Database.Repo, []),
+      supervisor(Database.Repo, [])
       # Starts a worker by calling: Database.Worker.start_link(arg)
       # {Database.Worker, arg},
     ]
