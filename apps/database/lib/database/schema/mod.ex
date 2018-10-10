@@ -9,9 +9,9 @@ defmodule Database.Schema.Mod do
     field(:desc, :string)
     field(:published, :boolean)
 
-    embeds_one(:oldrim, Database.ModFile)
-    embeds_one(:sse, Database.ModFile)
-    has_many(:image, Database.ModImage)
-    many_to_many(:tags, Database.ModTag, join_through: "mods_tags", unique: true)
+    embeds_one(:oldrim, Database.Schema.ModFile)
+    embeds_one(:sse, Database.Schema.ModFile)
+    has_many(:image, Database.Schema.ModImage)
+    many_to_many(:tags, Database.Schema.ModTag, join_through: "mods_tags", unique: true)
   end
 end

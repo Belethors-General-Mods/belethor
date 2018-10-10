@@ -6,6 +6,6 @@ defmodule Database.Schema.ModTag do
 
   schema "mod_tag" do
     field(:name, :string)
-    many_to_many(:mods, Database.Mod, join_through: "mods_tags", unique: true)
+    many_to_many(:mods, Database.Schema.Mod, join_through: "mods_tags", unique: true)
   end
 end

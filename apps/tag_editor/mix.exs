@@ -38,6 +38,7 @@ defmodule TagEditor.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:database, in_umbrella: true},
       {:phoenix, "~> 1.3"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.12"},
