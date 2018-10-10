@@ -18,3 +18,5 @@ rules:
   semi:
     - error
     - never
+globals:
+  exports: true
