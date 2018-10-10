@@ -12,11 +12,13 @@ defmodule TagEditor.DataCase do
   of the test unless the test case is marked as async.
   """
 
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Changeset
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      alias TagEditor.Repo
+      alias Database.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -26,10 +28,10 @@ defmodule TagEditor.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TagEditor.Repo)
+    :ok = Sandbox.checkout(Database.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(TagEditor.Repo, {:shared, self()})
+      Sandbox.mode(Database.Repo, {:shared, self()})
     end
 
     :ok
@@ -44,7 +46,7 @@ defmodule TagEditor.DataCase do
 
   """
   def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Changeset.traverse_errors(changeset, fn {message, opts} ->
       Enum.reduce(opts, message, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)

@@ -1,8 +1,8 @@
 /* This file is for your main application css. */
 
 .mod-card {
-    width: 10rem;
     margin: 1rem;
+    width: 10rem;
 }
 
 .mod-card img {
@@ -10,6 +10,6 @@
 }
 
 .modtag {
-    padding: 2px;
     margin: 4px;
+    padding: 2px;
 }

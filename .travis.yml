@@ -5,6 +5,7 @@ elixir:
 otp_release:
   - '20.3'
   - '21.0'
+  - '21.1'
 addons:
   apt:
     packages:
@@ -21,10 +22,14 @@ install:
   - mix deps.get
   - mix deps.compile
 script:
-  - mix compile --warnings-as-errors --all-warnings
   - mix format --check-formatted
+  - for f in $(mix format --check-formatted 2>&1 | cut -s -d' ' -f4- | grep -E '^.+\.exs?$'); do echo $f; cat $f | mix format - | diff $f -; done
+  - mix compile --warnings-as-errors --all-warnings
   - mix ecto.create
   - mix ecto.migrate
   - mix coveralls.travis -u
   - mix credo --strict
   - mix dialyzer
+cache:
+  directories:
+    - deps

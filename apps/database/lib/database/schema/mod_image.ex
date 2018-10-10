@@ -8,6 +8,6 @@ defmodule Database.Schema.ModImage do
     field(:data, :binary)
     field(:url, :string)
 
-    belongs_to(:mod, Database.Mod)
+    belongs_to(:mod, Database.Schema.Mod)
   end
 end
