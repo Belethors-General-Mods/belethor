@@ -18,7 +18,7 @@ defmodule TagEditor.DataCase do
 
   using do
     quote do
-      alias TagEditor.Repo
+      alias Database.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -28,10 +28,10 @@ defmodule TagEditor.DataCase do
   end
 
   setup tags do
-    :ok = Sandbox.checkout(TagEditor.Repo)
+    :ok = Sandbox.checkout(Database.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(TagEditor.Repo, {:shared, self()})
+      Sandbox.mode(Database.Repo, {:shared, self()})
     end
 
     :ok

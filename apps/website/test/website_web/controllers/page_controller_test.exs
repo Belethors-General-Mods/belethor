@@ -2,7 +2,7 @@ defmodule WebsiteWeb.PageControllerTest do
   use WebsiteWeb.ConnCase
 
   test "GET /", %{conn: conn} do
-    conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+    conn = get(conn, "/")
+    assert html_response(conn, 200) =~ "Welcome to Belethors General Mods"
   end
 end

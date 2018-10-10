@@ -29,10 +29,10 @@ defmodule WebsiteWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Sandbox.checkout(Website.Repo)
+    :ok = Sandbox.checkout(Database.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(Website.Repo, {:shared, self()})
+      Sandbox.mode(Database.Repo, {:shared, self()})
     end
 
     {:ok, conn: ConnTest.build_conn()}

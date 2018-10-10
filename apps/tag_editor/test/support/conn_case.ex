@@ -29,10 +29,10 @@ defmodule TagEditorWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Sandbox.checkout(TagEditor.Repo)
+    :ok = Sandbox.checkout(Database.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(TagEditor.Repo, {:shared, self()})
+      Sandbox.mode(Database.Repo, {:shared, self()})
     end
 
     {:ok, conn: ConnTest.build_conn()}
