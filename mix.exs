@@ -24,8 +24,11 @@ defmodule Belethor.MixProject do
     plt =
       case Mix.env() do
         # this fixes a failure when dialyxir is run in a test env
-        :test -> [:ex_unit]
-        _ -> []
+        :test ->
+          [:ex_unit]
+
+        _ ->
+          []
       end
 
     [
