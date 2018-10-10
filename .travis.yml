@@ -22,10 +22,14 @@ install:
   - mix deps.get
   - mix deps.compile
 script:
-  - mix compile --warnings-as-errors --all-warnings
   - mix format --check-formatted
+  - mix format --dry-run
+  - mix compile --warnings-as-errors --all-warnings
   - mix ecto.create
   - mix ecto.migrate
   - mix coveralls.travis -u
   - mix credo --strict
   - mix dialyzer
+cache:
+  directories:
+    - deps
