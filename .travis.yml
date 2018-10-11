@@ -33,3 +33,4 @@ script:
 cache:
   directories:
     - deps
+    - _build
