@@ -85,7 +85,7 @@ defmodule Belethor.MixProject do
       # {:ex_doc, "~> 0.19", runtime: false, only: [:dev, :prod]},
       {:ex_doc,
        git: "https://github.com/elixir-lang/ex_doc",
-       ref: "5c5acfac61a311ec4fb61a42d956075bcfddbc44",
+       ref: "f376e2208d58508df01dbdf4bdcc58f441e61595",
        runtime: false,
        only: [:dev, :prod]},
       {:credo, "~> 0.10", runtime: false, only: [:dev, :test]},
