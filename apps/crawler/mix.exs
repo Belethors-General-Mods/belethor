@@ -26,9 +26,10 @@ defmodule Crawler.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:database, in_umbrella: true},
       {:httpoison, "~> 1.3"},
       {:floki, "~> 0.20"},
-      {:gen_stage, "~> 0.14"}
+      {:flow, "~> 0.14"}
     ]
   end
 end

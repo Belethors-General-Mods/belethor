@@ -29,7 +29,8 @@ defmodule Database.MixProject do
   defp deps do
     [
       {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:poison, "~> 3.1"}
     ]
   end
 
