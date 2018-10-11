@@ -90,7 +90,7 @@ defmodule Belethor.MixProject do
        only: [:dev, :prod]},
       {:credo, "~> 0.10", runtime: false, only: [:dev, :test]},
       {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
-      {:distillery, "~> 1.5", runtime: false},
+      {:distillery, "~> 2.0", runtime: false},
       {:excoveralls, "~> 0.10", runtime: false, only: :test}
     ]
   end
