@@ -13,7 +13,9 @@ defmodule Crawler.TaskManager do
     receive do
       {:result, result} -> result
     after
-      timeout -> :timeout
+      timeout ->
+        #TODO kill the task not needed anymore
+        :timeout
     end
   end
 
@@ -29,7 +31,6 @@ defmodule Crawler.TaskManager do
   def handle_call({:search, args}, {pid, _ref}, state = {max, queue}) do
     # startup a new task if the max is not reached
     c = Task.Supervisor.children(Crawler.TaskSupervisor)
-    Logger.debug "children : #{c}"
     if length(c) < max do
       start_task(pid, args)
       {:reply, :ok, state}
@@ -67,4 +68,5 @@ defmodule Crawler.TaskManager do
       :ok
     end)
   end
+
 end
