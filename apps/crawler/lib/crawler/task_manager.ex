@@ -1,4 +1,5 @@
 defmodule Crawler.TaskManager do
+
   use GenServer
   require Logger
 
@@ -20,23 +21,29 @@ defmodule Crawler.TaskManager do
   end
 
 
-  ## Callbacks
+  ## callbacks and internal stuff
+
+  defmodule State do
+    @moduledoc false
+    defstruct [:max, :queue, :supervisor]
+  end
+
 
   def init(max) do
     Logger.info "starting up #{__MODULE__} with max #{max}"
-    {:ok, {max, :queue.new}}
+    {:ok, %State{ max: max, queue: :queue.new, supervisor: Crawler.TaskSupervisor}}
   end
 
   # get the call to add on task
-  def handle_call({:search, args}, {pid, _ref}, state = {max, queue}) do
+  def handle_call({:search, args}, {pid, _ref}, state) do
     # startup a new task if the max is not reached
-    c = Task.Supervisor.children(Crawler.TaskSupervisor)
-    if length(c) < max do
-      start_task(pid, args)
       {:reply, :ok, state}
+    c = Task.Supervisor.children(state.supervisor)
+    if length(c) < state.max do
+      t = start_task(state.supervisor, pid, args)
     else # otherwise queue it
-      q = :queue.in({pid, args}, queue)
-      {:reply, :ok, {max, q}}
+      q = :queue.in({pid, args}, state.queue)
+      {:reply, :queued, %State{ state | queue: q}}
     end
   end
 
@@ -46,13 +53,14 @@ defmodule Crawler.TaskManager do
   end
 
   # a task shutdown (for whatever reason)
-  def handle_info({:DOWN, _ref, :process, _pid, _reason}, state = {max, queue}) do
+  def handle_info({:DOWN, _ref, :process, _pid, _reason}, state) do
     # add new task if aviable
+    queue = state.queue
     case :queue.out(queue) do
       {:empty, ^queue} -> {:noreply, state}
       {{:value, {pid, args}}, q} ->
-        start_task(pid, args)
-        {:noreply, {max, q}}
+        start_task(state.supervisor, pid, args)
+        {:noreply, %State{state | queue: q}}
     end
   end
 
@@ -62,9 +70,9 @@ defmodule Crawler.TaskManager do
     {:noreply, state}
   end
 
-  defp start_task(client, {provider, query}) do
-    %Task{} = Task.Supervisor.async_nolink(Crawler.TaskSupervisor, fn ->
-      send client, {:result, provider.search(query)}
+  defp start_task(supervisor, client, {provider, query}) do
+    %Task{} = Task.Supervisor.async_nolink(supervisor, fn ->
+      send client, {:ok, provider.search(query)}
       :ok
     end)
   end
