@@ -8,8 +8,6 @@ defmodule Crawler.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      worker(Crawler.TaskManager, [4]),
-      {Task.Supervisor, name: Crawler.TaskSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
