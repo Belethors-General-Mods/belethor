@@ -27,7 +27,7 @@ defmodule Crawler.MixProject do
   defp deps do
     [
       {:database, in_umbrella: true},
-      {:httpoison, "~> 1.3"},
+      {:httpoison, "~> 1.4"},
       {:floki, "~> 0.20"},
       {:flow, "~> 0.14"}
     ]
