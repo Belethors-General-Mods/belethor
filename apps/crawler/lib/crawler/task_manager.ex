@@ -3,12 +3,21 @@ defmodule Crawler.TaskManager do
   use GenServer
   require Logger
 
+  @type search_result() :: {:timeout, :running | :queued} | {:ok, list(any())}
+
+
   ## api
 
+  @doc "start an instance, with options"
+  @spec start_link(pos_integer(), GenServer.options()) :: Supervisor.on_start()
   def start_link(max, opts \\ []) do
     GenServer.start_link(__MODULE__, max, opts)
   end
 
+  @doc """
+  execute ``provider.search(query)`` in an rate limited way.
+  """
+  @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
   def search(query, manager, provider, timeout \\ 5000) do
     GenServer.call(manager, {:search, {provider, query}})
     receive do
@@ -29,6 +38,7 @@ defmodule Crawler.TaskManager do
   end
 
 
+  @doc false
   def init(max) do
     {:ok, supervisor} = DynamicSupervisor.start_link(strategy: :one_for_one)
     start = %State{ max: max, queue: :queue.new, supervisor: supervisor }
@@ -37,6 +47,7 @@ defmodule Crawler.TaskManager do
   end
 
   # get the call to add on task
+  @doc false
   def handle_call({:search, args}, {pid, _ref}, state) do
     # startup a new task if the max is not reached
     c = Task.Supervisor.children(state.supervisor)
@@ -50,11 +61,13 @@ defmodule Crawler.TaskManager do
   end
 
   # a task returned without error
+  @doc false
   def handle_info({_, :ok}, state) do
     {:noreply, state}
   end
 
   # a task shutdown (for whatever reason)
+  @doc false
   def handle_info({:DOWN, _ref, :process, _pid, _reason}, state) do
     # add new task if aviable
     queue = state.queue
@@ -67,6 +80,7 @@ defmodule Crawler.TaskManager do
   end
 
   # only to log unexpected messages
+  @doc false
   def handle_info(msg, state) do
     Logger.warn "unexpected handle_info call, msg: #{inspect msg}"
     {:noreply, state}
