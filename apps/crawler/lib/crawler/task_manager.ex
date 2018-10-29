@@ -5,12 +5,12 @@ defmodule Crawler.TaskManager do
 
   ## api
 
-  def start_link(max) do
-    GenServer.start_link(__MODULE__, max, name: __MODULE__)
+  def start_link(max, opts \\ []) do
+    GenServer.start_link(__MODULE__, max, opts)
   end
 
-  def search(query, provider, timeout \\ 5000) do
-    GenServer.call(__MODULE__, {:search, {provider, args}})
+  def search(query, manager, provider, timeout \\ 5000) do
+    GenServer.call(manager, {:search, {provider, query}})
     receive do
       {:result, result} -> result
     after
@@ -30,20 +30,22 @@ defmodule Crawler.TaskManager do
 
 
   def init(max) do
-    Logger.info "starting up #{__MODULE__} with max #{max}"
-    {:ok, %State{ max: max, queue: :queue.new, supervisor: Crawler.TaskSupervisor}}
+    {:ok, supervisor} = DynamicSupervisor.start_link(strategy: :one_for_one)
+    start = %State{ max: max, queue: :queue.new, supervisor: supervisor }
+    Logger.debug "starting start created:\n\t#{inspect start}"
+    {:ok, start}
   end
 
   # get the call to add on task
   def handle_call({:search, args}, {pid, _ref}, state) do
     # startup a new task if the max is not reached
-      {:reply, :ok, state}
     c = Task.Supervisor.children(state.supervisor)
     if length(c) < state.max do
-      t = start_task(state.supervisor, pid, args)
+      start_task(state.supervisor, pid, args)
+      {:noreply, state}
     else # otherwise queue it
       q = :queue.in({pid, args}, state.queue)
-      {:reply, :queued, %State{ state | queue: q}}
+      {:noreply, %State{ state | queue: q}}
     end
   end
 
@@ -71,7 +73,7 @@ defmodule Crawler.TaskManager do
   end
 
   defp start_task(supervisor, client, {provider, query}) do
-    %Task{} = Task.Supervisor.async_nolink(supervisor, fn ->
+    %Task{} = Task.Supervisor.async(supervisor, fn ->
       send client, {:ok, provider.search(query)}
       :ok
     end)
