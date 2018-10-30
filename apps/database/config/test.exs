@@ -4,9 +4,13 @@ use Mix.Config
 config :logger, level: :warn
 
 # Configure your database
-config :website, Database.Repo,
+config :database, Database.Repo,
   username: "postgres",
   password: "postgres",
   database: "belethor_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :database,
+  test_time: 1000,
+  test_runs: 10_000

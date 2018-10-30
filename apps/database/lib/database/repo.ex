@@ -1,6 +1,6 @@
 defmodule Database.Repo do
   use Ecto.Repo,
-    otp_app: :website,
+    otp_app: :database,
     adapter: Ecto.Adapters.Postgres
 
   @doc """

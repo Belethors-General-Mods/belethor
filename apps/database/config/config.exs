@@ -39,3 +39,4 @@ config :logger, :console,
   metadata: [:user_id]
 
 import_config "#{Mix.env()}.exs"
+import_config "config.mappings.exs"

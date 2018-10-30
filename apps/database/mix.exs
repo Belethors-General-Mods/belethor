@@ -31,7 +31,8 @@ defmodule Database.MixProject do
       {:ecto_sql, ">= 3.0.0-rc1"},
       {:phoenix_ecto, "~> 3.5"},
       {:postgrex, ">= 0.0.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:stream_data, "~> 0.4"}
     ]
   end
 

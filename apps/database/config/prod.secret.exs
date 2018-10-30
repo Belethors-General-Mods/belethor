@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :website, Database.Repo,
+config :database, Database.Repo,
   username: "postgres",
   password: "postgres",
   database: "belethor",

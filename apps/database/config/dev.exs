@@ -8,9 +8,13 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :website, Database.Repo,
+config :database, Database.Repo,
   username: "postgres",
   password: "postgres",
   database: "belethor_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :database,
+  test_time: 100,
+  test_runs: 1000
