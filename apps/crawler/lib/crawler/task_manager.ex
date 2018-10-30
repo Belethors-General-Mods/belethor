@@ -21,7 +21,7 @@ defmodule Crawler.TaskManager do
   def search(query, manager, provider, timeout \\ 5000) do
     GenServer.call(manager, {:search, {provider, query}})
     receive do
-      {:result, result} -> result
+      {:ok, result} -> result
     after
       timeout ->
         #TODO kill the task not needed anymore
