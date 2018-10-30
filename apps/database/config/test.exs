@@ -1,8 +1,5 @@
 use Mix.Config
 
-# Print only warnings and errors during test
-config :logger, level: :warn
-
 # Configure your database
 config :website, Database.Repo,
   adapter: Ecto.Adapters.Postgres,
