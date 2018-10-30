@@ -13,7 +13,7 @@ defmodule DatabaseTest do
   @test_runs Application.get_env(:database, :test_runs)
   @translations Application.get_env(:database, :tag_translations)
 
-  defp modfile() do
+  defp modfile do
     %{:console_compat => StreamData.boolean()}
     |> Map.merge(
       StreamData.optional_map(%{
@@ -24,18 +24,18 @@ defmodule DatabaseTest do
     )
   end
 
-  defp image() do
+  defp image do
     StreamData.optional_map(%{
       :data => StreamData.binary(),
       :url => StreamData.string(:ascii)
     })
   end
 
-  defp tag() do
+  defp tag do
     StreamData.member_of(@translations |> Map.keys())
   end
 
-  defp mods() do
+  defp mods do
     %{
       :published? => StreamData.boolean(),
       :name => StreamData.string(:printable),

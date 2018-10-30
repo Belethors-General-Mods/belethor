@@ -35,6 +35,7 @@ defmodule Database do
 
   @spec add_mod(mod :: mod()) :: :ok | {:error, reason :: term()}
   def add_mod(mod) do
+    # TODO handle images & tags
     %Mod{}
     |> Mod.changeset(mod)
     |> Repo.insert!()
