@@ -3,7 +3,7 @@ defmodule Crawler.TaskManager do
   use GenServer
   require Logger
 
-  @type search_result() :: {:timeout, :running | :queued} | {:ok, list(any())}
+  @type search_result() :: :timeout | {:ok, list(any())}
 
 
   ## api
