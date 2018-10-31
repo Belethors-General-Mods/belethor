@@ -10,7 +10,7 @@ defmodule TaskManagerTest do
 
   defmodule BlockingProvider do
     def search(query) do
-      :timer.sleep(:infinite)
+      :timer.sleep(:infinity)
       query
     end
   end
