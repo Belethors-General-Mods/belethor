@@ -3,8 +3,7 @@ defmodule Crawler.TaskManager do
   use GenServer
   require Logger
 
-  @type search_result() :: :timeout | {:ok, list(any())}
-
+  @type search_result() :: list(any())
 
   ## api
 
@@ -18,15 +17,8 @@ defmodule Crawler.TaskManager do
   execute ``provider.search(query)`` in an rate limited way.
   """
   @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
-  def search(query, manager, provider, timeout \\ 5000) do
-    GenServer.call(manager, {:search, {provider, query}})
-    receive do
-      {:ok, result} -> result
-    after
-      timeout ->
-        #TODO kill the task not needed anymore
-        :timeout
-    end
+  def search(query, manager, provider, timeout \\ 50000) do
+    GenServer.call(manager, {:search, {provider, query}}, timeout)
   end
 
 
@@ -40,29 +32,37 @@ defmodule Crawler.TaskManager do
 
   @doc false
   def init(max) do
-    {:ok, supervisor} = DynamicSupervisor.start_link(strategy: :one_for_one)
+    {:ok, supervisor} = Task.Supervisor.start_link(
+      strategy: :one_for_one,
+      restart: :transient,
+      max_children: max
+    )
     start = %State{ max: max, queue: :queue.new, supervisor: supervisor }
-    Logger.debug "starting start created:\n\t#{inspect start}"
+    Logger.debug "#{__MODULE__} started in #{inspect self()} inits with #{inspect start}"
     {:ok, start}
   end
 
   # get the call to add on task
   @doc false
-  def handle_call({:search, args}, {pid, _ref}, state) do
+  def handle_call({:search, args}, client, state) do
     # startup a new task if the max is not reached
     c = Task.Supervisor.children(state.supervisor)
+    Logger.debug "current supervised children #{inspect length(c)}"
     if length(c) < state.max do
-      start_task(state.supervisor, pid, args)
+      Logger.debug "directly start task #{inspect args}"
+      start_task(state.supervisor, client, args)
       {:noreply, state}
     else # otherwise queue it
-      q = :queue.in({pid, args}, state.queue)
+      Logger.debug "task #{inspect args} will be queued"
+      q = :queue.in({client, args}, state.queue)
       {:noreply, %State{ state | queue: q}}
     end
   end
 
   # a task returned without error
   @doc false
-  def handle_info({_, :ok}, state) do
+  def handle_info({_ref, :ok}, state) do
+    Logger.debug "a Task ended successful"
     {:noreply, state}
   end
 
@@ -86,9 +86,12 @@ defmodule Crawler.TaskManager do
     {:noreply, state}
   end
 
-  defp start_task(supervisor, client, {provider, query}) do
-    %Task{} = Task.Supervisor.async(supervisor, fn ->
-      send client, {:ok, provider.search(query)}
+  defp start_task(supervisor, client, args = {provider, query}) do
+    Task.Supervisor.async_nolink(supervisor, fn ->
+      Logger.debug "Task client [#{inspect client}], args [#{inspect args}]"
+      result = provider.search(query)
+      Logger.debug "Task resulted in #{inspect result}"
+      GenServer.reply(client, result)
       :ok
     end)
   end

@@ -4,17 +4,18 @@ defmodule TaskManagerTest do
 
   defmodule EchoProvider do
     def search(query) do
-      [query]
+      query
+    end
+  end
     end
   end
 
 
-  @tag capture_log: true
   test "basic test ensure provider.search(query) gets called" do
-    input = "testvalue"
+    input = ["testvalue"]
     {:ok, mng} = Crawler.TaskManager.start_link(1)
-    {:ok, result} = Crawler.TaskManager.search(input, mng, EchoProvider)
-    assert result == [input]
+    result = Crawler.TaskManager.search(input, mng, EchoProvider)
+    assert result == input
   end
 
   @tag capture_log: true
