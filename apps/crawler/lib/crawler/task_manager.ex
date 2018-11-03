@@ -53,7 +53,7 @@ defmodule Crawler.TaskManager do
       start_task(state.supervisor, client, args)
       {:noreply, state}
     else # otherwise queue it
-      Logger.debug "task #{inspect args} will be queued"
+      Logger.debug "request #{inspect args} will be queued"
       q = :queue.in({client, args}, state.queue)
       {:noreply, %State{ state | queue: q}}
     end

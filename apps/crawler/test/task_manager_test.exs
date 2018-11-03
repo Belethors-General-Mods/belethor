@@ -17,15 +17,15 @@ defmodule TaskManagerTest do
 
 
   test "basic test ensure provider.search(query) gets called" do
-    input = ["testvalue"]
+    input = ["basic testvalue"]
     {:ok, mng} = Crawler.TaskManager.start_link(1)
     result = Crawler.TaskManager.search(input, mng, EchoProvider)
     assert result == input
   end
 
   test "don't hang on unending tasks" do
-    {:ok, mng} = Crawler.TaskManager.start_link(2)
-    input = ["testvalue"]
+    {:ok, mng} = Crawler.TaskManager.start_link(3)
+    input = ["unending testvalue"]
 
     block = fn ->
       {exit_reason, _} = catch_exit(Crawler.TaskManager.search(3000, mng, BlockingProvider, 1000))
