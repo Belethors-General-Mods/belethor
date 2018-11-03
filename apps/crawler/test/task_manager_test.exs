@@ -61,6 +61,8 @@ defmodule TaskManagerTest do
     {:ok, mngB} = Crawler.TaskManager.start_link(1)
     {:ok, mngC} = Crawler.TaskManager.start_link(1)
 
+    assert mngA != mngB != mngC
+
     request = fn input, mng ->
       fn -> Crawler.TaskManager.search(input, mng, EchoProvider) end
     end
