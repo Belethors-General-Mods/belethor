@@ -45,6 +45,24 @@ defmodule TaskManagerTest do
 
   end
 
-  test "allow multiple managers running at the same time"
+  test "allow multiple managers running at the same time" do
+    inputa = ["inputA"]
+    inputb = ["inputB"]
+    inputc = [12,23,34]
+
+    {:ok, mngA} = Crawler.TaskManager.start_link(1)
+    {:ok, mngB} = Crawler.TaskManager.start_link(1)
+    {:ok, mngC} = Crawler.TaskManager.start_link(1)
+
+    request = fn input, mng ->
+      fn -> Crawler.TaskManager.search(input, mng, EchoProvider) end
+    end
+
+    queue = [request.(inputa, mngA), request.(inputb, mngB), request.(inputc, mngC)]
+    result = Enum.map(queue, &Task.async/1) |> Enum.reverse |> Enum.map(&Task.await/1)
+
+    assert result == [inputc, inputb, inputa]
+
+  end
 
 end
