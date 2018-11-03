@@ -1,5 +1,7 @@
 defmodule Crawler.TaskManager do
 
+  defstruct [:max, :queue, :supervisor]
+
   use GenServer
   require Logger
 
@@ -24,12 +26,6 @@ defmodule Crawler.TaskManager do
 
   ## callbacks and internal stuff
 
-  defmodule State do
-    @moduledoc false
-    defstruct [:max, :queue, :supervisor]
-  end
-
-
   @doc false
   def init(max) do
     {:ok, supervisor} = Task.Supervisor.start_link(
@@ -37,7 +33,7 @@ defmodule Crawler.TaskManager do
       restart: :transient,
       max_children: max
     )
-    start = %State{ max: max, queue: :queue.new, supervisor: supervisor }
+    start = %Crawler.TaskManager{ max: max, queue: :queue.new, supervisor: supervisor }
     Logger.debug "#{__MODULE__} started in #{inspect self()} inits with #{inspect start}"
     {:ok, start}
   end
@@ -55,7 +51,7 @@ defmodule Crawler.TaskManager do
     else # otherwise queue it
       Logger.debug "request #{inspect args} will be queued"
       q = :queue.in({client, args}, state.queue)
-      {:noreply, %State{ state | queue: q}}
+      {:noreply, %Crawler.TaskManager{ state | queue: q}}
     end
   end
 
@@ -76,7 +72,7 @@ defmodule Crawler.TaskManager do
       {:empty, ^queue} -> {:noreply, state}
       {{:value, {pid, args}}, q} ->
         start_task(state.supervisor, pid, args)
-        {:noreply, %State{state | queue: q}}
+        {:noreply, %Crawler.TaskManager{state | queue: q}}
     end
   end
 
@@ -87,11 +83,9 @@ defmodule Crawler.TaskManager do
     {:noreply, state}
   end
 
-  defp start_task(supervisor, client, args = {provider, query}) do
+  defp start_task(supervisor, client, {provider, query}) do
     Task.Supervisor.async_nolink(supervisor, fn ->
-      Logger.debug "Task client [#{inspect client}], args [#{inspect args}]"
       result = provider.search(query)
-      Logger.debug "Task resulted in #{inspect result}"
       GenServer.reply(client, result)
       :ok
     end)
