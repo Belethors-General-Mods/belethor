@@ -76,13 +76,6 @@ defmodule Crawler.TaskManager do
     end
   end
 
-  # only to log unexpected messages
-  @doc false
-  def handle_info(msg, state) do
-    Logger.warn "unexpected handle_info call, msg: #{inspect msg}"
-    {:noreply, state}
-  end
-
   defp start_task(supervisor, client, {provider, query}) do
     Task.Supervisor.async_nolink(supervisor, fn ->
       result = provider.search(query)
