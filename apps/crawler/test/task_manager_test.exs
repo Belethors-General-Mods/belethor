@@ -27,19 +27,26 @@ defmodule TaskManagerTest do
     {:ok, mng} = Crawler.TaskManager.start_link(3)
     input = ["unending testvalue"]
 
+    genserver_timeout = 500
+    task_timeout = 800
+
     block = fn ->
-      {exit_reason, _} = catch_exit(Crawler.TaskManager.search(3000, mng, BlockingProvider, 1000))
+      {exit_reason, _} = catch_exit do
+        Crawler.TaskManager.search(:lemming, mng, BlockingProvider, genserver_timeout)
+      end
       assert :timeout == exit_reason
       :ok
     end
 
     valid = fn ->
-      Crawler.TaskManager.search(input, mng, EchoProvider)
+      Crawler.TaskManager.search(input, mng, EchoProvider, genserver_timeout)
     end
 
     queue = [block, block, block, valid]
     expected = [:ok, :ok, :ok, input]
-    actual = Enum.map(queue, &Task.async/1) |> Enum.map(&Task.await/1)
+    actual = Enum.map(queue, &Task.async/1) |> Enum.map(fn t ->
+      Task.await t, task_timeout
+    end)
 
     assert expected == actual
 
