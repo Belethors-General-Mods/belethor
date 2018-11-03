@@ -14,7 +14,7 @@ defmodule Crawler.TaskManager do
   end
 
   @doc """
-  execute ``provider.search(query)`` in an rate limited way.
+  execute `provider.search(query)` in an rate limited way.
   """
   @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
   def search(query, manager, provider, timeout \\ 50000) do
@@ -68,7 +68,8 @@ defmodule Crawler.TaskManager do
 
   # a task shutdown (for whatever reason)
   @doc false
-  def handle_info({:DOWN, _ref, :process, _pid, _reason}, state) do
+  def handle_info(down = {:DOWN, _ref, :process, _pid, _reason}, state) do
+    Logger.debug "got a down msg : #{inspect down}"
     # add new task if aviable
     queue = state.queue
     case :queue.out(queue) do
