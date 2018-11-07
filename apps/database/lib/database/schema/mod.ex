@@ -5,6 +5,8 @@ defmodule Database.Schema.Mod do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @tags Map.keys(Application.get_env(:database, :tag_translations))
+
   schema "mod" do
     field(:name, :string)
     field(:desc, :string)
@@ -16,10 +18,12 @@ defmodule Database.Schema.Mod do
     many_to_many(:tags, Database.Schema.ModTag, join_through: "mods_tags", unique: true)
   end
 
-  def changeset(record, params \\ :empty) do
+  def changeset(record, params \\ %{}) do
     record
     |> cast(params, [:name, :desc, :published])
     |> cast_embed(:oldrim)
     |> cast_embed(:sse)
+    |> validate_required([:name, :desc, :published])
+    |> validate_subset(:tags, @tags)
   end
 end
