@@ -32,7 +32,8 @@ defmodule Crawler.TaskManager do
     {:ok, supervisor} = Task.Supervisor.start_link(
       strategy: :one_for_one,
       restart: :transient,
-      max_children: max
+      max_children: max,
+      max_restarts: 0
     )
     start = %Crawler.TaskManager{
       max: max,

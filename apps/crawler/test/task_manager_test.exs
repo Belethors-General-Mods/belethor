@@ -28,20 +28,20 @@ defmodule TaskManagerTest do
     {:ok, mng} = TaskManager.start_link(3)
     input = ["unending testvalue"]
 
-    genserver_timeout = 500
-    task_timeout = 1000
+    timeout = 1000
 
     block = fn ->
-      {exit_reason, _} = catch_exit do
-        TaskManager.search(:lemming, mng, BlockingProvider, genserver_timeout)
+      {pid, ref} = Process.spawn fn ->
+        TaskManager.search(:lemming, mng, BlockingProvider, 500)
+      end, [:monitor]
+      receive do
+        {:DOWN, ^ref, :process, ^pid, {reason, _more_info}} -> reason
       end
-      assert :timeout == exit_reason
-      :ok
     end
 
     valid = fn ->
       try do
-        TaskManager.search(input, mng, EchoProvider, genserver_timeout)
+        TaskManager.search(input, mng, EchoProvider, timeout)
       catch
         :exit, msg = {reason, _} ->
           Logger.warn "valid request failed with #{inspect msg}"
@@ -50,10 +50,10 @@ defmodule TaskManagerTest do
     end
 
     queue = [block, block, block, valid]
-    expected = [:ok, :ok, :ok, input]
+    expected = [:timeout, :timeout, :timeout, input]
     actual = queue |>
       Enum.map(&Task.async/1) |>
-      Enum.map(fn t -> Task.await t, task_timeout end)
+      Enum.map(fn t -> Task.await(t, timeout) end)
 
     assert expected == actual
 
