@@ -21,7 +21,7 @@ defmodule TaskManagerTest do
     {:ok, mng} = TaskManager.start_link(1)
     result = TaskManager.search(input, mng, EchoProvider)
     assert result == input
-    Process.sleep 400
+    Process.sleep(400)
   end
 
   test "don't hang on unending tasks" do
@@ -31,9 +31,14 @@ defmodule TaskManagerTest do
     timeout = 1000
 
     block = fn ->
-      {pid, ref} = Process.spawn fn ->
-        TaskManager.search(:lemming, mng, BlockingProvider, 500)
-      end, [:monitor]
+      {pid, ref} =
+        Process.spawn(
+          fn ->
+            TaskManager.search(:lemming, mng, BlockingProvider, 500)
+          end,
+          [:monitor]
+        )
+
       receive do
         {:DOWN, ^ref, :process, ^pid, {reason, _more_info}} -> reason
       end
@@ -44,20 +49,22 @@ defmodule TaskManagerTest do
         TaskManager.search(input, mng, EchoProvider, timeout)
       catch
         :exit, msg = {reason, _} ->
-          Logger.warn "valid request failed with #{inspect msg}"
+          Logger.warn("valid request failed with #{inspect(msg)}")
           reason
       end
     end
 
     queue = [block, block, block, valid]
     expected = [:timeout, :timeout, :timeout, input]
-    actual = queue |>
-      Enum.map(&Task.async/1) |>
-      Enum.map(fn t -> Task.await(t, timeout) end)
+
+    actual =
+      queue
+      |> Enum.map(&Task.async/1)
+      |> Enum.map(fn t -> Task.await(t, timeout) end)
 
     assert expected == actual
 
-    Process.sleep 400
+    Process.sleep(400)
   end
 
   test "allow multiple managers running at the same time" do
@@ -81,14 +88,14 @@ defmodule TaskManagerTest do
       request.(input_c, mng_c)
     ]
 
-    result = queue |>
-      Enum.map(&Task.async/1) |>
-      Enum.reverse |>
-      Enum.map(&Task.await/1)
+    result =
+      queue
+      |> Enum.map(&Task.async/1)
+      |> Enum.reverse()
+      |> Enum.map(&Task.await/1)
 
     assert result == [input_c, input_b, input_a]
 
-    Process.sleep 400
+    Process.sleep(400)
   end
-
 end
