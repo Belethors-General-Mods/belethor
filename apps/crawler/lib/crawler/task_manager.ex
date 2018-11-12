@@ -1,6 +1,7 @@
 defmodule Crawler.TaskManager do
   @moduledoc """
-  TODO
+  Module to limit the amount of concurrent running task.
+  If the task maximum is reached, the request will be queued.
   """
 
   defstruct [:max, :queue, :supervisor]
