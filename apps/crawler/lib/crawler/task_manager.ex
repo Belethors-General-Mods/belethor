@@ -25,7 +25,6 @@ defmodule Crawler.TaskManager do
 
 
   ## callbacks and internal stuff
-
   @doc false
   def init(max) do
     {:ok, supervisor} = Task.Supervisor.start_link(
@@ -33,7 +32,11 @@ defmodule Crawler.TaskManager do
       restart: :transient,
       max_children: max
     )
-    start = %Crawler.TaskManager{ max: max, queue: :queue.new, supervisor: supervisor }
+    start = %Crawler.TaskManager{
+      max: max,
+      queue: :queue.new,
+      supervisor: supervisor
+    }
     Logger.debug "#{__MODULE__} started in #{inspect self()} inits with #{inspect start}"
     {:ok, start}
   end
@@ -42,9 +45,7 @@ defmodule Crawler.TaskManager do
   @doc false
   def handle_call({:search, args}, client, state) do
     # startup a new task if the max is not reached
-    c = Task.Supervisor.children(state.supervisor)
-    Logger.debug "current supervised children #{inspect length(c)}"
-    if length(c) < state.max do
+    if max_reached? state do
       Logger.debug "directly start task #{inspect args}"
       start_task(state.supervisor, client, args)
       {:noreply, state}
@@ -57,12 +58,12 @@ defmodule Crawler.TaskManager do
 
   # a task returned without error
   @doc false
-  def handle_info({_ref, :ok}, state) do
-    Logger.debug "a Task ended successful"
+  def handle_info({ref, :ok}, state) when is_reference(ref) do
+    Logger.debug "a Task (#{inspect ref}) ended successful"
     {:noreply, state}
   end
 
-  # a task shutdown (for whatever reason)
+  # a monitored process died (for whatever reason)
   @doc false
   def handle_info(down = {:DOWN, _ref, :process, _pid, _reason}, state) do
     Logger.debug "got a down msg : #{inspect down}"
@@ -71,13 +72,29 @@ defmodule Crawler.TaskManager do
     case :queue.out(queue) do
       {:empty, ^queue} -> {:noreply, state}
       {{:value, {pid, args}}, q} ->
-        start_task(state.supervisor, pid, args)
-        {:noreply, %Crawler.TaskManager{state | queue: q}}
+        if max_reached? state do
+          start_task(state.supervisor, pid, args)
+          {:noreply, %Crawler.TaskManager{state | queue: q}}
+        else
+          {:noreply, state}
+        end
     end
   end
 
-  defp start_task(supervisor, client, {provider, query}) do
-    Task.Supervisor.async_nolink(supervisor, fn ->
+  defp max_reached?(state) do
+    state.max > count_tasks(state.supervisor)
+  end
+
+  defp count_tasks(supervisor) do
+    Task.Supervisor.children(supervisor) |> length
+  end
+
+  defp start_task(supervisor, client = {client_pid, _id}, {provider, query})
+  when is_pid(client_pid) do
+    Logger.debug "current supervised children #{inspect count_tasks(supervisor)}"
+
+    %Task{} = Task.Supervisor.async_nolink(supervisor, fn ->
+      Process.link(client_pid)
       result = provider.search(query)
       GenServer.reply(client, result)
       :ok
