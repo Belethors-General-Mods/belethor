@@ -21,6 +21,7 @@ defmodule TaskManagerTest do
     {:ok, mng} = Crawler.TaskManager.start_link(1)
     result = Crawler.TaskManager.search(input, mng, EchoProvider)
     assert result == input
+    Process.sleep 400
   end
 
   test "don't hang on unending tasks" do
@@ -39,7 +40,13 @@ defmodule TaskManagerTest do
     end
 
     valid = fn ->
-      Crawler.TaskManager.search(input, mng, EchoProvider, genserver_timeout)
+      try do
+        Crawler.TaskManager.search(input, mng, EchoProvider, genserver_timeout)
+      catch
+        :exit, msg = {reason, _} ->
+          Logger.warn "valid request failed with #{inspect msg}"
+          reason
+      end
     end
 
     queue = [block, block, block, valid]
@@ -50,6 +57,7 @@ defmodule TaskManagerTest do
 
     assert expected == actual
 
+    Process.sleep 400
   end
 
   test "allow multiple managers running at the same time" do
@@ -72,6 +80,7 @@ defmodule TaskManagerTest do
 
     assert result == [inputc, inputb, inputa]
 
+    Process.sleep 400
   end
 
 end
