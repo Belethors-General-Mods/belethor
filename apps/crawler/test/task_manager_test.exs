@@ -1,6 +1,7 @@
 defmodule TaskManagerTest do
   use ExUnit.Case
   require Logger
+  alias Crawler.TaskManager
 
   defmodule EchoProvider do
     def search(query) do
@@ -15,25 +16,24 @@ defmodule TaskManagerTest do
     end
   end
 
-
   test "basic test ensure provider.search(query) gets called" do
     input = ["basic testvalue"]
-    {:ok, mng} = Crawler.TaskManager.start_link(1)
-    result = Crawler.TaskManager.search(input, mng, EchoProvider)
+    {:ok, mng} = TaskManager.start_link(1)
+    result = TaskManager.search(input, mng, EchoProvider)
     assert result == input
     Process.sleep 400
   end
 
   test "don't hang on unending tasks" do
-    {:ok, mng} = Crawler.TaskManager.start_link(3)
+    {:ok, mng} = TaskManager.start_link(3)
     input = ["unending testvalue"]
 
     genserver_timeout = 500
-    task_timeout = 800
+    task_timeout = 1000
 
     block = fn ->
       {exit_reason, _} = catch_exit do
-        Crawler.TaskManager.search(:lemming, mng, BlockingProvider, genserver_timeout)
+        TaskManager.search(:lemming, mng, BlockingProvider, genserver_timeout)
       end
       assert :timeout == exit_reason
       :ok
@@ -41,7 +41,7 @@ defmodule TaskManagerTest do
 
     valid = fn ->
       try do
-        Crawler.TaskManager.search(input, mng, EchoProvider, genserver_timeout)
+        TaskManager.search(input, mng, EchoProvider, genserver_timeout)
       catch
         :exit, msg = {reason, _} ->
           Logger.warn "valid request failed with #{inspect msg}"
@@ -51,9 +51,9 @@ defmodule TaskManagerTest do
 
     queue = [block, block, block, valid]
     expected = [:ok, :ok, :ok, input]
-    actual = Enum.map(queue, &Task.async/1) |> Enum.map(fn t ->
-      Task.await t, task_timeout
-    end)
+    actual = queue |>
+      Enum.map(&Task.async/1) |>
+      Enum.map(fn t -> Task.await t, task_timeout end)
 
     assert expected == actual
 
@@ -61,24 +61,32 @@ defmodule TaskManagerTest do
   end
 
   test "allow multiple managers running at the same time" do
-    inputa = ["inputA"]
-    inputb = ["inputB"]
-    inputc = [12,23,34]
+    input_a = ["AAAAAAAAAAAAAa"]
+    input_b = ["BBBBBBBBBBbbb"]
+    input_c = [12, 23, 34]
 
-    {:ok, mngA} = Crawler.TaskManager.start_link(1)
-    {:ok, mngB} = Crawler.TaskManager.start_link(1)
-    {:ok, mngC} = Crawler.TaskManager.start_link(1)
+    {:ok, mng_a} = TaskManager.start_link(1)
+    {:ok, mng_b} = TaskManager.start_link(1)
+    {:ok, mng_c} = TaskManager.start_link(1)
 
-    assert mngA != mngB != mngC
+    assert mng_a != mng_b != mng_c
 
     request = fn input, mng ->
-      fn -> Crawler.TaskManager.search(input, mng, EchoProvider) end
+      fn -> TaskManager.search(input, mng, EchoProvider) end
     end
 
-    queue = [request.(inputa, mngA), request.(inputb, mngB), request.(inputc, mngC)]
-    result = Enum.map(queue, &Task.async/1) |> Enum.reverse |> Enum.map(&Task.await/1)
+    queue = [
+      request.(input_a, mng_a),
+      request.(input_b, mng_b),
+      request.(input_c, mng_c)
+    ]
 
-    assert result == [inputc, inputb, inputa]
+    result = queue |>
+      Enum.map(&Task.async/1) |>
+      Enum.reverse |>
+      Enum.map(&Task.await/1)
+
+    assert result == [input_c, input_b, input_a]
 
     Process.sleep 400
   end

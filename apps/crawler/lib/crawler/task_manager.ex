@@ -1,4 +1,7 @@
 defmodule Crawler.TaskManager do
+  @moduledoc """
+  TODO
+  """
 
   defstruct [:max, :queue, :supervisor]
 
@@ -19,12 +22,11 @@ defmodule Crawler.TaskManager do
   execute `provider.search(query)` in an rate limited way.
   """
   @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
-  def search(query, manager, provider, timeout \\ 50000) do
+  def search(query, manager, provider, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {provider, query}}, timeout)
   end
 
-
-  ## callbacks and internal stuff
+  # callbacks and internal stuff
   @doc false
   def init(max) do
     {:ok, supervisor} = Task.Supervisor.start_link(
@@ -51,7 +53,7 @@ defmodule Crawler.TaskManager do
       {:noreply, state}
     else # otherwise queue it
       Logger.debug "request #{inspect args} will be queued"
-      q = :queue.in({client, args}, state.queue)
+      q = :queue.in {client, args}, state.queue
       {:noreply, %Crawler.TaskManager{ state | queue: q}}
     end
   end
@@ -86,7 +88,7 @@ defmodule Crawler.TaskManager do
   end
 
   defp count_tasks(supervisor) do
-    Task.Supervisor.children(supervisor) |> length
+    supervisor |> Task.Supervisor.children |> length
   end
 
   defp start_task(supervisor, client = {client_pid, _id}, {provider, query})
