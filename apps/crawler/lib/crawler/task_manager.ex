@@ -44,7 +44,10 @@ defmodule Crawler.TaskManager do
       supervisor: supervisor
     }
 
-    Logger.debug("#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}")
+    Logger.debug(fn ->
+      "#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}"
+    end)
+
     {:ok, start}
   end
 
@@ -54,11 +57,11 @@ defmodule Crawler.TaskManager do
     # startup a new task if the max is not reached
     # otherwise queue it
     if max_reached?(state) do
-      Logger.debug("directly start task #{inspect(args)}")
+      Logger.debug(fn -> "directly start task #{inspect(args)}" end)
       start_task(state.supervisor, client, args)
       {:noreply, state}
     else
-      Logger.debug("request #{inspect(args)} will be queued")
+      Logger.debug(fn -> "request #{inspect(args)} will be queued" end)
       q = :queue.in({client, args}, state.queue)
       {:noreply, %Crawler.TaskManager{state | queue: q}}
     end
@@ -67,14 +70,14 @@ defmodule Crawler.TaskManager do
   # a task returned without error
   @doc false
   def handle_info({ref, :ok}, state) when is_reference(ref) do
-    Logger.debug("a Task (#{inspect(ref)}) ended successful")
+    Logger.debug(fn -> "a Task (#{inspect(ref)}) ended successful" end)
     {:noreply, state}
   end
 
   # a monitored process died (for whatever reason)
   @doc false
   def handle_info(down = {:DOWN, _ref, :process, _pid, _reason}, state) do
-    Logger.debug("got a down msg : #{inspect(down)}")
+    Logger.debug(fn -> "got a down msg : #{inspect(down)}" end)
     # add new task if aviable
     queue = state.queue
 
@@ -102,7 +105,7 @@ defmodule Crawler.TaskManager do
 
   defp start_task(supervisor, client = {client_pid, _id}, {provider, query})
        when is_pid(client_pid) do
-    Logger.debug("current supervised children #{inspect(count_tasks(supervisor))}")
+    Logger.debug(fn -> "current supervised children #{inspect(count_tasks(supervisor))}" end)
 
     %Task{} =
       Task.Supervisor.async_nolink(supervisor, fn ->
