@@ -21,3 +21,4 @@ erl_crash.dump
 
 /apps/tag_editor/assets/package-lock.json
 /apps/website/assets/package-lock.json
+/.tool-versions
