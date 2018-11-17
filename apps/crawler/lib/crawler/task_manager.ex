@@ -4,23 +4,32 @@ defmodule Crawler.TaskManager do
   If the task maximum is reached, the request will be queued.
   """
 
+  # struct to represent the inner gen_server state
   defstruct [:max, :queue, :supervisor]
 
   use GenServer
   require Logger
 
+  # macro to correct log debug messages
+  defmacrop debug(msg) do
+    quote do
+      :ok = Logger.debug(fn -> unquote(msg) end)
+    end
+  end
+
+  @type max() :: pos_integer() | :infinty
   @type search_result() :: list(any())
 
   ## api
 
   @doc "start an instance, with options"
-  @spec start_link(pos_integer(), GenServer.options()) :: Supervisor.on_start()
+  @spec start_link(max(), GenServer.options()) :: Supervisor.on_start()
   def start_link(max, opts \\ []) do
     GenServer.start_link(__MODULE__, max, opts)
   end
 
   @doc """
-  execute `provider.search(query)` in an rate limited way.
+  execute `provider.search(query)` in a rate limited way.
   """
   @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
   def search(query, manager, provider, timeout \\ 5_000) do
@@ -44,9 +53,7 @@ defmodule Crawler.TaskManager do
       supervisor: supervisor
     }
 
-    Logger.debug(fn ->
-      "#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}"
-    end)
+    debug("#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}")
 
     {:ok, start}
   end
@@ -57,11 +64,11 @@ defmodule Crawler.TaskManager do
     # startup a new task if the max is not reached
     # otherwise queue it
     if max_reached?(state) do
-      Logger.debug(fn -> "directly start task #{inspect(args)}" end)
-      start_task(state.supervisor, client, args)
+      debug("directly start task #{inspect(args)}")
+      :ok = start_task(state.supervisor, client, args)
       {:noreply, state}
     else
-      Logger.debug(fn -> "request #{inspect(args)} will be queued" end)
+      debug("request #{inspect(args)} will be queued")
       q = :queue.in({client, args}, state.queue)
       {:noreply, %Crawler.TaskManager{state | queue: q}}
     end
@@ -70,14 +77,14 @@ defmodule Crawler.TaskManager do
   # a task returned without error
   @doc false
   def handle_info({ref, :ok}, state) when is_reference(ref) do
-    Logger.debug(fn -> "a Task (#{inspect(ref)}) ended successful" end)
+    debug("a Task (#{inspect(ref)}) ended successful")
     {:noreply, state}
   end
 
   # a monitored process died (for whatever reason)
   @doc false
   def handle_info(down = {:DOWN, _ref, :process, _pid, _reason}, state) do
-    Logger.debug(fn -> "got a down msg : #{inspect(down)}" end)
+    debug("got a down msg : #{inspect(down)}")
     # add new task if aviable
     queue = state.queue
 
@@ -87,7 +94,7 @@ defmodule Crawler.TaskManager do
 
       {{:value, {pid, args}}, q} ->
         if max_reached?(state) do
-          start_task(state.supervisor, pid, args)
+          :ok = start_task(state.supervisor, pid, args)
           {:noreply, %Crawler.TaskManager{state | queue: q}}
         else
           {:noreply, state}
@@ -105,7 +112,7 @@ defmodule Crawler.TaskManager do
 
   defp start_task(supervisor, client = {client_pid, _id}, {provider, query})
        when is_pid(client_pid) do
-    Logger.debug(fn -> "current supervised children #{inspect(count_tasks(supervisor))}" end)
+    debug("current supervised children #{inspect(count_tasks(supervisor))}")
 
     %Task{} =
       Task.Supervisor.async_nolink(supervisor, fn ->
@@ -114,5 +121,7 @@ defmodule Crawler.TaskManager do
         GenServer.reply(client, result)
         :ok
       end)
+
+    :ok
   end
 end

@@ -16,12 +16,12 @@ defmodule TaskManagerTest do
     end
   end
 
-  test "basic test ensure provider.search(query) gets called" do
-    input = ["basic testvalue"]
+  test "ensure provider.search(query) gets called" do
+    expected = ["basic testvalue"]
     {:ok, mng} = TaskManager.start_link(1)
-    result = TaskManager.search(input, mng, EchoProvider)
-    assert result == input
-    Process.sleep(400)
+    actual = TaskManager.search(expected, mng, EchoProvider)
+    assert expected == actual
+    Logger.flush()
   end
 
   test "don't hang on unending tasks" do
@@ -64,7 +64,7 @@ defmodule TaskManagerTest do
 
     assert expected == actual
 
-    Process.sleep(400)
+    Logger.flush()
   end
 
   test "allow multiple managers running at the same time" do
@@ -96,6 +96,6 @@ defmodule TaskManagerTest do
 
     assert result == [input_c, input_b, input_a]
 
-    Process.sleep(400)
+    Logger.flush()
   end
 end
