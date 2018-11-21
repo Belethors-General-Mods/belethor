@@ -18,16 +18,28 @@ defmodule TaskManagerTest do
     end
   end
 
+  defp start(max) do
+    {:ok, supervisor} =
+      Task.Supervisor.start_link(
+        strategy: :one_for_one,
+        restart: :transistent,
+        max_children: max,
+        max_restarts: 0
+      )
+
+    TaskManager.start_link(max, supervisor)
+  end
+
   test "ensure provider.search(query) gets called" do
     expected = ["basic testvalue"]
-    {:ok, mng} = TaskManager.start_link(1)
+    {:ok, mng} = start(1)
     actual = TaskManager.search(expected, mng, EchoProvider)
     assert expected == actual
     Logger.flush()
   end
 
   test "don't hang on unending tasks" do
-    {:ok, mng} = TaskManager.start_link(3)
+    {:ok, mng} = start(3)
     input = ["unending testvalue"]
 
     timeout = 1000
@@ -74,9 +86,9 @@ defmodule TaskManagerTest do
     input_b = ["BBBBBBBBBBbbb"]
     input_c = [12, 23, 34]
 
-    {:ok, mng_a} = TaskManager.start_link(1)
-    {:ok, mng_b} = TaskManager.start_link(1)
-    {:ok, mng_c} = TaskManager.start_link(1)
+    {:ok, mng_a} = start(1)
+    {:ok, mng_b} = start(1)
+    {:ok, mng_c} = start(1)
 
     assert mng_a != mng_b != mng_c
 

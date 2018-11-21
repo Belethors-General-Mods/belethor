@@ -24,9 +24,9 @@ defmodule Crawler.TaskManager do
   ## api
 
   @doc "start an instance, with options"
-  @spec start_link(max(), GenServer.options()) :: Supervisor.on_start()
-  def start_link(max, opts \\ []) do
-    GenServer.start_link(__MODULE__, max, opts)
+  @spec start_link(max(), Supervisor.on_start(), GenServer.options()) :: Supervisor.on_start()
+  def start_link(max, task_supervisor, opts \\ []) do
+    GenServer.start_link(__MODULE__, {max, task_supervisor}, opts)
   end
 
   @doc """
@@ -41,15 +41,7 @@ defmodule Crawler.TaskManager do
 
   # callbacks and internal stuff
   @doc false
-  def init(max) do
-    {:ok, supervisor} =
-      Task.Supervisor.start_link(
-        strategy: :one_for_one,
-        restart: :transient,
-        max_children: max,
-        max_restarts: 0
-      )
-
+  def init({max, supervisor}) do
     start = %Crawler.TaskManager{
       max: max,
       queue: :queue.new(),
