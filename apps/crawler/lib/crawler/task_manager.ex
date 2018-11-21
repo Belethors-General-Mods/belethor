@@ -24,7 +24,8 @@ defmodule Crawler.TaskManager do
   ## api
 
   @doc "start an instance, with options"
-  @spec start_link(max(), Supervisor.on_start(), GenServer.options()) :: Supervisor.on_start()
+  @spec start_link(max(), Supervisor.on_start(), GenServer.options()) ::
+          Supervisor.on_start()
   def start_link(max, task_supervisor, opts \\ []) do
     GenServer.start_link(__MODULE__, {max, task_supervisor}, opts)
   end
@@ -33,8 +34,12 @@ defmodule Crawler.TaskManager do
   execute `provider.search(query)` in a rate limited way.
   the search callback is defined in `Crawler.SearchProvider´.
   """
-  @spec search(Crawler.SearchProvider.query(), GenServer.name(), module(), timeout()) ::
-          Crawler.SearchProvider.search_result()
+  @spec search(
+          Crawler.SearchProvider.query(),
+          GenServer.name(),
+          module(),
+          timeout()
+        ) :: Crawler.SearchProvider.search_result()
   def search(query, manager, provider, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {provider, query}}, timeout)
   end
@@ -48,7 +53,9 @@ defmodule Crawler.TaskManager do
       supervisor: supervisor
     }
 
-    debug("#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}")
+    debug(
+      "#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}"
+    )
 
     {:ok, start}
   end
