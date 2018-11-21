@@ -6,6 +6,8 @@ defmodule Crawler.TaskManager do
 
   # struct to represent the inner gen_server state
   defstruct [:max, :queue, :supervisor]
+  @typedoc false
+  @type inner_state() :: %__MODULE__{}
 
   use GenServer
   require Logger
@@ -18,7 +20,6 @@ defmodule Crawler.TaskManager do
   end
 
   @type max() :: pos_integer() | :infinty
-  @type search_result() :: list(any())
 
   ## api
 
@@ -30,8 +31,10 @@ defmodule Crawler.TaskManager do
 
   @doc """
   execute `provider.search(query)` in a rate limited way.
+  the search callback is defined in `Crawler.SearchProvider´.
   """
-  @spec search(String.t(), GenServer.name(), module(), timeout()) :: search_result()
+  @spec search(Crawler.SearchProvider.query(), GenServer.name(), module(), timeout()) ::
+          Crawler.SearchProvider.search_result()
   def search(query, manager, provider, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {provider, query}}, timeout)
   end
