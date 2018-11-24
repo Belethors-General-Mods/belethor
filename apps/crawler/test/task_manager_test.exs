@@ -3,21 +3,6 @@ defmodule TaskManagerTest do
   require Logger
   alias Crawler.TaskManager
 
-  defmodule EchoProvider do
-    @behaviour Crawler.SearchProvider
-    def search(query) do
-      query
-    end
-  end
-
-  defmodule BlockingProvider do
-    @behaviour Crawler.SearchProvider
-    def search(query) do
-      :timer.sleep(:infinity)
-      query
-    end
-  end
-
   defp start(max) do
     {:ok, supervisor} =
       Task.Supervisor.start_link(
@@ -27,7 +12,7 @@ defmodule TaskManagerTest do
         max_restarts: 0
       )
 
-    TaskManager.start_link(max, supervisor)
+    TaskManager.start_link(max: max, task_supervisor: supervisor)
   end
 
   test "ensure provider.search(query) gets called" do

@@ -21,13 +21,28 @@ defmodule Crawler.TaskManager do
 
   @type max() :: pos_integer() | :infinty
 
+  @typedoc """
+  start options for starting up a `TaskManager`
+  """
+  @type start_options() ::
+          {:max, max()}
+          | {:task_supervisor, Supervisor.supervisor()}
+          | GenServer.options()
+
   ## api
 
-  @doc "start an instance, with options"
-  @spec start_link(max(), Supervisor.on_start(), GenServer.options()) ::
-          Supervisor.on_start()
-  def start_link(max, task_supervisor, opts \\ []) do
-    GenServer.start_link(__MODULE__, {max, task_supervisor}, opts)
+  @doc """
+  start an instance, with options.
+  `:max` and `:task_supervisor` are required.
+  `:max`: the maximum tasks running in parrallel
+  `:task_manager`: the `Task.Supervisor` to supervise the tasks.
+  `GenServer` start options can be added, but are optional.
+  """
+  @spec start_link([start_options()]) :: GenServer.on_start()
+  def start_link(opts) do
+    {max, opts} = Access.pop(opts, :max)
+    {supi, opts} = Access.pop(opts, :task_supervisor)
+    GenServer.start_link(__MODULE__, {max, supi}, opts)
   end
 
   @doc """
