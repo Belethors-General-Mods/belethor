@@ -4,9 +4,10 @@ defmodule CrawlerTest do
 
   doctest Crawler
 
-  test "check if Crawler.Application has started its stuff" do
+  test "has Crawler.Application started the provider managers and supervisors" do
     :ok = Application.ensure_started(:crawler)
 
+    # bad test, becaus it relies on the order of supervisor children
     assert match?(
              [
                {Crawler.Bethesda.TaskManager, _, :worker,
