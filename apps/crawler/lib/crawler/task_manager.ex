@@ -37,10 +37,10 @@ defmodule Crawler.TaskManager do
   `GenServer` start options can be added, but are optional.
   """
   @spec start_link([start_options()]) :: GenServer.on_start()
-  def start_link(opts) do
-    {max, opts} = Access.pop(opts, :max)
-    {supi, opts} = Access.pop(opts, :task_supervisor)
-    GenServer.start_link(__MODULE__, {max, supi}, opts)
+  def start_link(opts0) do
+    {max, opts1} = Access.pop(opts0, :max)
+    {supi, opts2} = Access.pop(opts1, :task_supervisor)
+    GenServer.start_link(__MODULE__, {max, supi}, opts2)
   end
 
   @doc """
@@ -52,7 +52,7 @@ defmodule Crawler.TaskManager do
           GenServer.name(),
           module(),
           timeout()
-  ) :: Crawler.Client.search_result()
+        ) :: Crawler.Client.search_result()
   def search(query, manager, provider, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {provider, query}}, timeout)
   end
