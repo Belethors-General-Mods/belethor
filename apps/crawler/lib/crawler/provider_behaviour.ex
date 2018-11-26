@@ -16,8 +16,8 @@ defmodule Crawler.Provider do
     cln = Module.concat([:Crawler, name, :Client])
 
     quote do
-      alias Crawler.TaskManager
       alias Crawler.Provider
+      alias Crawler.TaskManager
       @behaviour Provider
 
       @impl Provider
