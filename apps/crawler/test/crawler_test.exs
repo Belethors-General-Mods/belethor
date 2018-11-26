@@ -8,7 +8,8 @@ defmodule CrawlerTest do
     :ok = Application.ensure_started(:crawler)
 
     actual =
-      Supervisor.which_children(Crawler.Supervisor)
+      Crawler.Supervisor
+      |> Supervisor.which_children()
       |> Enum.map(fn {name, _pid, type, origin} -> {name, type, origin} end)
 
     assert Enum.member?(
