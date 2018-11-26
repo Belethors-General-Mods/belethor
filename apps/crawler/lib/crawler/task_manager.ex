@@ -31,27 +31,30 @@ defmodule Crawler.TaskManager do
   ## api
 
   @doc """
-  start an instance, with options.
-  `:max` and `:task_supervisor` are required.
-  `:max`: the maximum tasks running in parrallel
-  `:task_manager`: the `Task.Supervisor` to supervise the tasks.
-  `GenServer` start options can be added, but are optional.
+  start an instance
+
+  `:max` and `:task_supervisor` are required:
+  - `:max` the maximum tasks running in parrallel
+  - `:task_manager` the `Task.Supervisor` to supervise the tasks.
+
+  `GenServer.options()` can be added, but are optional.
   """
-  @spec start_link([start_options()]) :: GenServer.on_start()
-  def start_link(opts0) do
-    {max, opts1} = Access.pop(opts0, :max)
+  @spec start_link(opts :: [start_options()]) :: GenServer.on_start()
+  def start_link(opts) do
+    {max, opts1} = Access.pop(opts, :max)
     {supi, opts2} = Access.pop(opts1, :task_supervisor)
     GenServer.start_link(__MODULE__, {max, supi}, opts2)
   end
 
   @doc """
   execute `client.search(query)` in a rate limited way.
-  the search callback is defined in `Crawler.Client´.
+
+  the search callback is defined in `Crawler.Client`.
   """
   @spec search(
-          Client.query(),
-          GenServer.name(),
-          module(),
+          query :: Client.query(),
+          manager :: GenServer.name(),
+          client :: module(),
           timeout()
         ) :: Client.search_result()
   def search(query, manager, client, timeout \\ 5_000) do

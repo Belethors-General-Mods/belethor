@@ -1,4 +1,5 @@
 defmodule Crawler.Bethesda.Client do
+  @moduledoc "implements `Crawler.Client` for [Nexus Mods](https://www.nexusmods.com/)"
   @behaviour Crawler.Client
 
   @impl Crawler.Client
