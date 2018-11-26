@@ -15,6 +15,37 @@ defmodule TaskManagerTest do
     TaskManager.start_link(max: max, task_supervisor: supervisor)
   end
 
+  test "ensure maximum is respected" do
+    max = 3
+
+    {:ok, supi} =
+      Task.Supervisor.start_link(
+        strategy: :one_for_one,
+        restart: :transistent,
+        max_children: max,
+        max_restarts: 0
+      )
+
+    {:ok, mng} = TaskManager.start_link(max: max, task_supervisor: supi)
+
+    Enum.each(1..10, fn _ ->
+      Process.spawn(
+        fn ->
+          TaskManager.search(:lemming, mng, BlockingProvider, 500)
+        end,
+        []
+      )
+    end)
+
+    Enum.each(1..400, fn _ ->
+      count = supi |> Task.Supervisor.children() |> length
+      assert count <= max
+      Process.sleep(10)
+    end)
+
+    Logger.flush()
+  end
+
   test "ensure provider.search(query) gets called" do
     expected = ["basic testvalue"]
     {:ok, mng} = start(1)
