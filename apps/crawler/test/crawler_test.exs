@@ -42,4 +42,10 @@ defmodule CrawlerTest do
              {Crawler.Steam.Supervisor, :worker, [Task.Supervisor]}
            )
   end
+
+  test "check if the provider instances are functional" do
+    assert Nexus.search("whatever") == {:error, :not_implemented}
+    assert Steam.search("whatever") == {:error, :not_implemented}
+    assert Bethesda.search("whatever") == {:error, :not_implemented}
+  end
 end
