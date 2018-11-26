@@ -30,7 +30,6 @@ defmodule Crawler.Application do
     [
       %{
         id: man_name,
-        name: sup_name,
         start:
           {Crawler.TaskManager, :start_link,
            [
@@ -43,11 +42,11 @@ defmodule Crawler.Application do
       },
       %{
         id: sup_name,
-        name: sup_name,
         start:
           {Task.Supervisor, :start_link,
            [
              [
+               name: sup_name,
                strategy: :one_for_one,
                restart: :transistent,
                max_children: max_tasks,
