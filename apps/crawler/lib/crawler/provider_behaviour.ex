@@ -1,6 +1,10 @@
 defmodule Crawler.Provider do
-  @callback search(Crawler.Client.query()) :: Crawler.Client.search_result()
-  @callback search!(Crawler.Client.query()) :: [Crawler.Client.result()]
+  alias Crawler.Client
+
+  @doc "do a remote search, may return a error tuple"
+  @callback search(Client.query()) :: Client.search_result()
+  @doc "do a remote search, throws on error"
+  @callback search!(Client.query()) :: [Client.result()]
 
   defmacro __using__(args) do
     name = args[:name]
@@ -8,14 +12,15 @@ defmodule Crawler.Provider do
     cln = Module.concat([:Crawler, name, :Client])
 
     quote do
-      @behaviour Crawler.Provider
+      alias Crawler.Provider
+      @behaviour Provider
 
-      @impl Crawler.Provider
+      @impl Provider
       def search(query) do
         Crawler.TaskManager.search(query, unquote(mgn), unquote(cln))
       end
 
-      @impl Crawler.Provider
+      @impl Provider
       def search!(query) do
         case search(query) do
           {:ok, result} -> result
