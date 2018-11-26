@@ -9,6 +9,7 @@ defmodule Crawler.TaskManager do
 
   use GenServer
   require Logger
+  alias Crawler
 
   # macro to correct log debug messages
   defmacrop debug(msg) do
@@ -48,19 +49,19 @@ defmodule Crawler.TaskManager do
   the search callback is defined in `Crawler.Client´.
   """
   @spec search(
-          Crawler.Client.query(),
+          Client.query(),
           GenServer.name(),
           module(),
           timeout()
-        ) :: Crawler.Client.search_result()
-  def search(query, manager, provider, timeout \\ 5_000) do
-    GenServer.call(manager, {:search, {provider, query}}, timeout)
+        ) :: Client.search_result()
+  def search(query, manager, client, timeout \\ 5_000) do
+    GenServer.call(manager, {:search, {client, query}}, timeout)
   end
 
   # callbacks and internal stuff
   @doc false
   def init({max, supervisor}) do
-    start = %Crawler.TaskManager{
+    start = %__MODULE__{
       max: max,
       queue: :queue.new(),
       supervisor: supervisor
@@ -85,7 +86,7 @@ defmodule Crawler.TaskManager do
     else
       debug("request #{inspect(args)} will be queued")
       q = :queue.in({client, args}, state.queue)
-      {:noreply, %Crawler.TaskManager{state | queue: q}}
+      {:noreply, %__MODULE__{state | queue: q}}
     end
   end
 
@@ -110,7 +111,7 @@ defmodule Crawler.TaskManager do
       {{:value, {pid, args}}, q} ->
         if max_reached?(state) do
           :ok = start_task(state.supervisor, pid, args)
-          {:noreply, %Crawler.TaskManager{state | queue: q}}
+          {:noreply, %__MODULE__{state | queue: q}}
         else
           {:noreply, state}
         end
@@ -125,14 +126,18 @@ defmodule Crawler.TaskManager do
     supervisor |> Task.Supervisor.children() |> length
   end
 
-  defp start_task(supervisor, client = {client_pid, _id}, {provider, query})
+  defp start_task(
+         supervisor,
+         client = {client_pid, _id},
+         {provider_client, query}
+       )
        when is_pid(client_pid) do
     debug("current supervised children #{inspect(count_tasks(supervisor))}")
 
     %Task{} =
       Task.Supervisor.async_nolink(supervisor, fn ->
         Process.link(client_pid)
-        result = provider.search(query)
+        result = provider_client.search(query)
         GenServer.reply(client, result)
         :ok
       end)
