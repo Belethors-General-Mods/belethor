@@ -1,5 +1,6 @@
 # Used by "mix format"
 [
   inputs: ["*.exs", "lib/**/*.{ex,exs}", "test/**/*.{ex,exs}", "config/**/*.exs"],
-  subdirectories: ["apps/*"]
+  subdirectories: ["apps/*"],
+  line_length: 100
 ]
