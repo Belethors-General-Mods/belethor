@@ -70,9 +70,7 @@ defmodule Crawler.TaskManager do
       supervisor: supervisor
     }
 
-    debug(
-      "#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}"
-    )
+    debug("#{__MODULE__} started in #{inspect(self())} inits with #{inspect(start)}")
 
     {:ok, start}
   end
