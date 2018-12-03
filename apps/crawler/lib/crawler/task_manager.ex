@@ -52,11 +52,11 @@ defmodule Crawler.TaskManager do
   the search callback is defined in `Crawler.Client`.
   """
   @spec search(
-          query :: Client.query(),
+          query :: Crawler.Client.query(),
           manager :: GenServer.name(),
           client :: module(),
           timeout()
-        ) :: Client.search_result()
+        ) :: Crawler.Client.search_result()
   def search(query, manager, client, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {client, query}}, timeout)
   end
