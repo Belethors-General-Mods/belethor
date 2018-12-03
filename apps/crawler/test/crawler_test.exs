@@ -1,6 +1,8 @@
 defmodule CrawlerTest do
   use ExUnit.Case
-  alias Crawler.{Bethesda, Nexus, Steam}
+  alias Crawler.Bethesda
+  alias Crawler.Nexus
+  alias Crawler.Steam
 
   doctest Crawler
 
