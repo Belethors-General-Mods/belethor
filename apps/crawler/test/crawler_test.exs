@@ -1,6 +1,6 @@
 defmodule CrawlerTest do
   use ExUnit.Case
-  alias Crawler
+  alias Crawler.{Bethesda, Nexus, Steam}
 
   doctest Crawler
 
@@ -12,12 +12,12 @@ defmodule CrawlerTest do
       |> Supervisor.which_children()
       |> Enum.map(fn {name, _pid, type, origin} -> {name, type, origin} end)
 
-    assert Enum.member?(actual, {Crawler.Bethesda.TaskManager, :worker, [Crawler.TaskManager]})
-    assert Enum.member?(actual, {Crawler.Bethesda.Supervisor, :worker, [Task.Supervisor]})
-    assert Enum.member?(actual, {Crawler.Nexus.TaskManager, :worker, [Crawler.TaskManager]})
-    assert Enum.member?(actual, {Crawler.Nexus.Supervisor, :worker, [Task.Supervisor]})
-    assert Enum.member?(actual, {Crawler.Steam.TaskManager, :worker, [Crawler.TaskManager]})
-    assert Enum.member?(actual, {Crawler.Steam.Supervisor, :worker, [Task.Supervisor]})
+    assert Enum.member?(actual, {Bethesda.TaskManager, :worker, [Crawler.TaskManager]})
+    assert Enum.member?(actual, {Bethesda.Supervisor, :worker, [Task.Supervisor]})
+    assert Enum.member?(actual, {Nexus.TaskManager, :worker, [Crawler.TaskManager]})
+    assert Enum.member?(actual, {Nexus.Supervisor, :worker, [Task.Supervisor]})
+    assert Enum.member?(actual, {Steam.TaskManager, :worker, [Crawler.TaskManager]})
+    assert Enum.member?(actual, {Steam.Supervisor, :worker, [Task.Supervisor]})
   end
 
   test "check if the provider instances are functional" do
@@ -25,4 +25,5 @@ defmodule CrawlerTest do
     assert Steam.search("whatever") == {:error, :not_implemented}
     assert Bethesda.search("whatever") == {:error, :not_implemented}
   end
+
 end
