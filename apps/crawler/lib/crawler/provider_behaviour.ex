@@ -10,11 +10,7 @@ defmodule Crawler.Provider do
   @doc "do a remote search, throws on error"
   @callback search!(Client.query()) :: [Client.result()]
 
-  defmacro __using__(args) do
-    name = args[:name]
-    mgn = Module.concat([:Crawler, name, :TaskManager])
-    cln = Module.concat([:Crawler, name, :Client])
-
+  defmacro __using__(_args) do
     quote do
       alias Crawler.Provider
       alias Crawler.TaskManager
@@ -22,7 +18,7 @@ defmodule Crawler.Provider do
 
       @impl Provider
       def search(query) do
-        TaskManager.search(query, unquote(mgn), unquote(cln))
+        TaskManager.search(query, __MODULE__.TaskManager, __MODULE__.Client)
       end
 
       @impl Provider
