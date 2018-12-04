@@ -2,6 +2,9 @@ defmodule Crawler.Provider do
   @moduledoc """
   behaviour to implemented a provider.
   `use` this module to implement the callbacks the standard way.
+
+  If you `use` this module, a `Crawler.TaskManager` is expected run as `__YOUR_MODULE__.TaskManager`
+  and a `Crawler.Client` should be implemented at `__YOUR_MODULE__.Client`
   """
   alias Crawler.Client
 
