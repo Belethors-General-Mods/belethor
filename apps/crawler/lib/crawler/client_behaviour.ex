@@ -1,8 +1,8 @@
 defmodule Crawler.Client do
   @moduledoc """
-  beaviour to implement search providers for `Crawler.TaskManager`
+  This module describes client behaviour to be used by `Crawler.TaskManager.search/4`.
 
-  the implementations are meant to download and parse
+  The implementations are meant to download and parse.
   """
   @type result() :: any()
   @type search_result() :: {:ok, [mod()]} | {:error, term()}
