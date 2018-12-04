@@ -27,5 +27,4 @@ defmodule CrawlerTest do
     assert Steam.search("whatever") == {:error, :not_implemented}
     assert Bethesda.search("whatever") == {:error, :not_implemented}
   end
-
 end

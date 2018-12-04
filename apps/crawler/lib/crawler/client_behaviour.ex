@@ -9,6 +9,6 @@ defmodule Crawler.Client do
   @type query :: list(any())
   @callback search(query()) :: search_result()
 
-  #TODO :)
+  # TODO :)
   @type mod() :: :todo
 end
