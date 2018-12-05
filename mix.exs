@@ -9,14 +9,15 @@ defmodule Belethor.MixProject do
     [
       version: @version,
       name: "Belethor's General Mods",
-      homepage_url: "http://bgm.tetrarch.co",
+      homepage_url: "https://bgm.tetrarch.co",
       apps_path: "apps",
       aliases: aliases(),
       deps: deps(),
       docs: docs(),
       dialyzer: dialyzer(),
       start_permanent: Mix.env() == :prod,
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test]
     ]
   end
 
@@ -88,8 +89,8 @@ defmodule Belethor.MixProject do
        ref: "42c1cde9b9569d6e51706ffc55087c905d923c72",
        runtime: false,
        only: [:dev, :prod]},
-      {:credo, "~> 0.10", runtime: false, only: [:dev, :test]},
-      {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
+      {:credo, "~> 1.0.0", runtime: false, only: [:dev, :test]},
+      {:dialyxir, ">= 1.0.0-rc.4", runtime: false, only: [:dev, :test]},
       {:distillery, "~> 2.0", runtime: false},
       {:excoveralls, "~> 0.10", runtime: false, only: :test}
     ]
@@ -97,6 +98,9 @@ defmodule Belethor.MixProject do
 
   defp aliases do
     [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run apps/database/priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.reset", "test"],
       digest: "cmd --app website --app tag_editor mix phx.digest"
     ]
   end

@@ -28,8 +28,7 @@ defmodule Database.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto_sql, ">= 3.0.0-rc1"},
-      {:phoenix_ecto, "~> 3.5"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:poison, "~> 3.1"},
       {:stream_data, "~> 0.4"}

@@ -1,7 +1,10 @@
 use Mix.Config
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger,
+  # level: :debug,
+  backends: [:console],
+  compile_time_purge_level: :debug
 
 # Configure your database
 config :database, Database.Repo,
