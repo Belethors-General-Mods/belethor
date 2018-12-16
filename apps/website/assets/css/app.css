@@ -1,15 +1,3 @@
 /* This file is for your main application css. */
 
-.mod-card {
-    margin: 1rem;
-    width: 10rem;
-}
-
-.mod-card img {
-    width: 9rem;
-}
-
-.modtag {
-    margin: 4px;
-    padding: 2px;
-}
+@import "./phoenix.css";

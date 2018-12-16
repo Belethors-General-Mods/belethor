@@ -1,17 +1,17 @@
 defmodule Website.Application do
-  @moduledoc """
-  The main module for the Webist application
-  """
-  alias WebsiteWeb.Endpoint
-  use Application
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @moduledoc false
 
+  use Application
+
+  def start(_type, _args) do
+    # List all child processes to be supervised
     children = [
-      supervisor(WebsiteWeb.Endpoint, [])
+      # Start the endpoint when the application starts
+      WebsiteWeb.Endpoint
+      # Starts a worker by calling: Website.Worker.start_link(arg)
+      # {Website.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -23,7 +23,7 @@ defmodule Website.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Endpoint.config_change(changed, removed)
+    WebsiteWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end
