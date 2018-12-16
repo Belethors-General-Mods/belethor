@@ -1,5 +1,4 @@
 defmodule WebsiteWeb.ErrorView do
-  alias Phoenix.Controller
   use WebsiteWeb, :view
 
   # If you want to customize a particular status code
@@ -12,6 +11,6 @@ defmodule WebsiteWeb.ErrorView do
   # the template name. For example, "404.html" becomes
   # "Not Found".
   def template_not_found(template, _assigns) do
-    Controller.status_message_from_template(template)
+    Phoenix.Controller.status_message_from_template(template)
   end
 end

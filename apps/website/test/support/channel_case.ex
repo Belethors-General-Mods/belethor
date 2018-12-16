@@ -5,7 +5,7 @@ defmodule WebsiteWeb.ChannelCase do
 
   Such tests rely on `Phoenix.ChannelTest` and also
   import other functionality to make it easier
-  to build common datastructures and query the data layer.
+  to build common data structures and query the data layer.
 
   Finally, if the test case interacts with the database,
   it cannot be async. For this reason, every test runs
@@ -13,7 +13,6 @@ defmodule WebsiteWeb.ChannelCase do
   of the test unless the test case is marked as async.
   """
 
-  alias Ecto.Adapters.SQL.Sandbox
   use ExUnit.CaseTemplate
 
   using do
@@ -26,13 +25,7 @@ defmodule WebsiteWeb.ChannelCase do
     end
   end
 
-  setup tags do
-    :ok = Sandbox.checkout(Database.Repo)
-
-    unless tags[:async] do
-      Sandbox.mode(Database.Repo, {:shared, self()})
-    end
-
+  setup _tags do
     :ok
   end
 end

@@ -3,20 +3,20 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-use Mix.Config
 
 # General application configuration
-config :website,
-  namespace: Website
+use Mix.Config
 
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "O34XxKe9m3URfXZFeHDlI15eeZquHSalUz9K3XyvCJnjLNPZGRGgKd5eH4/2HsvI",
+  secret_key_base: "Mt2tj+6BdZ16NAwrL2q4DFlKz8ICpLg36zLTzTivXrDGiZplMNZ3wCUdSWOJBA8+",
   render_errors: [view: WebsiteWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Website.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Website.PubSub, adapter: Phoenix.PubSub.PG2]
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
