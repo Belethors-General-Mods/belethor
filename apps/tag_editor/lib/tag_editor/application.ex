@@ -1,17 +1,19 @@
 defmodule TagEditor.Application do
-  @moduledoc """
-  The main module of the Tag Editor application
-  """
-  alias TagEditorWeb.Endpoint
-  use Application
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @moduledoc false
 
+  use Application
+
+  def start(_type, _args) do
+    # List all child processes to be supervised
     children = [
-      supervisor(TagEditorWeb.Endpoint, [])
+      # Start the Ecto repository
+      TagEditor.Repo,
+      # Start the endpoint when the application starts
+      TagEditorWeb.Endpoint
+      # Starts a worker by calling: TagEditor.Worker.start_link(arg)
+      # {TagEditor.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -23,7 +25,7 @@ defmodule TagEditor.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Endpoint.config_change(changed, removed)
+    TagEditorWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end
