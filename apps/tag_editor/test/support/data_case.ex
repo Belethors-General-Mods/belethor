@@ -12,13 +12,11 @@ defmodule TagEditor.DataCase do
   of the test unless the test case is marked as async.
   """
 
-  alias Ecto.Adapters.SQL.Sandbox
-  alias Ecto.Changeset
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      alias Database.Repo
+      alias TagEditor.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -28,17 +26,17 @@ defmodule TagEditor.DataCase do
   end
 
   setup tags do
-    :ok = Sandbox.checkout(Database.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TagEditor.Repo)
 
     unless tags[:async] do
-      Sandbox.mode(Database.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(TagEditor.Repo, {:shared, self()})
     end
 
     :ok
   end
 
   @doc """
-  A helper that transform changeset errors to a map of messages.
+  A helper that transforms changeset errors into a map of messages.
 
       assert {:error, changeset} = Accounts.create_user(%{password: "short"})
       assert "password is too short" in errors_on(changeset).password
@@ -46,7 +44,7 @@ defmodule TagEditor.DataCase do
 
   """
   def errors_on(changeset) do
-    Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
       Enum.reduce(opts, message, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)
