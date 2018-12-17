@@ -1,11 +1,12 @@
-const path = require('path');
-const glob = require('glob');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+/* global __dirname */
+const path = require("path")
+const glob = require("glob")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
-module.exports = (env, options) => ({
+module.exports = (env, options) => ({ // eslint-disable-line no-unused-vars
   optimization: {
     minimizer: [
       new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
@@ -13,11 +14,11 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-      './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
+    "./js/app.js": ["./js/app.js"].concat(glob.sync("./vendor/**/*.js"))
   },
   output: {
-    filename: 'app.js',
-    path: path.resolve(__dirname, '../priv/static/js')
+    filename: "app.js",
+    path: path.resolve(__dirname, "../priv/static/js")
   },
   module: {
     rules: [
@@ -25,17 +26,17 @@ module.exports = (env, options) => ({
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: "babel-loader"
         }
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
+    new MiniCssExtractPlugin({ filename: "../css/app.css" }),
+    new CopyWebpackPlugin([{ from: "static/", to: "../" }])
   ]
-});
+})

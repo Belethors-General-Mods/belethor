@@ -3,13 +3,13 @@ defmodule TagEditor.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  alias TagEditorWeb.Endpoint
+
   use Application
 
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
-      TagEditor.Repo,
       # Start the endpoint when the application starts
       TagEditorWeb.Endpoint
       # Starts a worker by calling: TagEditor.Worker.start_link(arg)
@@ -25,7 +25,7 @@ defmodule TagEditor.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    TagEditorWeb.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end

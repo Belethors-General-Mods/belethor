@@ -3,6 +3,8 @@ defmodule Website.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  alias WebsiteWeb.Endpoint
+
   use Application
 
   def start(_type, _args) do
@@ -23,7 +25,7 @@ defmodule Website.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    WebsiteWeb.Endpoint.config_change(changed, removed)
+    Endpoint.config_change(changed, removed)
     :ok
   end
 end

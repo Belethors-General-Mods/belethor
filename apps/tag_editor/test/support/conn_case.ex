@@ -13,6 +13,8 @@ defmodule TagEditorWeb.ConnCase do
   of the test unless the test case is marked as async.
   """
 
+  alias Phoenix.ConnTest
+
   use ExUnit.CaseTemplate
 
   using do
@@ -26,13 +28,7 @@ defmodule TagEditorWeb.ConnCase do
     end
   end
 
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TagEditor.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(TagEditor.Repo, {:shared, self()})
-    end
-
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+  setup _tags do
+    {:ok, conn: ConnTest.build_conn()}
   end
 end

@@ -7,20 +7,12 @@
 # General application configuration
 use Mix.Config
 
-config :tag_editor,
-  ecto_repos: [TagEditor.Repo]
-
 # Configures the endpoint
 config :tag_editor, TagEditorWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "yC8vstJhHHMhSQ6LkddYqmkFCxhKuFWdI4MaCtHdQYkVQVm3xTPmsEkI4yCTFWP1",
   render_errors: [view: TagEditorWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: TagEditor.PubSub, adapter: Phoenix.PubSub.PG2]
-
-# Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

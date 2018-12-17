@@ -13,6 +13,8 @@ defmodule WebsiteWeb.ConnCase do
   of the test unless the test case is marked as async.
   """
 
+  alias Phoenix.ConnTest
+
   use ExUnit.CaseTemplate
 
   using do
@@ -27,6 +29,6 @@ defmodule WebsiteWeb.ConnCase do
   end
 
   setup _tags do
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: ConnTest.build_conn()}
   end
 end
