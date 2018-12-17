@@ -20,7 +20,7 @@ defmodule Database.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :phoenix_ecto],
       mod: {Database.Application, []}
     ]
   end
@@ -29,6 +29,7 @@ defmodule Database.MixProject do
   defp deps do
     [
       {:phoenix_ecto, "~> 4.0"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"}
     ]
   end
