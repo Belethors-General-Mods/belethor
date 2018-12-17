@@ -29,7 +29,8 @@ script:
   - mix ecto.migrate
   - mix coveralls.travis -u
   - mix credo --strict
-  - mix dialyzer
+  - travis_wait mix dialyzer
 cache:
   directories:
     - deps
+    - _build
