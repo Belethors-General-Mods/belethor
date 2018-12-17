@@ -1,6 +1,6 @@
-defmodule TagEditorWeb.ErrorView do
+defmodule WebsiteWeb.ErrorView do
   alias Phoenix.Controller
-  use TagEditorWeb, :view
+  use WebsiteWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
