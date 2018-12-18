@@ -4,9 +4,13 @@ defmodule Crawler.Client do
 
   The only function to be implemented is the `search/1` function.
   """
-  @type result() :: any()
-  @type search_result() :: {:ok, [mod()]} | {:error, term()}
-  @type query :: list(any())
+  alias Common.Mod
+
+  @typedoc "TODO this should be done with the first real impls of clients"
+  @type args :: list(any())
+
+  @type result :: {:ok, [Mod.t()]} | {:error, term()}
+
   @doc """
   This function is meant to query an provider.
   In the usual version of an http based api from the provider, you need to do:
@@ -15,8 +19,6 @@ defmodule Crawler.Client do
   If all this worked as expected return {:ok, [result()]}.
   If not return {:error, reason :: term()}.
   """
-  @callback search(query()) :: search_result()
+  @callback search(args()) :: result()
 
-  # TODO :)
-  @type mod() :: :todo
 end
