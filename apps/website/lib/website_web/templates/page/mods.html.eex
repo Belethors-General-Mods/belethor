@@ -1,5 +1,0 @@
-<div class="d-flex flex-wrap">
-    <%= for mod <- @mods do %>
-        <%= render "mod.html", mod: mod %>
-    <% end %>
-</div>

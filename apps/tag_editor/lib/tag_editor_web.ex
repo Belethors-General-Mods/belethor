@@ -20,26 +20,28 @@ defmodule TagEditorWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: TagEditorWeb
+
       import Plug.Conn
-      import TagEditorWeb.Router.Helpers
       import TagEditorWeb.Gettext
+      alias TagEditorWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/tag_editor_web/templates",
-                        namespace: TagEditorWeb
+      use Phoenix.View,
+        root: "lib/tag_editor_web/templates",
+        namespace: TagEditorWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import TagEditorWeb.Router.Helpers
       import TagEditorWeb.ErrorHelpers
       import TagEditorWeb.Gettext
+      alias TagEditorWeb.Router.Helpers, as: Routes
     end
   end
 

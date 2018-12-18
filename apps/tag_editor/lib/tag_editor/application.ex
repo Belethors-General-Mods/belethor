@@ -1,17 +1,19 @@
 defmodule TagEditor.Application do
-  @moduledoc """
-  The main module of the Tag Editor application
-  """
-  alias TagEditorWeb.Endpoint
-  use Application
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @moduledoc false
 
+  alias TagEditorWeb.Endpoint
+
+  use Application
+
+  def start(_type, _args) do
+    # List all child processes to be supervised
     children = [
-      supervisor(TagEditorWeb.Endpoint, [])
+      # Start the endpoint when the application starts
+      TagEditorWeb.Endpoint
+      # Starts a worker by calling: TagEditor.Worker.start_link(arg)
+      # {TagEditor.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
