@@ -1,5 +1,4 @@
 defmodule Common.Utils do
-
   @doc """
   macro to correctly log debug messages.
 
@@ -10,5 +9,4 @@ defmodule Common.Utils do
       :ok = Logger.debug(fn -> unquote(msg) end)
     end
   end
-
 end

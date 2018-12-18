@@ -1,5 +1,4 @@
 defmodule Common.Modfile do
-
   @enforce_keys [:console_compat]
   defstruct [:console_compat, :steam, :nexus, :bethesda]
 
@@ -7,5 +6,4 @@ defmodule Common.Modfile do
   TODO
   """
   @type modfile :: %__MODULE__{}
-
 end
