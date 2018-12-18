@@ -9,14 +9,15 @@ defmodule Belethor.MixProject do
     [
       version: @version,
       name: "Belethor's General Mods",
-      homepage_url: "http://bgm.tetrarch.co",
+      homepage_url: "https://bgm.tetrarch.co",
       apps_path: "apps",
       aliases: aliases(),
       deps: deps(),
       docs: docs(),
       dialyzer: dialyzer(),
       start_permanent: Mix.env() == :prod,
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test]
     ]
   end
 
@@ -94,6 +95,9 @@ defmodule Belethor.MixProject do
 
   defp aliases do
     [
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.reset", "test"],
       digest: "cmd --app website --app tag_editor mix phx.digest"
     ]
   end

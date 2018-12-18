@@ -34,3 +34,4 @@ config :database,
   ecto_repos: [Database.Repo]
 
 import_config "#{Mix.env()}.exs"
+import_config "config.mappings.exs"
