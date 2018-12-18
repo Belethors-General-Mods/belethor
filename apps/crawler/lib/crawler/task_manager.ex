@@ -10,13 +10,7 @@ defmodule Crawler.TaskManager do
   use GenServer
   require Logger
   alias Crawler
-
-  # macro to correct log debug messages
-  defmacrop debug(msg) do
-    quote do
-      :ok = Logger.debug(fn -> unquote(msg) end)
-    end
-  end
+  import Common.Utils, only: [debug: 1]
 
   @type max() :: pos_integer() | :infinty
 
