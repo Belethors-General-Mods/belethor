@@ -20,5 +20,4 @@ defmodule Crawler.Client do
   If not return {:error, reason :: term()}.
   """
   @callback search(args()) :: result()
-
 end
