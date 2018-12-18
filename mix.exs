@@ -44,7 +44,7 @@ defmodule Belethor.MixProject do
   defp docs do
     ignored =
       case Mix.env() do
-        :prod -> [:database, :tag_editor, :crawler, :website]
+        :prod -> [:common, :database, :tag_editor, :crawler, :website]
         _ -> []
       end
 
