@@ -1,4 +1,6 @@
 defmodule Common.Utils do
+  @moduledoc "Module for utilities used across belethor."
+
   @doc """
   macro to correctly log debug messages.
 

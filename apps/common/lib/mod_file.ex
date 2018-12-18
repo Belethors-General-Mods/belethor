@@ -1,9 +1,18 @@
 defmodule Common.Modfile do
+  @moduledoc """
+  Represents a mod file somewhere to download.
+  """
+  alias Common.Modfile
+
   @enforce_keys [:console_compat]
   defstruct [:console_compat, :steam, :nexus, :bethesda]
 
-  @typedoc """
-  TODO
-  """
-  @type modfile :: %__MODULE__{}
+  @typedoc "typespec for a mod"
+  @type modfile :: %Modfile{}
+
+  defimpl Common.Validation, for: Modfile do
+    def valid?(_mod_file) do
+      true
+    end
+  end
 end
