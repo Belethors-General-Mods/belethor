@@ -18,8 +18,8 @@ defmodule Common.Mod do
   @typedoc "typespec for a mod"
   @type t :: %Mod{}
 
-  defimpl Common.Validation, for: mod do
-    def valid?(mod) do
+  defimpl Common.Validation, for: Mod do
+    def valid?(_mod) do
       true
     end
   end
