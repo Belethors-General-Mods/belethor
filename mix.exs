@@ -37,7 +37,9 @@ defmodule Belethor.MixProject do
         :race_conditions,
         :no_opaque,
         :underspecs
-      ]
+      ],
+      list_unused_filters: true,
+      ignore_warnings: ".dialyzer_ignore.exs"
     ]
   end
 
