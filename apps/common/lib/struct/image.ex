@@ -1,10 +1,10 @@
-defmodule Common.Image do
+defmodule Common.Struct.Image do
   @moduledoc """
   Represents a image.
 
   only `:data` OR `:url` should be set.
   """
-  alias Common.Image
+  alias Common.Struct.Image
 
   defstruct [:data, :url]
   @typedoc "the typespec of an image"

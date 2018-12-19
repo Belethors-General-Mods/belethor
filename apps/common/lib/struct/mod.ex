@@ -1,8 +1,8 @@
-defmodule Common.Mod do
+defmodule Common.Struct.Mod do
   @moduledoc """
   Represents a mod.
   """
-  alias Common.Mod
+  alias Common.Struct.Mod
 
   @enforce_keys [:name, :description, :published]
   defstruct [

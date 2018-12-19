@@ -1,8 +1,8 @@
-defmodule Common.Modfile do
+defmodule Common.Mod.Modfile do
   @moduledoc """
   Represents a mod file somewhere to download.
   """
-  alias Common.Modfile
+  alias Common.Mod.Modfile
 
   @enforce_keys [:console_compat]
   defstruct [:console_compat, :steam, :nexus, :bethesda]
