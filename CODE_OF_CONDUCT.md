@@ -1,6 +1,6 @@
 # Code of Conduct
 
-Contact: bgm-conduct@tetrarch.com
+Contact: bgm-coc@tetrarch.com
 
 ## Why have a Code of Conduct?
 
@@ -46,7 +46,7 @@ Other BGM activities (such as conferences, meetups, and other unofficial forums)
 
 Project maintainers may remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct.
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by emailing: bgm-conduct@tetrarch.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. **All reports will be kept confidential**.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by emailing: bgm-coc@tetrarch.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. **All reports will be kept confidential**.
 
 **The goal of the Code of Conduct is to resolve conflicts in the most harmonious way possible**. We hope that in most cases issues may be resolved through polite discussion and mutual agreement. Bannings and other forceful measures are to be employed only as a last resort. **Do not** post publicly about currently ongoing issues or try to rally sentiment against a particular individual or group.
 
