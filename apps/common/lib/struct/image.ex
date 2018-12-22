@@ -9,5 +9,4 @@ defmodule Common.Struct.Image do
   defstruct [:data, :url]
   @typedoc "the typespec of an image"
   @type t :: %Image{}
-
 end

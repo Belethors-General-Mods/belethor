@@ -17,5 +17,4 @@ defmodule Common.Struct.Mod do
 
   @typedoc "typespec for a mod"
   @type t :: %Mod{}
-
 end

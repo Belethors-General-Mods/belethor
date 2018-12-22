@@ -9,5 +9,4 @@ defmodule Common.Struct.Modfile do
 
   @typedoc "typespec for a mod"
   @type modfile :: %Modfile{}
-
 end
