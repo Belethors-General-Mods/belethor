@@ -10,9 +10,4 @@ defmodule Common.Struct.Image do
   @typedoc "the typespec of an image"
   @type t :: %Image{}
 
-  defimpl Common.Validation, for: Image do
-    def valid?(img) do
-      !(img.data == nil) == (img.url == nil)
-    end
-  end
 end

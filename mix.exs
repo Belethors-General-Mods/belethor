@@ -38,8 +38,7 @@ defmodule Belethor.MixProject do
         :no_opaque,
         :underspecs
       ],
-      list_unused_filters: true,
-      ignore_warnings: ".dialyzer_ignore.exs"
+      list_unused_filters: true
     ]
   end
 

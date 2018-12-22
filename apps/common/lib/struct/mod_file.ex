@@ -10,9 +10,4 @@ defmodule Common.Struct.Modfile do
   @typedoc "typespec for a mod"
   @type modfile :: %Modfile{}
 
-  defimpl Common.Validation, for: Modfile do
-    def valid?(_mod_file) do
-      true
-    end
-  end
 end
