@@ -4,7 +4,7 @@ defmodule Crawler.Client do
 
   The only function to be implemented is the `search/1` function.
   """
-  alias Common.Mod
+  alias Common.Struct.Mod
 
   @typedoc "TODO this should be done with the first real impls of clients"
   @type args :: list(any())

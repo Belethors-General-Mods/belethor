@@ -6,7 +6,7 @@ defmodule Crawler.Provider do
   If you `use` this module, a `Crawler.TaskManager` is expected run as `__YOUR_MODULE__.TaskManager`
   and a `Crawler.Client` should be implemented at `__YOUR_MODULE__.Client`
   """
-  alias Common.Mod
+  alias Common.Struct.Mod
   alias Crawler.Client
 
   @doc "do a remote search, may return a error tuple"
