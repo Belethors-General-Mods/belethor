@@ -80,15 +80,9 @@ defmodule Belethor.MixProject do
   # the apps folder.
   defp deps do
     [
-      # {:ex_doc, "~> 0.19", runtime: false, only: [:dev, :prod]},
-      {:ex_doc,
-       git: "https://github.com/elixir-lang/ex_doc",
-       ref: "5c5acfac61a311ec4fb61a42d956075bcfddbc44",
-       runtime: false,
-       only: [:dev, :prod]},
-      {:credo, "~> 0.10", runtime: false, only: [:dev, :test]},
       {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
       {:distillery, "~> 1.5", runtime: false},
+      {:ex_doc, "~> 0.19.2", runtime: false},
       {:excoveralls, "~> 0.10", runtime: false, only: :test}
     ]
   end
