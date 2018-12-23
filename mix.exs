@@ -80,9 +80,10 @@ defmodule Belethor.MixProject do
   # the apps folder.
   defp deps do
     [
-      {:dialyxir, ">= 1.0.0-rc.3", runtime: false, only: [:dev, :test]},
-      {:distillery, "~> 1.5", runtime: false},
       {:ex_doc, "~> 0.19.2", runtime: false},
+      {:credo, "~> 1.0", runtime: false, only: [:dev, :test]},
+      {:dialyxir, ">= 1.0.0-rc.4", runtime: false, only: [:dev, :test]},
+      {:distillery, "~> 2.0", runtime: false},
       {:excoveralls, "~> 0.10", runtime: false, only: :test}
     ]
   end
