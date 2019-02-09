@@ -10,13 +10,7 @@ defmodule Crawler.TaskManager do
   use GenServer
   require Logger
   alias Crawler
-
-  # macro to correct log debug messages
-  defmacrop debug(msg) do
-    quote do
-      :ok = Logger.debug(fn -> unquote(msg) end)
-    end
-  end
+  import Common.Utils, only: [debug: 1]
 
   @type max() :: pos_integer() | :infinty
 
@@ -52,11 +46,11 @@ defmodule Crawler.TaskManager do
   the search callback is defined in `Crawler.Client`.
   """
   @spec search(
-          query :: Crawler.Client.query(),
+          query :: Crawler.Client.args(),
           manager :: GenServer.name(),
           client :: module(),
           timeout()
-        ) :: Crawler.Client.search_result()
+        ) :: Crawler.Client.result()
   def search(query, manager, client, timeout \\ 5_000) do
     GenServer.call(manager, {:search, {client, query}}, timeout)
   end

@@ -36,6 +36,7 @@ defmodule TagEditor.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:common, in_umbrella: true},
       {:database, in_umbrella: true},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
