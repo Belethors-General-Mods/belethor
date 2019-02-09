@@ -2,17 +2,28 @@ defmodule Common.StructValidTest do
   use ExUnit.Case
 
   alias Common.Struct.Image
-  alias Common.Validation
 
-  test "valid? image" do
-    invalid1 = %Image{data: "jlkdsfj", url: "jlksdjf"}
-    invalid2 = %Image{data: nil, url: nil}
-    valid1 = %Image{data: nil, url: "jlksdjf"}
-    valid2 = %Image{data: "jlkdsfj", url: nil}
+  test "Image.validate: check 'full' error" do
+    full = %Image{data: "jlkdsfj", url: "jlksdjf"}
+    assert Image.validate(full) == {:error, :full}
+  end
 
-    assert !(invalid1 |> Validation.valid?())
-    assert !(invalid2 |> Validation.valid?())
-    assert valid1 |> Validation.valid?()
-    assert valid2 |> Validation.valid?()
+  test "Image.validate: check invalid data" do
+    data_wrong = %Image{data: :nope}
+    assert Image.validate(data_wrong)
+  end
+
+  test "Image.validate: check invalid url" do
+    assert Image.validate(%Image{}) == {:error, :empty}
+  end
+
+  test "Image.validate: check valid url" do
+    valid1 = %Image{url: "jlksdjf"}
+    assert Image.validate(valid1) == :ok
+  end
+
+  test "Image.validate: check valid data" do
+    valid2 = %Image{data: "jlkdsfj"}
+    assert Image.validate(valid2) == :ok
   end
 end
