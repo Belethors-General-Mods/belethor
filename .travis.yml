@@ -22,7 +22,7 @@ script:
   - mix ecto.migrate
   - mix coveralls.travis -u
   - mix credo --strict
-  - travis_wait mix dialyzer
+  - travis_wait mix dialyzer --halt-exit-status
 cache:
   directories:
     - deps
