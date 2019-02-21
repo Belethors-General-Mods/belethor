@@ -15,7 +15,7 @@ defmodule Common.Struct.Modfile do
   end
 
   def validate(%Modfile{console_compat: b}) do
-    if(is_boolean(b)) do
+    if is_boolean(b) do
       :ok
     else
       {:error, {:console_compat, :wrong_type}}
