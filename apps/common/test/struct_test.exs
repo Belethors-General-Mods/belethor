@@ -42,7 +42,10 @@ defmodule Common.StructValidTest do
     empty = %Modfile{console_compat: nil}
     assert Modfile.validate(empty) == {:error, :empty}
 
-    wt = %Modfile{console_compat: true}
+    wt = %Modfile{console_compat: "true"}
     assert Modfile.validate(wt) == {:error, {:console_compat, :wrong_type}}
+
+    ok = %Modfile{console_compat: true}
+    assert Modfile.validate(ok) == :ok
   end
 end
