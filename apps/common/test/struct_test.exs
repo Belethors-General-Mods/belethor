@@ -2,6 +2,8 @@ defmodule Common.StructValidTest do
   use ExUnit.Case
 
   alias Common.Struct.Image
+  alias Common.Struct.Mod
+  alias Common.Struct.Modfile
 
   test "Image.validate: check 'full' error" do
     full = %Image{data: "jlkdsfj", url: "jlksdjf"}
@@ -25,5 +27,22 @@ defmodule Common.StructValidTest do
   test "Image.validate: check valid data" do
     valid2 = %Image{data: "jlkdsfj"}
     assert Image.validate(valid2) == :ok
+  end
+
+  test "Mod.validate: enforced keys != nil" do
+    n = %Mod{name: nil, description: "d", published: "p"}
+    d = %Mod{name: "n", description: nil, published: "p"}
+    p = %Mod{name: "n", description: "d", published: nil}
+    assert Mod.validate(n) == {:error, :empty}
+    assert Mod.validate(d) == {:error, :empty}
+    assert Mod.validate(p) == {:error, :empty}
+  end
+
+  test "Modfile.validate: console_compate is always a boolean" do
+    empty = %Modfile{console_compat: nil}
+    assert Modfile.validate(empty) == {:error, :empty}
+
+    wt = %Modfile{console_compat: true}
+    assert Modfile.validate(wt) == {:error, {:console_compat, :wrong_type}}
   end
 end

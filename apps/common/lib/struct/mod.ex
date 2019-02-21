@@ -17,4 +17,20 @@ defmodule Common.Struct.Mod do
 
   @typedoc "typespec for a mod"
   @type t :: %Mod{}
+
+  def validate(%Mod{name: nil}) do
+    {:error, :empty}
+  end
+
+  def validate(%Mod{description: nil}) do
+    {:error, :empty}
+  end
+
+  def validate(%Mod{published: nil}) do
+    {:error, :empty}
+  end
+
+  def validate(%Mod{}) do
+    :ok
+  end
 end
