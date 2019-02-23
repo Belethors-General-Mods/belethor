@@ -7,14 +7,12 @@ let
 
   elixir = beam.packages.erlangR21.elixir_1_8;
   nodejs = nodejs-11_x;
-  postgresql = postgresql_11;
 in
 
 mkShell {
   buildInputs = [
       elixir
       nodejs
-      postgresql
       git
     ]
     ++ optional stdenv.isLinux glibcLocales # To allow setting consistent locale on linux
@@ -23,7 +21,9 @@ mkShell {
     ;
 
     # Set up environment vars
+    # We unset TERM b/c of https://github.com/NixOS/nix/issues/1056
     shellHook = ''
+      unset TERM
       export LANG="en_US.UTF-8"
       export LC_ALL="en_US.UTF-8"
       export PGDATA="$PWD/db"
