@@ -9,13 +9,17 @@ otp_release:
 # Build only if the type of the job is not a push
 if: type != push
 
+# Only clone the current commit
 git:
   depth: 1
+
 sudo: false
+
 env:
   global:
     - ELIXIR_ASSERT_TIMEOUT=2000
     - MIX_ENV=test
+
 install:
   - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
@@ -29,10 +33,14 @@ script:
   - mix coveralls.travis -u
   - mix credo --strict
   - travis_wait mix dialyzer --halt-exit-status
+
+# Cache as much as possible
 cache:
   directories:
     - deps
     - _build
+
+# Trigger our discord webhook
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
