@@ -3,9 +3,12 @@ elixir:
   - '1.7'
   - '1.8'
 otp_release:
-  - '21.0'
   - '21.1'
   - '21.2'
+
+# Build only if the type of the job is not a push
+if: type != push
+
 git:
   depth: 1
 sudo: false
