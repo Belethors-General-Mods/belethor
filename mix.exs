@@ -22,7 +22,7 @@ defmodule Belethor.MixProject do
         "coveralls.detail": :test,
         "coveralls.html": :test,
         "coveralls.post": :test
-      ],
+      ]
     ]
   end
 

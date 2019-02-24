@@ -5,8 +5,8 @@ defmodule TagEditorWeb.ErrorHelpersTest do
   import StreamData
   alias TagEditorWeb.ErrorHelpers
 
-  @max_run_time Application.get_env(:ex_unit, :test_timings, [max_run_time: 500])[:max_run_time]
-  @max_runs Application.get_env(:ex_unit, :test_timings, [max_runs: 1_000_000_000])[:max_runs]
+  @max_run_time Application.get_env(:ex_unit, :test_timings, max_run_time: 500)[:max_run_time]
+  @max_runs Application.get_env(:ex_unit, :test_timings, max_runs: 1_000_000_000)[:max_runs]
 
   test "translates known errors" do
     # assert TagEditorWeb.ErrorHelpers.translate_error({"some known message", []})
