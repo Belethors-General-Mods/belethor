@@ -17,7 +17,12 @@ defmodule Belethor.MixProject do
       dialyzer: dialyzer(),
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test]
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.html": :test,
+        "coveralls.post": :test
+      ]
     ]
   end
 
