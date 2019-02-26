@@ -17,3 +17,4 @@ exclude_paths:
 - config
 - apps/*/config
 - apps/*/assets/vendor
+- docs

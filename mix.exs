@@ -77,7 +77,8 @@ defmodule Belethor.MixProject do
         Modding: Path.wildcard("guides/modding/*.md"),
         "Advanced Modding": Path.wildcard("guides/modding/advanced/*.md"),
         "Mod Curation": Path.wildcard("guides/curation/*.md")
-      ]
+      ],
+      output: "docs"
     ]
   end
 
