@@ -17,7 +17,12 @@ defmodule Belethor.MixProject do
       dialyzer: dialyzer(),
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test]
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.html": :test,
+        "coveralls.post": :test
+      ]
     ]
   end
 
@@ -37,14 +42,15 @@ defmodule Belethor.MixProject do
         :race_conditions,
         :no_opaque,
         :underspecs
-      ]
+      ],
+      list_unused_filters: true
     ]
   end
 
   defp docs do
     ignored =
       case Mix.env() do
-        :prod -> [:database, :tag_editor, :crawler, :website]
+        :prod -> [:common, :database, :tag_editor, :crawler, :website]
         _ -> []
       end
 

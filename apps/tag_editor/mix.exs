@@ -12,6 +12,7 @@ defmodule TagEditor.MixProject do
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      test_coverage: [tool: ExCoveralls],
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -36,6 +37,7 @@ defmodule TagEditor.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:common, in_umbrella: true},
       {:database, in_umbrella: true},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
@@ -43,7 +45,8 @@ defmodule TagEditor.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:stream_data, "~> 0.4", only: :test}
     ]
   end
 end
