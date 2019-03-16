@@ -25,6 +25,8 @@ defmodule Crawler.Application do
   # defines a task manager at Crawler.#{name}.TaskManager
   # and its supervisor at Crawler.#{name}.Supervisor
   defp define_taskmanager(name, max_tasks) do
+    # We create 2 new atoms per crawler on startup here. This is safe.
+    # credo:disable-for-lines:2 Credo.Check.Warning.UnsafeToAtom
     sup_name = Module.concat([:Crawler, name, :Supervisor])
     man_name = Module.concat([:Crawler, name, :TaskManager])
 
