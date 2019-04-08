@@ -8,7 +8,7 @@ Our project aims to fill the void left after [Skyrim G.E.M.S.](https://web.archi
 
 The idea is to organize primarily gameplay-enhancing, and other mods with the use of categorized tags (tm), and give modders extra information about compatibility and requirements for any given mod.
 
-Our project is to feature a powerful search tool, that is capable of filtering on several layers, and thus giving you ~~absolute~~ good control over the results, especially when compared to other mod-indexing services, such as nexus.
+Our project is to feature a powerful search tool, that is capable of filtering on several layers, and thus giving you ~~absolute~~ good control over the results, especially when compared to other mod-indexing services. ~~(no offense)~~
 
 In the future we also have plans to perhaps support games other than Skyrim, and give you the tools to create 20% more amazing modlists, with 70% less ~~fatality~~ functional meltdown rate.
 
