@@ -23,7 +23,7 @@ For post-install configuration, please see: [TODO: LINK](TODO)
 
 ## Contribute
 
-Please see [Contributing](TODO) and [Code of Conduct](TODO)
+Please see [Contributing](TODO) and [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Affix & License
 
