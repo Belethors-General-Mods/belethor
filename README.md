@@ -27,7 +27,7 @@ Please see [Contributing](TODO) and [Code of Conduct](TODO)
 
 ## Affix & License
 
-**Copyright 2018 The BGM Contributors**
+**Copyright 2019 The BGM Contributors**
 
 Licensed under the **Apache License, Version 2.0** (the "License");
 you may not use this file except in compliance with the License.
