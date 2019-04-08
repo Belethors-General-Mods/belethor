@@ -25,7 +25,7 @@ For post-install configuration, please see: [TODO: LINK](TODO)
 
 Please see [TODO: Contributing](TODO) and [Code of Conduct](CODE_OF_CONDUCT.md)
 
-## Affix & License
+## Legal
 
 **Copyright 2019 The BGM Contributors**
 
