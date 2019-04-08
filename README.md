@@ -4,7 +4,7 @@
 
 ## Curated modlist for skyrim and modding assistance
 
-Our project aims to fill the void left after [Skyrim G.E.M.S.](TODO) has ended it's service.
+Our project aims to fill the void left after [Skyrim G.E.M.S.](https://web.archive.org/web/20170221222347/http://skyrimgems.com/) has ended it's service.
 
 The idea is to organize primarily gameplay-enhancing, and other mods with the use of categorized tags (tm), and give modders extra information about compatibility and requirements for any given mod.
 
@@ -23,7 +23,7 @@ For post-install configuration, please see: [TODO: LINK](TODO)
 
 ## Contribute
 
-Please see [Contributing](TODO) and [Code of Conduct](CODE_OF_CONDUCT.md)
+Please see [TODO: Contributing](TODO) and [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Affix & License
 
