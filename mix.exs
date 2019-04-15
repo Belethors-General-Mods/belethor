@@ -62,6 +62,7 @@ defmodule Belethor.MixProject do
       # logo: "guides/assets/images/bgm_white_64.png",
       ignore_apps: ignored,
       extra_section: "GUIDES",
+      assets: 'guides/assets',
       extras: [
         "README.md": [title: "README"],
         "guides/test.md": [title: "Test Document"],
