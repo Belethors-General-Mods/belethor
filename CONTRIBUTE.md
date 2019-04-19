@@ -4,6 +4,7 @@ TODO see https://github.com/Belethors-General-Mods/belethor/issues/33
 ## Basics
 The git master branch is protected, do your changes a branch called 'feature/<feature-name>'.
 We have automatic checks on your pull request, make them green if you want PR to be merged.
+If you want to do large changes, you should discuss them with us in an issue or on discord first.
 
 ## Frontend
 We have two apps, that need designing. There are design mockups, logos from Zaki, here: TODO
