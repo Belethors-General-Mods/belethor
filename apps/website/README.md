@@ -1,19 +1,14 @@
 # Website
 
-To start your Phoenix server:
+This phoenix app is to render mod lists from the database to the public.
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## Design
+Design is still WIP.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+`./assets/design` contains some textures, assets and references.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+### Mockups
+This is the most recent:
+![recent mockup](./assets/website/images/mockups/mockup6.png)
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+There are older ones too, [here](./assets/website/images/mockups_old).

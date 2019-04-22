@@ -65,7 +65,7 @@ defmodule Belethor.MixProject do
       assets: 'doc-assets',
       extras: [
         "README.md": [title: "README"],
-        "guides/test.md": [title: "Test Document"],
+        "apps/website/README.md": [title: "Website README", filename: "website-readme",],
         "guides/curation/submitting_a_mod.md": [title: "Submitting a Mod"],
         "guides/modding/advanced/MO1_reference.md": [title: "MO1 Reference"],
         "guides/modding/what_tools_do_i_need.md": [title: "What Tools Do I Need?"],
