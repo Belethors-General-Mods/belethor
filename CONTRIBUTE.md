@@ -1,5 +1,4 @@
 # Contributing
-TODO see https://github.com/Belethors-General-Mods/belethor/issues/33
 
 ## Basics
 The git master branch is protected, do your changes a branch called 'feature/<feature-name>'.
@@ -25,5 +24,5 @@ The checks on elixir code are:
  - code needs to have consistent formatted (`mix format` does that for you)
 See `.travis.yml` how these tests are run, you can run them easily on your on machine, before committing.
 
-## something unclear?
+## Something unclear?
 If you don't get something here, join our [Discord Server](https://discord.gg/4ezeRgn) and ask in '#support'.

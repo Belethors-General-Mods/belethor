@@ -3,7 +3,7 @@ defmodule Belethor.MixProject do
   use Mix.Project
 
   # major.minor.patch-docs
-  @version "0.0.1-1"
+  @version "0.0.1-2"
 
   def project do
     [
