@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.com/Belethors-General-Mods/belethor.svg?branch=master)](https://travis-ci.com/Belethors-General-Mods/belethor) [![Coverage Status](https://coveralls.io/repos/github/Belethors-General-Mods/belethor/badge.svg?branch=master)](https://coveralls.io/github/Belethors-General-Mods/belethor?branch=master) [![Ebert](https://ebertapp.io/github/Belethors-General-Mods/belethor.svg)](https://ebertapp.io/github/Belethors-General-Mods/belethor)
 
-Welcome,
+Belethor is meant as a [G.E.M.S.](https://web.archive.org/web/20170221222347/http://skyrimgems.com/) successor.
+
+We are still in development, not ready for prime time yet.
 
 ## License (Apache)
 
