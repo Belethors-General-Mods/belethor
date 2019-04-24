@@ -62,15 +62,16 @@ defmodule Belethor.MixProject do
       # logo: "guides/assets/images/bgm_white_64.png",
       ignore_apps: ignored,
       extra_section: "GUIDES",
-      assets: 'guides/assets',
+      assets: 'doc-assets',
       extras: [
         "README.md": [title: "README"],
-        "guides/test.md": [title: "Test Document"],
+        "apps/website/README.md": [title: "Website README", filename: "website-readme"],
         "guides/curation/submitting_a_mod.md": [title: "Submitting a Mod"],
         "guides/modding/advanced/MO1_reference.md": [title: "MO1 Reference"],
         "guides/modding/what_tools_do_i_need.md": [title: "What Tools Do I Need?"],
         "guides/website/search/search_reference.md": [title: "Search Reference"],
-        "guides/website/website_overview.md": [title: "Website Overview"]
+        "guides/website/website_overview.md": [title: "Website Overview"],
+        "guides/website/website_mockups.md": [title: "Website Mockups"]
       ],
       groups_for_extras: [
         Website: Path.wildcard("guides/website/*.md"),
