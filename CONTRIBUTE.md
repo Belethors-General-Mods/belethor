@@ -6,7 +6,7 @@ We have automatic checks on your pull request, make them green if you want PR to
 If you want to do large changes, you should discuss them with us in an issue or on discord first.
 
 ## Frontend
-We have two apps, that need designing. There are design [mockups](https://belethors-general-mods.github.io/belethor/website_mockups.html), [logos]() from Zaki, 
+We have two apps, that need designing. There are design [mockups](https://belethors-general-mods.github.io/belethor/website_mockups.html) from Zaki. The whole design things are [here](https://github.com/Belethors-General-Mods/belethor/tree/feature/design/apps/website/assets/design)
 That whole design thing is very much in an concept phase, join our [Discord Server](https://discord.gg/4ezeRgn) to discuss design improvement / concept.
 Also we lack github checks to do quality assurance on HTML, CSS and JS (feel free to recommend us some).
 
