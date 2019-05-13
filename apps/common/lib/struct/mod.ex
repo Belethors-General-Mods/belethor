@@ -11,7 +11,7 @@ defmodule Common.Struct.Mod do
     :published,
     :sse,
     :oldrim,
-    :images,
+    :image,
     :tags
   ]
 

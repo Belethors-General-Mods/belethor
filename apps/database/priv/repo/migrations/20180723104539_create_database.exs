@@ -4,11 +4,6 @@ defmodule Database.Repo.Migrations.CreateDatabase do
   use Ecto.Migration
 
   def change do
-    create table(:mod_image) do
-      add(:data, :binary)
-      add(:url, :string)
-    end
-
     create table(:mod_tag) do
       add(:name, :string, null: false)
       add(:desc, :text)
@@ -20,7 +15,7 @@ defmodule Database.Repo.Migrations.CreateDatabase do
       add(:published, :boolean, null: false)
       add(:oldrim, :map)
       add(:sse, :map)
-      add(:images, references(:mod_image))
+      add(:image, :string)
     end
 
     create table(:modlist) do
@@ -30,11 +25,6 @@ defmodule Database.Repo.Migrations.CreateDatabase do
 
     create table(:mods_tags) do
       add(:mod_tag_id, references(:mod_tag), null: false)
-      add(:mod_id, references(:mod), null: false)
-    end
-
-    create table(:mods_images) do
-      add(:mod_image_id, references(:mod_image), null: false)
       add(:mod_id, references(:mod), null: false)
     end
 
@@ -50,8 +40,6 @@ defmodule Database.Repo.Migrations.CreateDatabase do
 
     create(unique_index(:mod, [:name]))
     create(unique_index(:mod_tag, [:name]))
-    create(unique_index(:mod_image, [:data]))
-    create(unique_index(:mod_image, [:url]))
     create(unique_index(:mods_tags, [:mod_id, :mod_tag_id]))
     create(unique_index(:mod_dependencies, [:requires_id, :required_by_id]))
     create(unique_index(:modlist, [:name]))

@@ -31,7 +31,8 @@ defmodule Database.MixProject do
       {:common, in_umbrella: true},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:jason, "~> 1.0"} # as long we use maps in schemas, we need this
     ]
   end
 
@@ -44,7 +45,7 @@ defmodule Database.MixProject do
   defp aliases do
     [
       seed: ["run priv/repo/abc_seeds.exs"],
-      "ecto.setup": ["ecto.create", "ecto.migrate" ],
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
