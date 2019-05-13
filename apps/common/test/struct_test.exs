@@ -4,6 +4,7 @@ defmodule Common.StructValidTest do
   alias Common.Struct.Image
   alias Common.Struct.Mod
   alias Common.Struct.Modfile
+  alias Common.Struct.ModList
 
   test "Image.validate: check 'full' error" do
     full = %Image{data: "jlkdsfj", url: "jlksdjf"}
@@ -48,4 +49,16 @@ defmodule Common.StructValidTest do
     ok = %Modfile{console_compat: true}
     assert Modfile.validate(ok) == :ok
   end
+
+  test "ModList.validate: test" do
+    ok = %ModList{ name = "test", mods = []}
+    assert :ok == ModList.validate(ok)
+
+    noname = %ModList { mods = []}
+    assert {:error, :empty} == ModList.validate(noname)
+
+    nomods = %ModList { name = "name"}
+    assert {:error, :empty} == ModList.validate(nomods)
+  end
 end
+
