@@ -100,7 +100,7 @@ defmodule Belethor.MixProject do
 
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "cmd --app database mix ecto.setup"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.reset", "test"],
       digest: "cmd --app website --app tag_editor mix phx.digest"
