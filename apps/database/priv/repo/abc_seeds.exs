@@ -14,69 +14,36 @@ alias Database.Repo
 alias Database.Schema.Mod
 alias Database.Schema.ModTag
 alias Database.Schema.ModFile
-alias Database.Schema.ModImage
 alias Ecto.Changeset
 
-favi = %ModImage { url: "/favicon.ico" } |> Repo.insert!()
+favi = "/favicon.ico"
+
+modfile_a_sse = %ModFile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
+modfile_a_oldrim = %ModFile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
+modfile_b_sse = %ModFile{console_compat: true, bethesda: "beths url: bbbbbbbb"}
 
 mod_a =
-  %Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: [favi], published: false }
+  %Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: favi, published: false}
   |> Repo.insert!()
-  |> Repo.preload([:tags, :oldrim, :sse])
+  |> Changeset.change()
+  |> Changeset.put_embed(:sse, modfile_a_sse)
+  |> Changeset.put_embed(:oldrim, modfile_a_oldrim)
+  |> Repo.update!()
+  |> Repo.preload([:tags])
 
 mod_b =
-  %Mod{name: "Mod B", desc: "bbbbbbbbbbbbbbb", image: [favi], published: false }
+  %Mod{name: "Mod B", desc: "bbbbbbbbbbbbbbb", image: favi, published: false}
   |> Repo.insert!()
-  |> Repo.preload([:tags, :oldrim, :sse])
+  |> Changeset.change()
+  |> Changeset.put_embed(:sse, modfile_b_sse)
+  |> Repo.update!()
+  |> Repo.preload([:tags])
 
 mod_c =
-  %Mod{name: "Mod C", desc: "ccccccccccccccc", image: [favi], published: false }
+  %Mod{name: "Mod C", desc: "ccccccccccccccc", image: favi, published: false}
   |> Repo.insert!()
-  |> Repo.preload([:tags, :oldrim, :sse])
+  |> Repo.preload([:tags])
 
 tag_a = %ModTag{name: "Tag A"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_b = %ModTag{name: "Tag B"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_c = %ModTag{name: "Tag C"} |> Repo.insert!() |> Repo.preload(:mods)
-
-file_a_sse =
-  %ModFile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
-  |> Repo.insert!()
-
-file_a_oldrim =
-  %ModFile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
-  |> Repo.insert!()
-
-file_b_sse =
-  %ModFile{console_compat: true, bethesda: "beths url: bbbbbbbb"}
-  |> Repo.insert!()
-
-mod_a =
-  mod_a
-  |> Changeset.change()
-  |> Changeset.put_assoc(:sse, file_a_sse)
-  |> Changeset.put_assoc(:oldrim, file_a_oldrim)
-  |> Repo.update!()
-
-mod_b =
-  mod_b
-  |> Changeset.change()
-  |> Changeset.put_assoc(:sse, file_b_sse)
-  |> Repo.update!()
-
-mod_a =
-  mod_a
-  |> Changeset.change()
-  |> Changeset.put_assoc(:tags, [tag_a, tag_c])
-  |> Repo.update!()
-
-mod_b =
-  mod_b
-  |> Changeset.change()
-  |> Changeset.put_assoc(:tags, [tag_a, tag_b, tag_c])
-  |> Repo.update!()
-
-mod_c =
-  mod_c
-  |> Changeset.change()
-  |> Changeset.put_assoc(:tags, [tag_b])
-  |> Repo.update!()
