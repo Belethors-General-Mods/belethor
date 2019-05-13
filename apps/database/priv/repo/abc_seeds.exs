@@ -10,24 +10,27 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Database.Schema.Repo
+alias Database.Repo
 alias Database.Schema.Mod
 alias Database.Schema.ModTag
-alias Database.Schema.Modfile
+alias Database.Schema.ModFile
+alias Database.Schema.ModImage
 alias Ecto.Changeset
 
+favi = %ModImage { url: "/favicon.ico" }
+
 mod_a =
-  %Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", pic: "/favicon.ico"}
+  %Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: [favi], published: false }
   |> Repo.insert!()
   |> Repo.preload([:tags, :oldrim, :sse])
 
 mod_b =
-  %Mod{name: "Mod B", desc: "bbbbbbbbbbbbbbb", pic: "/favicon.ico"}
+  %Mod{name: "Mod B", desc: "bbbbbbbbbbbbbbb", image: [favi], published: false }
   |> Repo.insert!()
   |> Repo.preload([:tags, :oldrim, :sse])
 
 mod_c =
-  %Mod{name: "Mod C", desc: "ccccccccccccccc", pic: "/favicon.ico"}
+  %Mod{name: "Mod C", desc: "ccccccccccccccc", image: [favi], published: false }
   |> Repo.insert!()
   |> Repo.preload([:tags, :oldrim, :sse])
 
@@ -36,15 +39,15 @@ tag_b = %ModTag{name: "Tag B"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_c = %ModTag{name: "Tag C"} |> Repo.insert!() |> Repo.preload(:mods)
 
 file_a_sse =
-  %Modfile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
+  %ModFile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
   |> Repo.insert!()
 
 file_a_oldrim =
-  %Modfile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
+  %ModFile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
   |> Repo.insert!()
 
 file_b_sse =
-  %Modfile{console_compat: true, bethesda: "beths url: bbbbbbbb"}
+  %ModFile{console_compat: true, bethesda: "beths url: bbbbbbbb"}
   |> Repo.insert!()
 
 mod_a =
