@@ -17,7 +17,7 @@ alias Database.Schema.ModFile
 alias Database.Schema.ModImage
 alias Ecto.Changeset
 
-favi = %ModImage { url: "/favicon.ico" }
+favi = %ModImage { url: "/favicon.ico" } |> Repo.insert!()
 
 mod_a =
   %Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: [favi], published: false }
