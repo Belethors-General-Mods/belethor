@@ -13,5 +13,19 @@ defmodule TagEditorWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+  end
+
+  scope "/modlist", TagEditorWeb do
+    pipe_through :browser
+
+    # all html sites
+    get "/:id", ModListController, :index
+    get "/:id/new", ModListController, :new
+
+    # form actions
+    post "/:id", ModListController, :create
+    put "/:id", ModListController, :update
+    delete "/:id", ModListController, :delete
   end
 end
