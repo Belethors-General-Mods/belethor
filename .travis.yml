@@ -3,8 +3,9 @@ elixir:
   - '1.7'
   - '1.8'
 otp_release:
-  - '21.1'
   - '21.2'
+  - '21.3'
+  - '22.0'
 
 # Build only if the type of the job is not a push
 if: type != push
