@@ -7,7 +7,7 @@ defmodule Common.Struct.ModList do
   @enforce_keys [:name, :mods]
   defstruct [
     :name,
-    :description,
+    :desc,
     :mods
   ]
 

@@ -22,7 +22,7 @@ defmodule Database.Schema.Mod do
   def struct2schema(%Struct.Mod{} = struct) do
     %__MODULE__ {
       name: struct.name,
-      desc: struct.description,
+      desc: struct.desc,
       published: struct.published,
       sse: Schema.ModFile.from_struct(struct.sse),
       oldrim: Schema.ModFile.from_struct(struct.oldrim),
@@ -34,7 +34,7 @@ defmodule Database.Schema.Mod do
     schema = Repo.preload(schema, [:tags])
     %Struct.Mod {
       name: schema.name,
-      description: schema.desc,
+      desc: schema.desc,
       published: schema.published,
       sse: Schema.ModFile.to_struct(schema.sse),
       oldrim: Schema.ModFile.to_struct(schema.oldrim),
