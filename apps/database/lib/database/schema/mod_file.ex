@@ -9,7 +9,5 @@ defmodule Database.Schema.ModFile do
     field(:steam, :string)
     field(:nexus, :string)
     field(:bethesda, :string)
-    many_to_many(:requires, Database.Schema.ModFile, join_through: "mod_dependencies")
-    many_to_many(:required_by, Database.Schema.ModFile, join_through: "mod_dependencies")
   end
 end
