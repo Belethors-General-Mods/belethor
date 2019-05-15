@@ -1,20 +1,20 @@
-defmodule Common.Struct.Modfile do
+defmodule Common.Struct.ModFile do
   @moduledoc """
   Represents a mod file somewhere to download.
   """
-  alias Common.Struct.Modfile
+  alias Common.Struct.ModFile
 
   @enforce_keys [:console_compat]
   defstruct [:console_compat, :steam, :nexus, :bethesda]
 
   @typedoc "typespec for a mod"
-  @type modfile :: %Modfile{}
+  @type modfile :: %ModFile{}
 
-  def validate(%Modfile{console_compat: nil}) do
+  def validate(%ModFile{console_compat: nil}) do
     {:error, :empty}
   end
 
-  def validate(%Modfile{console_compat: b}) do
+  def validate(%ModFile{console_compat: b}) do
     if is_boolean(b) do
       :ok
     else

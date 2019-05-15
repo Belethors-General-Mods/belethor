@@ -3,7 +3,7 @@ defmodule Common.StructValidTest do
 
   alias Common.Struct.Image
   alias Common.Struct.Mod
-  alias Common.Struct.Modfile
+  alias Common.Struct.ModFile
   alias Common.Struct.ModList
 
   test "Image.validate: check 'full' error" do
@@ -39,15 +39,15 @@ defmodule Common.StructValidTest do
     assert Mod.validate(p) == {:error, :empty}
   end
 
-  test "Modfile.validate: console_compate is always a boolean" do
-    empty = %Modfile{console_compat: nil}
-    assert Modfile.validate(empty) == {:error, :empty}
+  test "ModFile.validate: console_compate is always a boolean" do
+    empty = %ModFile{console_compat: nil}
+    assert ModFile.validate(empty) == {:error, :empty}
 
-    wt = %Modfile{console_compat: "true"}
-    assert Modfile.validate(wt) == {:error, {:console_compat, :wrong_type}}
+    wt = %ModFile{console_compat: "true"}
+    assert ModFile.validate(wt) == {:error, {:console_compat, :wrong_type}}
 
-    ok = %Modfile{console_compat: true}
-    assert Modfile.validate(ok) == :ok
+    ok = %ModFile{console_compat: true}
+    assert ModFile.validate(ok) == :ok
   end
 
   test "ModList.validate: test" do
