@@ -1,15 +1,3 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Website.Repo.insert!(%Website.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
-
 alias Database.Repo
 alias Database.Schema.Mod
 alias Database.Schema.ModTag
@@ -26,7 +14,7 @@ tag_a = %ModTag{name: "Tag A"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_b = %ModTag{name: "Tag B"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_c = %ModTag{name: "Tag C"} |> Repo.insert!() |> Repo.preload(:mods)
 
-%Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: favi, published: false}
+%Mod{name: "Mod A", desc: "aaaaaaaaaaaaaaa", image: favi, published: false }
 |> Repo.insert!()
 |> Repo.preload([:tags])
 |> Changeset.change()
