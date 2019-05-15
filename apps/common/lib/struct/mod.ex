@@ -4,10 +4,10 @@ defmodule Common.Struct.Mod do
   """
   alias Common.Struct.Mod
 
-  @enforce_keys [:name, :description, :published]
+  @enforce_keys [:name, :desc, :published]
   defstruct [
     :name,
-    :description,
+    :desc,
     :published,
     :sse,
     :oldrim,
@@ -22,7 +22,7 @@ defmodule Common.Struct.Mod do
     {:error, :empty}
   end
 
-  def validate(%Mod{description: nil}) do
+  def validate(%Mod{desc: nil}) do
     {:error, :empty}
   end
 
