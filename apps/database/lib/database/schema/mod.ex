@@ -24,9 +24,9 @@ defmodule Database.Schema.Mod do
       name: struct.name,
       desc: struct.desc,
       published: struct.published,
-      sse: Schema.ModFile.from_struct(struct.sse),
-      oldrim: Schema.ModFile.from_struct(struct.oldrim),
-      tags: Enum.map(struct.tags, &Schema.ModTag.from_struct/1)
+      sse: Schema.ModFile.struct2schema(struct.sse),
+      oldrim: Schema.ModFile.struct2schema(struct.oldrim),
+      tags: Enum.map(struct.tags, &Schema.ModTag.struct2schema/1)
     }
   end
 
@@ -36,9 +36,9 @@ defmodule Database.Schema.Mod do
       name: schema.name,
       desc: schema.desc,
       published: schema.published,
-      sse: Schema.ModFile.to_struct(schema.sse),
-      oldrim: Schema.ModFile.to_struct(schema.oldrim),
-      tags: Enum.map(schema.tags, &Schema.ModTag.to_struct/1)
+      sse: Schema.ModFile.schema2struct(schema.sse),
+      oldrim: Schema.ModFile.schema2struct(schema.oldrim),
+      tags: Enum.map(schema.tags, &Schema.ModTag.schema2struct/1)
     }
   end
 end
