@@ -1,7 +1,7 @@
-alias Database.Repo
-alias Database.Schema.Mod
-alias Database.Schema.ModTag
-alias Database.Schema.ModFile
+alias Common.Repo
+alias Common.Schema.Mod
+alias Common.Schema.ModTag
+alias Common.Schema.ModFile
 alias Ecto.Changeset
 
 favi = "/favicon.ico"

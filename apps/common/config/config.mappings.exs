@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :database, :tag_translations, %{
+config :common, :tag_translations, %{
   "Animation - Modified" => ["Animation"],
   "Animation" => ["Animation"],
   "Armour - Shields" => ["Items.Armour.Shields"],

@@ -1,4 +1,4 @@
-defmodule Database.Application do
+defmodule Common.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -11,14 +11,14 @@ defmodule Database.Application do
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Database.Repo, [])
-      # Starts a worker by calling: Database.Worker.start_link(arg)
-      # {Database.Worker, arg},
+      supervisor(Common.Repo, [])
+      # Starts a worker by calling: Common.Worker.start_link(arg)
+      # {Common.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Database.Supervisor]
+    opts = [strategy: :one_for_one, name: Common.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

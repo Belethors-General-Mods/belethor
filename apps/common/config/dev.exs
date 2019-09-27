@@ -1,9 +1,10 @@
 use Mix.Config
 
-config :website, Database.Repo,
+# Configure your database
+config :common, Common.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "belethor",
+  database: "belethor_dev",
   hostname: "localhost",
   pool_size: 10

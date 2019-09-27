@@ -50,7 +50,7 @@ defmodule Belethor.MixProject do
   defp docs do
     ignored =
       case Mix.env() do
-        :prod -> [:common, :database, :tag_editor, :crawler, :website]
+        :prod -> [:common, :tag_editor, :crawler, :website]
         _ -> []
       end
 
@@ -100,7 +100,7 @@ defmodule Belethor.MixProject do
 
   defp aliases do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "cmd --app database mix ecto.setup"],
+      "ecto.setup": ["cmd --app common mix ecto.setup"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.reset", "test"],
       digest: "cmd --app website --app tag_editor mix phx.digest"

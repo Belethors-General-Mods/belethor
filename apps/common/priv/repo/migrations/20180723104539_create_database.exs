@@ -1,6 +1,6 @@
-defmodule Database.Repo.Migrations.CreateDatabase do
-  alias Database.Repo
-  alias Database.Schema.ModTag
+defmodule Common.Repo.Migrations.CreateCommon do
+  alias Common.Repo
+  alias Common.Schema.ModTag
   use Ecto.Migration
 
   def change do
