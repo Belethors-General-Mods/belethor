@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.19.3">
-    <title>What Tools Do I Need? — Belethor's General Mods v0.0.1-2</title>
+    <title>Development on NixOS — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
     <script src="dist/sidebar_items-cc6117ac3b.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
@@ -57,6 +57,40 @@ Belethor's General Mods      </h1>
     <div id="content" class="content-inner">
 
 
+<h1>This is a short guide on how to setup a development environment in NixOS</h1>
+<h2 id="install-postgresql" class="section-heading">
+  <a href="#install-postgresql" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  install postgresql
+</h2>
+
+<p>This snippet needs to go into your <code class="inline">/etc/nixos/configuration.nix</code>.
+It will install a postgresql database with a default password (!).
+Don&#39;t use this in production.</p>
+<pre><code class="nix">{ config, pkgs, ... }:
+
+{
+  # Enable the Postgresql database
+  services.postgresql = {
+    enable = true;
+    enableTCPIP = true;
+    authentication = pkgs.lib.mkOverride 10 &#39;&#39;
+      local all all trust
+      host all all localhost trust
+    &#39;&#39;;
+
+    initialScript = pkgs.writeText &quot;backend-initScript&quot; &#39;&#39;
+      ALTER USER postgres WITH PASSWORD &#39;postgresql&#39;;
+    &#39;&#39;;
+  };
+}</code></pre>
+<h2 id="elixir-nodejs-etc" class="section-heading">
+  <a href="#elixir-nodejs-etc" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Elixir, Nodejs, etc
+</h2>
+
+<p><code class="inline">cd</code> into the project root directory, then run <code class="inline">nix-shell --pure</code>.
+You should enter a shell with elixir, erlang and nodejs installed.
+The responsible configuration is in <code class="inline">default.nix</code>.</p>
       <footer class="footer">
         <p>
           <span class="line">
