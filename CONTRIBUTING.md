@@ -13,7 +13,7 @@ Also, we currently lack github checks to do quality assurance on HTML, CSS, and 
 ## Travis
 We target the following versions of Elixir and OTP when building on Travis CI:
  - [Elixir](https://elixir-lang.org/): `1.7`, `1.8`
- - [OTP](https://github.com/erlang/otp): `21.1`, `21.2`
+ - [OTP](https://github.com/erlang/otp): `21.2`, `21.3`, `22.0`
 
 Travis checks that:
  - code compiles without warnings
