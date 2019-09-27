@@ -6,13 +6,13 @@ defmodule Crawler.Provider do
   If you `use` this module, a `Crawler.TaskManager` is expected run as `__YOUR_MODULE__.TaskManager`
   and a `Crawler.Client` should be implemented at `__YOUR_MODULE__.Client`
   """
-  alias Common.Struct.Mod
+  alias Common.Schema.Mod
   alias Crawler.Client
 
   @doc "do a remote search, may return a error tuple"
   @callback search(Client.args()) :: Client.result()
   @doc "do a remote search, throws on error"
-  @callback search!(Client.args()) :: [Mod.t()]
+  @callback search!(Client.args()) :: [%Mod{}]
 
   defmacro __using__(_args) do
     quote do

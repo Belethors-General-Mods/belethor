@@ -4,12 +4,12 @@ defmodule Crawler.Client do
 
   The only function to be implemented is the `search/1` function.
   """
-  alias Common.Struct.Mod
+  alias Common.Schema.Mod
 
   @typedoc "TODO this should be done with the first real impls of clients"
   @type args :: list(any())
 
-  @type result :: {:ok, [Mod.t()]} | {:error, term()}
+  @type result :: {:ok, [%Mod{}]} | {:error, term()}
 
   @doc """
   This function is meant to query an provider.
