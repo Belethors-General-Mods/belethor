@@ -157,7 +157,22 @@ Types          </h1>
      </a>
         
       <div class="specs">
-          <pre>result() :: {:ok, [Common.Struct.Mod.t()]} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
+          <pre>result() ::
+  {:ok,
+   [
+     %Common.Schema.Mod{
+       __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       desc: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       image: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       oldrim: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       published: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       sse: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       tags: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+     }
+   ]}
+  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
       </div>
   </div>
   <section class="docstring">
