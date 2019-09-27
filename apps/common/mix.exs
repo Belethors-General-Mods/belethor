@@ -25,7 +25,6 @@ defmodule Common.MixProject do
     ]
   end
 
-
   # Aliases are shortcuts or tasks specific to the current project.
   # For example, to create, migrate and run the seeds file at once:
   #
@@ -47,7 +46,8 @@ defmodule Common.MixProject do
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:jason, "~> 1.0"} # as long we use maps in schemas, we need this
+      # as long we use maps in schemas, we need this
+      {:jason, "~> 1.0"}
     ]
   end
 end

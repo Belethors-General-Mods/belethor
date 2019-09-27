@@ -13,7 +13,6 @@ defmodule TagEditorWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-
   end
 
   scope "/modlist", TagEditorWeb do

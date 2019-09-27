@@ -15,5 +15,4 @@ defmodule Common.Schema.Mod do
     embeds_one(:sse, Schema.ModFile)
     many_to_many(:tags, Schema.ModTag, join_through: "mods_tags", unique: true)
   end
-
 end

@@ -8,5 +8,4 @@ defmodule Common.Schema.ModTag do
     field(:name, :string)
     many_to_many(:mods, Common.Schema.Mod, join_through: "mods_tags", unique: true)
   end
-
 end

@@ -10,5 +10,4 @@ defmodule Common.Schema.ModFile do
     field(:nexus, :string)
     field(:bethesda, :string)
   end
-
 end
