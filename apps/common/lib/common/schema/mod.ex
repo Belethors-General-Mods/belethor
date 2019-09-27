@@ -3,10 +3,7 @@ defmodule Common.Schema.Mod do
   Store information about a mod
   """
   use Ecto.Schema
-
-  alias Common.Repo
   alias Common.Schema
-  alias Common.Struct
 
   schema "mod" do
     field(:name, :string)
