@@ -18,7 +18,7 @@ defmodule Common.Repo.Migrations.CreateCommon do
       add(:image, :string)
     end
 
-    create table(:modlist) do
+    create table(:mod_list) do
       add(:name, :string, null: false)
       add(:desc, :string)
     end
@@ -28,15 +28,15 @@ defmodule Common.Repo.Migrations.CreateCommon do
       add(:mod_id, references(:mod), null: false)
     end
 
-    create table(:mods_modlists) do
-      add(:requires_id, references(:mod), null: false)
-      add(:required_by_id, references(:modlist), null: false)
+    create table(:mods_mod_lists) do
+      add(:mod_id, references(:mod), null: false)
+      add(:mod_list_id, references(:mod_list), null: false)
     end
 
     create(unique_index(:mod, [:name]))
     create(unique_index(:mod_tag, [:name]))
     create(unique_index(:mods_tags, [:mod_id, :mod_tag_id]))
-    create(unique_index(:modlist, [:name]))
+    create(unique_index(:mod_list, [:name]))
 
     flush()
 
