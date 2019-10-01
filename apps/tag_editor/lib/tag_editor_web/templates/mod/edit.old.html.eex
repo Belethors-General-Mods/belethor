@@ -1,0 +1,14 @@
+<form>
+    <div class="form-group">
+        <label for="edit-name">Name</label>
+        <input id="edit-name" type="name" class="form-control"
+               value="<%= @mod.name %>" placeholder="Enter mod name">
+    </div>
+    <div class="form-group">
+        <label for="edit-desc">Description</label>
+        <textarea id="edit-desc" class="form-control" rows="30">
+            <%= @mod.desc %>
+        </textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

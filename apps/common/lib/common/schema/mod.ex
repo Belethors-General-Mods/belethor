@@ -3,7 +3,9 @@ defmodule Common.Schema.Mod do
   Store information about a mod
   """
   use Ecto.Schema
+
   alias Common.Schema
+  alias Ecto.Changeset
 
   schema "mod" do
     field(:name, :string)
@@ -15,4 +17,13 @@ defmodule Common.Schema.Mod do
     embeds_one(:sse, Schema.ModFile)
     many_to_many(:tags, Schema.ModTag, join_through: "mods_tags", unique: true)
   end
+
+  def changeset(mod, params \\ %{}) do
+    import Ecto.Changeset
+    mod
+    |> cast(params, [:name, :desc, :published, :image])
+    |> validate_required([:name, :published])
+    |> unique_constraint(:name)
+  end
+
 end
