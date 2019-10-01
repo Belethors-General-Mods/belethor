@@ -19,8 +19,12 @@ defmodule TagEditorWeb.Router do
     pipe_through :browser
 
     # all html sites
-    get "/:id", ModListController, :index
+    get "/", ModListController, :all
+    # view a list of all modlists
+    get "/:id", ModListController, :view
+    # view a list of mods of one modlist
     get "/:id/new", ModListController, :new
+    # view a form to create a new modlist
 
     # form actions
     post "/:id", ModListController, :create
