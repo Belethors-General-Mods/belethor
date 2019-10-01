@@ -5,7 +5,7 @@ alias Common.Schema.ModFile
 alias Common.Schema.ModList
 alias Ecto.Changeset
 
-favi = "/pictures/bgm_logo.svg"
+favi = "/images/bgm_logo.svg"
 
 modfile_a_sse = %ModFile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
 modfile_a_oldrim = %ModFile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
