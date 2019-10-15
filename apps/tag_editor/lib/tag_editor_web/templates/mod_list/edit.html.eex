@@ -1,4 +1,4 @@
-<h1>Mods</h1>
+<h1><%= @mod_list.name %></h1>
 <ul class="list-group">
     <%= Enum.map(@mod_list.mods, fn m -> render(@view_module, "mod_preview.html", Map.put(assigns, :m,  m)) end) %>
 <ul>
