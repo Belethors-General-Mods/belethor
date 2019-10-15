@@ -38,7 +38,6 @@ defmodule Website.MixProject do
   defp deps do
     [
       {:common, in_umbrella: true},
-      {:database, in_umbrella: true},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.11"},

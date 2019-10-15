@@ -15,6 +15,9 @@ git:
 
 sudo: false
 
+addons:
+  postgresql: '9.6'
+
 env:
   global:
     - ELIXIR_ASSERT_TIMEOUT=2000

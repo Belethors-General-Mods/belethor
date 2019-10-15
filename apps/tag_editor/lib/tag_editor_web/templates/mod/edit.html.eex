@@ -1,0 +1,22 @@
+<% alias Common.Schema.Mod %>
+<% alias Common.Schema.ModFile %>
+
+<%= form_for @changeset, @action, fn f -> %>
+    <div class="form-group">
+        <label for="mod_name">Name</label>
+        <%= text_input f, :name, class: "form-control", placeholder: "Enter mod name" %>
+    </div>
+    <div id="elm-form"></div>
+<% end %>
+
+<%= case Access.fetch(assigns, :delete) do %>
+    <%= {:ok, daction } -> %>
+        <p>
+            <%= form_for @changeset, daction, [method: "DELETE"], fn _f -> %>
+                <%= submit "Delete", class: "btn btn-danger" %>
+            <% end %>
+        </p>
+
+    <% _ -> %>
+<% end %>
+

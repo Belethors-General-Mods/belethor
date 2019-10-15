@@ -1,0 +1,8 @@
+<a href="/modlist/<%= @ml.id%>" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= @ml.name %></h5>
+        <small>? days ago</small>
+    </div>
+    <p class="mb-1"><%= @ml.desc %></p>
+    <small>hier sollen irgendwann die tags stehen</small>
+</a>
