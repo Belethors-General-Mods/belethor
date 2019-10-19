@@ -2,13 +2,14 @@ module Mod exposing (Mod, Msg(..), default, update)
 
 import ModFile exposing(ModFile)
 import Maybe
+import Url exposing(Url)
 
 -- MODEL
 type alias Mod =
   { name : String
   , desc : String
   , published : Bool
-  , customFile : String
+  , customFile : Maybe Url
   , sse : Maybe ModFile
   , oldrim : Maybe ModFile
   }
@@ -18,7 +19,7 @@ type Msg
     = Name String
     | Desc String
     | Pub Bool
-    | CFile String
+    | CFile (Maybe Url)
     | SSE ModFile.Msg
     | Oldrim ModFile.Msg
 
@@ -44,4 +45,4 @@ update msg old_mod =
 
 default : Mod
 default =
-    Mod "" "" False "" Nothing Nothing
+    Mod "" "" False Nothing Nothing Nothing

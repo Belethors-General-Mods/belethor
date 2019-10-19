@@ -8,6 +8,7 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
+import Url exposing(Url)
 
 -- MAIN
 main =
@@ -17,11 +18,7 @@ main =
 type alias Model = { mod : Mod }
 
 init : Model
-init = -- TODO check out how to reload this whole bitch at once
-  let sse    = ModFile "beth" "nexus" "steam" False |> Just
-      oldrim = ModFile "beth" "nexus" "steam" True |> Just
-      mod = Mod "name" "desc" True "file_url" sse oldrim
-  in  Model mod
+init = Model Mod.default -- TODO check out how to load this whole bitch at once
 
 -- UPDATE
 type Msg = ChangeMod Mod.Msg
@@ -30,32 +27,46 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     ChangeMod modMsg ->
-        let new_mod = Mod.update modMsg model.mod
-        in { model | mod = new_mod }
+      { model | mod = Mod.update modMsg model.mod }
 
 -- VIEW
 view : Model -> Html Msg
 view model =
   div []
-      [ viewInputText "mod_name" "mod[name]" "Name" model.mod.name (capsuleModChange Mod.Name)
-      , viewInputBool "mod_published" "mod[published]" "Published" model.mod.published (capsuleModChange Mod.Pub)
-      , submitButton "btn-success" "Update" ]
+      [ viewInputText "name" "Name" model.mod.name Mod.Name
+      , viewInputBool "published" "Published" model.mod.published Mod.Pub
+      , viewSubmitButton "btn-success" "Update" ]
 
-submitButton : String -> String -> Html Msg
-submitButton cl t =
+viewSubmitButton : String -> String -> Html Msg
+viewSubmitButton cl t =
   button [ class ("btn " ++ cl), type_ "submit"] [ text t ]
 
-viewInputText : String -> String -> String -> String -> (String -> Msg) -> Html Msg
-viewInputText html_id html_name desc val msg =
-  div [ class "form-group" ]
-    [ label [ for html_id ] [ text desc ]
-    , input [ id html_id, class "form-control", type_ "text", value val, onInput msg ] [] ]
+viewInputText : String -> String -> String -> (String -> Mod.Msg) -> Html Msg
+viewInputText atom desc val msg =
+  let html = atom2html atom
+  in div [ class "form-group" ]
+    [ label [ for html.id ] [ text desc ]
+    , input [ id html.id, class "form-control", name html.name, type_ "text", value val, onInput (capsuleModChange  msg) ] [] ]
 
-viewInputBool : String -> String -> String -> Bool -> (Bool -> Msg) -> Html Msg
-viewInputBool html_id html_name desc val msg =
-  div [ class "form-group" ]
-    [ label [ for html_id ] [ text desc ]
-    , input [ id html_id, class "form-control", type_ "checkbox", value val, onInput msg ] [] ]
+viewInputBool : String -> String -> Bool -> (Bool -> Mod.Msg) -> Html Msg
+viewInputBool atom desc val msg =
+  let html = atom2html atom
+      bt sArg = msg (Utils.Bool.fromString sArg False)
+      sVal = Utils.Bool.toString val
+  in div [ class "form-group" ]
+    [ label [ for html.id ] [ text desc ]
+    , input [ id html.id, class "form-control", name html.name, type_ "checkbox", value sVal, onInput (capsuleModChange  bt) ] [] ]
+
+-- viewInputFile : String -> String -> Url -> (Maybe Url -> Mod.Msg) -> Html Msg
+-- viewInputFile atom desc val msg =
+--  let html = atom2html atom
+--      bt sArg = msg (Url.fromString sArg)
+--  in div [class "form-group"]
+--     [ label [ for html.id ] [ text desc ]
+--     , input [ id html.id, class "form-control", name html.name, type_ "checkbox", value val, onInput (capsuleModChange  bt) ] [] ]
+
+atom2html : String -> { id : String, name : String}
+atom2html attr = { id = "mod_"++ attr, name = "mod[" ++ attr ++"]" }
 
 capsuleModChange : (String -> Mod.Msg) -> (String -> Msg)
 capsuleModChange mm =
