@@ -3,11 +3,9 @@ module Main exposing (..)
 import Mod exposing (Mod)
 import ModFile exposing (ModFile)
 import Utils.Bool
+import Utils.Html
 
 import Browser
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
 
 -- MAIN
 main =
@@ -36,29 +34,9 @@ update msg model =
 -- VIEW
 view : Model -> Html Msg
 view model =
-  div []
-      [ viewInputText "mod_name" "mod[name]" "Name" model.mod.name <| capsuleModChange Mod.Name
-      , viewInputBool "mod_published" "mod[published]" "Published" model.mod.published <| capsuleModChange Mod.Pub
-      , submitButton "btn-success" "Update" ]
+  div [] (Mod.viewForm model.mod "mod" capsulateModChange)
 
-submitButton : String -> String -> Html Msg
-submitButton cl t =
-  button [ class ("btn " ++ cl), type_ "submit"] [ text t ]
-
-viewInputText : String -> String -> String -> String -> (String -> Msg) -> Html Msg
-viewInputText html_id html_name desc val msg =
-  div [ class "form-group" ]
-    [ label [ for html_id ] [ text desc ]
-    , input [ id html_id, class "form-control", type_ "text", value val, onInput msg ] [] ]
-
-viewInputBool : String -> String -> String -> Bool -> (Bool -> Msg) -> Html Msg
-viewInputBool html_id html_name desc val msg =
-  let inputHandler sArg = ()
-  in div [ class "form-group" ]
-    [ label [ for html_id ] [ text desc ]
-    , input [ id html_id, class "form-control", type_ "checkbox", value val, onInput inputHandler ] [] ]
-
-capsuleModChange : (String -> Mod.Msg) -> (String -> Msg)
+capsuleModChange : (a -> Mod.Msg) -> (a -> Msg)
 capsuleModChange mm =
   let buildMe sArg = ChangeMod ( mm sArg ) in buildMe
 
