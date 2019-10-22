@@ -18,8 +18,5 @@ erl_crash.dump
 
 /.elixir_ls/
 
-/apps/tag_editor/assets/package-lock.json
-/apps/website/assets/package-lock.json
-
 # Ignore ZSH plugin files
 **/.mix_tasks
