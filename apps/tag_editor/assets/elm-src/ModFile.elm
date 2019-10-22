@@ -1,21 +1,23 @@
 module ModFile exposing (ModFile, Msg(..), default, update)
 
+import Maybe
+import Url exposing (Url)
+
 type alias ModFile =
-  { beth : String
-  , nexus : String
-  , steam : String
+  { beth : Maybe Url
+  , nexus : Maybe Url
+  , steam : Maybe Url
   , console_compat : Bool
   }
 
 type Msg
-    = Beth String
-    | Nexus String
-    | Steam String
+    = Beth (Maybe Url)
+    | Nexus (Maybe Url)
+    | Steam (Maybe Url)
     | CC Bool
 
 default : ModFile
-default =
-    ModFile "" "" "" False
+default = ModFile Nothing Nothing Nothing False
 
 update : Msg -> ModFile -> ModFile
 update msg old_mod =

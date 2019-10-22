@@ -15,11 +15,7 @@ main =
 type alias Model = { mod : Mod }
 
 init : Model
-init = -- TODO check out how to reload this whole bitch at once
-  let sse    = ModFile "beth" "nexus" "steam" False |> Just
-      oldrim = ModFile "beth" "nexus" "steam" True |> Just
-      mod = Mod "name" "desc" True "file_url" sse oldrim
-  in  Model mod
+init = Model Mod.default -- TODO check out how to load this whole bitch at once
 
 -- UPDATE
 type Msg = ChangeMod Mod.Msg
@@ -28,8 +24,7 @@ update : Msg -> Model -> Model
 update msg model =
   case msg of
     ChangeMod modMsg ->
-        let new_mod = Mod.update modMsg model.mod
-        in { model | mod = new_mod }
+      { model | mod = Mod.update modMsg model.mod }
 
 -- VIEW
 view : Model -> Html Msg

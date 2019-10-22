@@ -4,17 +4,14 @@ import ModFile exposing(ModFile)
 import Utils.Html exposing(..)
 
 import Maybe
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
-
+import Url exposing(Url)
 
 -- MODEL
 type alias Mod =
   { name : String
   , desc : String
   , published : Bool
-  , customFile : String
+  , customFile : Maybe Url
   , sse : Maybe ModFile
   , oldrim : Maybe ModFile
   }
@@ -24,7 +21,7 @@ type Msg
     = Name String
     | Desc String
     | Pub Bool
-    | CFile String
+    | CFile (Maybe Url)
     | SSE ModFile.Msg
     | Oldrim ModFile.Msg
 
@@ -50,7 +47,7 @@ update msg oldMod =
 
 default : Mod
 default =
-    Mod "" "" False "" Nothing Nothing
+    Mod "" "" False Nothing Nothing Nothing
 
 viewForm : Mod -> String -> ((b -> otherMsg) -> List (Html otherMsg))
 viewForm mod varName =
