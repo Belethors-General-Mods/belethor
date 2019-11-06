@@ -3,7 +3,6 @@
 
 <%= form_for @changeset, @action, fn _f -> %>
     <div id="elm-form">
-        // base64 encoded mod json : Base.encode64(Jason.encode!(@mod))
     </div>
 <% end %>
 
@@ -17,3 +16,6 @@
 
     <% _ -> %>
 <% end %>
+<script>
+ mod = <%= raw Jason.encode!(@mod) %>;
+</script>

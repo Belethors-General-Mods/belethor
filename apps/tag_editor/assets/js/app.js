@@ -21,10 +21,8 @@ import "phoenix_html";
 // import socket from "./socket"
 
 import Elm from "../elm-src/Main.elm";
-import $ from "jquery";
 
-if($('#elm-form')) {
-    let value = JSON.parse(atob()); // not working
-    let node  = document.getElementById('elm-form');
-    Elm.Elm.Main.init({node: node, flags: value});
+let node  = document.getElementById('elm-form');
+if(node != null) {
+    Elm.Elm.Main.init({node: node, flags: mod});
 }
