@@ -1,8 +1,10 @@
 <% alias Common.Schema.Mod %>
 <% alias Common.Schema.ModFile %>
 
-<%= form_for @changeset, @action, fn f -> %>
-    <div id="elm-form"></div>
+<%= form_for @changeset, @action, fn _f -> %>
+    <div id="elm-form">
+        // base64 encoded mod json : Base.encode64(Jason.encode!(@mod))
+    </div>
 <% end %>
 
 <%= case Access.fetch(assigns, :delete) do %>
@@ -15,4 +17,3 @@
 
     <% _ -> %>
 <% end %>
-

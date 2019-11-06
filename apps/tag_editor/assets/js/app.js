@@ -20,10 +20,11 @@ import "phoenix_html";
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 
-import $ from 'jquery';
 import Elm from "../elm-src/Main.elm";
+import $ from "jquery";
 
-let form = $("#elm-form");
-if(form.length == 1) {
-    Elm.Elm.Main.init({node: form.get()[0]});
+if($('#elm-form')) {
+    let value = JSON.parse(atob()); // not working
+    let node  = document.getElementById('elm-form');
+    Elm.Elm.Main.init({node: node, flags: value});
 }

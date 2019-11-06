@@ -6,7 +6,10 @@ import Json.Decode as JD
 
 decoder : JD.Decoder (Maybe Url)
 decoder =
-    JD.map fromString JD.string
+    JD.oneOf
+        [ JD.null Nothing
+        , JD.map fromString JD.string
+        ]
 
 toString : Maybe Url -> String
 toString val =

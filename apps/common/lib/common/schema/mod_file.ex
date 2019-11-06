@@ -4,6 +4,7 @@ defmodule Common.Schema.ModFile do
   """
   use Ecto.Schema
 
+  @derive {Jason.Encoder, only: [:console_compat, :nexus, :steam, :bethesda]}
   embedded_schema do
     field(:console_compat, :boolean)
     field(:steam, :string)
