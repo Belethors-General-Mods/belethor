@@ -7,9 +7,9 @@ alias Ecto.Changeset
 
 favi = "/images/bgm_logo.svg"
 
-modfile_a_sse = %ModFile{console_compat: false, steam: "steam url: sse aaaaaaaaaa"}
-modfile_a_oldrim = %ModFile{console_compat: false, nexus: "nexus url: oldrim aaaaaaaa"}
-modfile_b_sse = %ModFile{console_compat: true, bethesda: "beths url: bbbbbbbb"}
+modfile_a_sse = %ModFile{console_compat: false, steam: "https://steamcommunity.com/sharedfiles/filedetails/?id=1858351813"}
+modfile_a_oldrim = %ModFile{console_compat: false, nexus: "https://bethesda.net/en/mods/skyrim/mod-detail/4032681"}
+modfile_b_sse = %ModFile{console_compat: true, bethesda: "https://www.nexusmods.com/skyrimspecialedition/mods/30089"}
 
 tag_a = %ModTag{name: "Tag A"} |> Repo.insert!() |> Repo.preload(:mods)
 tag_b = %ModTag{name: "Tag B"} |> Repo.insert!() |> Repo.preload(:mods)
