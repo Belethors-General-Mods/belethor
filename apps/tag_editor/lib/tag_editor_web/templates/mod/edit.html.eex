@@ -2,10 +2,6 @@
 <% alias Common.Schema.ModFile %>
 
 <%= form_for @changeset, @action, fn f -> %>
-    <div class="form-group">
-        <label for="mod_name">Name</label>
-        <%= text_input f, :name, class: "form-control", placeholder: "Enter mod name" %>
-    </div>
     <div id="elm-form"></div>
 <% end %>
 

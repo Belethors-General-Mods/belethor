@@ -37,8 +37,7 @@ defmodule TagEditorWeb.ModController do
   end
 
   def update(conn, %{"id" => id, "mod" => changes}) do
-#   changes = %{changes | "sse" => nil }
-#   IO.puts inspect changes, pretty: true
+    IO.puts inspect changes, pretty: true
     Mod
     |> Repo.get(id)
     |> Mod.changeset(changes)
