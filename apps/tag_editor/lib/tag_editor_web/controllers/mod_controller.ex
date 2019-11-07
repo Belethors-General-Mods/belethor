@@ -1,12 +1,14 @@
 defmodule TagEditorWeb.ModController do
   use TagEditorWeb, :controller
   require Logger
+  import Common.Utils, only: [debug: 1]
 
   alias Common.Repo
   alias Common.Schema.Mod
   alias Common.Schema.ModFile
   alias Common.Schema.ModList
   alias Ecto.Changeset
+
 
   def all(conn, %{}) do
     render(conn, "all.html", mod: Repo.all(Mod)) #TODO add paging
@@ -37,7 +39,8 @@ defmodule TagEditorWeb.ModController do
   end
 
   def update(conn, %{"id" => id, "mod" => changes}) do
-    IO.puts inspect changes, pretty: true
+    debug("mod changes: #{inspect changes}")
+
     Mod
     |> Repo.get(id)
     |> Mod.changeset(changes)

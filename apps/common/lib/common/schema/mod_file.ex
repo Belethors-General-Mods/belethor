@@ -14,20 +14,11 @@ defmodule Common.Schema.ModFile do
 
   def changeset(modfile, changes) do
     import Ecto.Changeset
-    changes = fix_form(changes)
 
     modfile
     |> cast(changes, [:console_compat, :steam, :nexus, :bethesda])
     |> validate_required([:console_compat])
     #todo add url constraint
-  end
-
-  defp fix_form(changes) do
-    cc = Map.has_key?(changes, "console_compat")
-
-    changes
-    |> Map.delete("console_compat")
-    |> Map.put("console_compat", cc)
   end
 
 end

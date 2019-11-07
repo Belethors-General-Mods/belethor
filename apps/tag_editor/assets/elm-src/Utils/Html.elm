@@ -45,14 +45,12 @@ inputBool : List(String) -> String -> Bool -> (Bool -> msg) -> Html msg
 inputBool path desc val msg =
   let htmlId = buildId path
       htmlName = buildName path
-      inputHandler sArg = msg (not val)
---    sVal = Utils.Bool.toString val
   in div [ class "form-group" ]
-      [ div [ class "custom-control custom-switch" ]
-            [ input [ id htmlId, class "custom-control-input", type_ "checkbox"
-                    , name htmlName, checked val, onInput inputHandler, value "true" ] []
-           , label [ for htmlId, class "custom-control-label"] [ text desc ]
-           ]
+      [ label [ for htmlId ] [ text desc ]
+      , select [ id htmlId, class "form-control", name htmlName ]
+          [ option [onClick (msg True), selected val] [text "true"]
+          , option [onClick (msg False), selected (not val)] [text "false"]
+          ]
       ]
 
 buildId : List(String) -> String
