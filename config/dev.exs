@@ -6,6 +6,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configures Elixir's Logger
 config :logger, :console,
-  level: :info,
+  level: :debug,
   format: "$time $metadata [$level] $message\n",
   metadata: [:user_id]
