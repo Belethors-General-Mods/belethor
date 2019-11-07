@@ -41,7 +41,7 @@ update msg model =
 -- VIEW
 view : Model -> Html Msg
 view model =
-    Mod.view model.mod "mod" ChangeMod
+    Mod.view model.mod ["mod"] ChangeMod
 
 sub: Model -> Sub Msg
 sub model =

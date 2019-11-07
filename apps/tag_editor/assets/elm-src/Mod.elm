@@ -67,24 +67,24 @@ decoder =
         (JD.field "sse" (JD.maybe ModFile.decoder))
         (JD.field "oldrim" (JD.maybe ModFile.decoder))
 
-view : Mod -> String -> (Msg -> msg) -> Html msg
-view mod varName cap =
+view : Mod -> List (String) -> (Msg -> msg) -> Html msg
+view mod attrs cap =
     div []
-        [ inputText (varName ++ "_name") (varName ++ "[name]") "Name" mod.name (cap << Name)
-        , inputBool (varName ++ "_published") (varName ++ "[published]") "Published" mod.published (cap << Pub)
-        , textArea (varName ++ "_desc") (varName ++ "[desc]") "Description" mod.desc (cap << Desc)
-        , viewModFile mod.sse "sse" "Skyrim Special Edition" (cap << SSE)
-        , viewModFile mod.oldrim "oldrim" "Skyrim Legendary Edition" (cap << Oldrim)
+        [ inputText ("name" :: attrs) "Name" mod.name (cap << Name)
+        , inputBool ("published" :: attrs) "Published" mod.published (cap << Pub)
+        , textArea ("desc" :: attrs) "Description" mod.desc (cap << Desc)
+        , viewModFile mod.sse ("sse" :: attrs) "Skyrim Special Edition" (cap << SSE)
+        , viewModFile mod.oldrim ("oldrim" :: attrs) "Skyrim Legendary Edition" (cap << Oldrim)
         , submit "btn-success" "Update" ]
 
-viewModFile : Maybe ModFile -> String -> String -> (ModFileUpdate -> msg) -> Html msg
-viewModFile mm varName name cap =
+viewModFile : Maybe ModFile -> List (String) -> String -> (ModFileUpdate -> msg) -> Html msg
+viewModFile mm attrs name cap =
     case mm of
         Just modfile ->
             div [ class "modfilebox"]
                 [ Html.h4 [] [ Html.text name ]
                 , bbutton "Delete" ((cap << New) Nothing)
-                , ModFile.view modfile varName name (cap << Update) ]
+                , ModFile.view modfile attrs name (cap << Update) ]
         Nothing -> viewCreateModFile name (Just ModFile.default) (cap << New)
 
 viewCreateModFile : String -> Maybe ModFile -> (Maybe ModFile -> msg) -> Html msg

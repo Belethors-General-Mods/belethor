@@ -41,18 +41,11 @@ update msg old_mod =
         Steam s -> { old_mod | steam = s }
         CC cc  -> { old_mod | console_compat = cc }
 
-view : ModFile -> String -> String -> (Msg -> msg) -> Html msg
-view modfile varName descName cap =
+view : ModFile -> List (String) -> String -> (Msg -> msg) -> Html msg
+view modfile attrs descName cap =
     div []
-    [ let name = varName ++ "_bethesda"
-          for  = varName ++ "[bethesda]"
-      in inputUrl name for "Bethesda Url" modfile.beth (cap << Beth)
-
-    , let name = varName ++ "_nexus"
-          for  = varName ++ "[nexus]"
-      in inputUrl name for "Nexus Url" modfile.nexus (cap << Nexus)
-
-    , let name = varName ++ "_steam"
-          for  = varName ++ "[steam]"
-      in inputUrl name for "Steam Url" modfile.steam (cap << Steam)
+    [ inputBool ("console_compat" :: attrs) "Compability on Consoles" modfile.console_compat (cap << CC)
+    , inputUrl ("bethesda" :: attrs) "Bethesda Url" modfile.beth (cap << Beth)
+    , inputUrl ("nexus" :: attrs) "Nexus Url" modfile.nexus (cap << Nexus)
+    , inputUrl ("steam" :: attrs) "Steam Url" modfile.steam (cap << Steam)
     ]

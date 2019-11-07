@@ -8,7 +8,10 @@ toString b =
 
 fromString : String -> Bool -> Bool
 fromString s default =
-  case s of
-    "true" -> True
-    "false" -> False
-    _ -> default
+    let z = Debug.log "convert boolean" s
+    in case s of
+           "true" -> True
+           "on" -> True
+           "false" -> False
+           "off" -> False
+           _ -> default
