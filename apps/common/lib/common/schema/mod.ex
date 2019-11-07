@@ -29,6 +29,7 @@ defmodule Common.Schema.Mod do
   end
 
   def changeset(mod, changes \\ %{}) do
+    changes = fix_form(changes)
     mod
     |> Changeset.cast(changes, [:name, :desc, :published, :image])
     |> optional_cast_embed(changes, :oldrim)
@@ -41,8 +42,16 @@ defmodule Common.Schema.Mod do
     if Map.has_key?(change, Atom.to_string(name))  do
       Changeset.cast_embed(cs, name, opts)
     else
-      cs # do nothing
+      cs #TODO add changeset.delete if exists modfile
     end
+  end
+
+  defp fix_form(changes) do
+    pub = Map.has_key?(changes, "published")
+
+    changes
+    |> Map.delete("published")
+    |> Map.put("published", pub)
   end
 
   defp debug(arg) do

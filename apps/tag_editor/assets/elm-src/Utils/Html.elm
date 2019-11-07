@@ -50,7 +50,7 @@ inputBool path desc val msg =
   in div [ class "form-group" ]
       [ div [ class "custom-control custom-switch" ]
             [ input [ id htmlId, class "custom-control-input", type_ "checkbox"
-                    , name htmlName, checked val, onInput inputHandler ] []
+                    , name htmlName, checked val, onInput inputHandler, value "true" ] []
            , label [ for htmlId, class "custom-control-label"] [ text desc ]
            ]
       ]
