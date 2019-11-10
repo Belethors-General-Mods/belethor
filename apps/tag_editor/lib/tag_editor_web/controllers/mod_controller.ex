@@ -11,7 +11,7 @@ defmodule TagEditorWeb.ModController do
 
 
   def all(conn, %{}) do
-    render(conn, "all.html", mod: Repo.all(Mod)) #TODO add paging
+    render(conn, "all.html", mod: Repo.all(Mod)) #TODO add paging and a search filter
   end
 
   def view(conn, %{"id" => id}) do
@@ -30,23 +30,18 @@ defmodule TagEditorWeb.ModController do
   end
 
   def create(conn, %{"mod" => changes}) do
-    m = Mod.changeset(%Mod{}, changes)
-
-    #TODO check validation stuff [like call Ecto.Changeset.validate ;) ]
-    Repo.insert!(m)
+    %Mod{}
+    |> Mod.changeset(changes)
+    |> Repo.insert!
 
     redirect(conn, to: "/mod/")
   end
 
   def update(conn, %{"id" => id, "mod" => changes}) do
-    debug("mod changes: #{inspect changes}")
-
     Mod
     |> Repo.get(id)
     |> Mod.changeset(changes)
     |> Repo.update!
-
-    #TODO check validation stuff [like call Ecto.Changeset.validate ;) ]
 
     redirect(conn, to: "/mod/")
   end

@@ -40,9 +40,9 @@ defmodule Common.Schema.Mod do
 
   defp optional_cast_embed(cs, change, name, opts \\ []) do
     if Map.has_key?(change, Atom.to_string(name))  do
-      Changeset.cast_embed(cs, name, opts)
+      Changeset.cast_embed(cs, name, opts) # create/update the modfile
     else
-      cs #TODO add changeset.delete if exists modfile
+      Changeset.put_embed(cs, name, opts) # delete the modfile
     end
   end
 
