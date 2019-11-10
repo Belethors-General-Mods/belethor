@@ -11,12 +11,14 @@ defmodule TagEditorWeb.ModController do
 
   def all(conn, %{}) do
     # TODO add paging and a search filter
-    render(conn, "all.html", mod: Repo.all(Mod))
+    mods = Repo.all(Mod)
+    render(conn, "all.html", mods: Enum.map(mods, fn m -> Repo.preload(m, [:tags]) end))
   end
 
   def view(conn, %{"id" => id}) do
-    mod = Repo.get(Mod, id)
-    changeset = Changeset.change(mod)
+    mod = Repo.get(Mod, id) |> Repo.preload([:tags])
+    debug("Mod to view: #{inspect mod, pretty: true}")
+    changeset = Mod.changeset(mod)
     action = Routes.mod_path(conn, :update, mod.id)
     daction = Routes.mod_path(conn, :delete, mod.id)
     render(conn, "edit.html", mod: mod, changeset: changeset, action: action, delete: daction)

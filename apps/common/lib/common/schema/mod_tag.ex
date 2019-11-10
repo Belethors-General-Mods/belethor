@@ -4,8 +4,10 @@ defmodule Common.Schema.ModTag do
   """
   use Ecto.Schema
 
+  @derive {Jason.Encoder, only: [:id, :name]}
   schema "mod_tag" do
     field(:name, :string)
     many_to_many(:mods, Common.Schema.Mod, join_through: "mods_tags", unique: true)
   end
+
 end

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-10">
             <ul class="list-group">
-                <%= Enum.map(@mod, fn m -> render(@view_module, "preview.html", Map.put(assigns, :m,  m)) end) %>
+                <%= Enum.map(@mods, fn m -> render(@view_module, "preview.html", Map.put(assigns, :m,  m)) end) %>
             </ul>
         </div>
     </div>

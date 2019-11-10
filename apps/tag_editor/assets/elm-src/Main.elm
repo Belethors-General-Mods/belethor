@@ -3,6 +3,7 @@ module Main exposing (..)
 import Mod exposing (Mod)
 import ModFile exposing (ModFile)
 import Utils.Bool
+import Utils.MsgBuilder
 import Utils.Html exposing(..)
 
 import Browser

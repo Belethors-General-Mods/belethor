@@ -11,7 +11,7 @@ defmodule Common.Schema.Mod do
   alias Ecto.Changeset
   alias Ecto.Multi
 
-  @derive {Jason.Encoder, only: [:name, :desc, :published, :image, :oldrim, :sse]}
+  @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
   schema "mod" do
     field(:name, :string)
     field(:desc, :string)

@@ -1,10 +1,10 @@
-module Utils.Html exposing (submit, textArea, bbutton, inputText, inputUrl, inputBool)
+module Utils.Html exposing (submit, textArea, bbutton, inputText, inputUrl, inputBool,
+                            optionSelect,  Option)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput,onClick)
 import Url exposing (Url)
-
 import Utils.Bool
 import Utils.Url
 
@@ -50,7 +50,7 @@ inputUrl : List(String) -> String -> Maybe Url -> (Maybe Url -> msg) -> Html msg
 inputUrl path desc val msg =
     inputText path desc (Utils.Url.toString val) (msg << Utils.Url.fromString)
 
-
+-- see for styling https://codepen.io/CameronFitzwilliam/pen/RxYbgg
 {-| input field for a boolean value -}
 inputBool : List(String) -> (String, String, String) -> Bool -> (Bool -> msg) -> Html msg
 inputBool path (desc, trueText, falseText) val msg =
@@ -59,13 +59,18 @@ inputBool path (desc, trueText, falseText) val msg =
         , Option "false" (not val) falseText "red" ("false" :: path) (msg False)
         ]
 
--- private utils
+{-| input field for a predefined amount of options -}
 optionSelect : List(String) -> String -> List(Option msg) -> Html msg
 optionSelect path desc options =
   let htmlId = buildId path
   in div [ id htmlId, class "custom-control custom-rad"]
       ([ p [ class "option-toplabel" ] [ text desc ] ] ++ (List.map optionView options))
+-- todo
+--optionMultiSelect : List(String) -> String -> List (Option msg) -> Html msg
+--optionMultiSelect path desc options = Debug.todo
 
+
+-- private utils
 optionView : Option msg -> Html msg
 optionView opt =
     let htmlId = buildId opt.path
