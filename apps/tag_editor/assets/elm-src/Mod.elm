@@ -71,17 +71,17 @@ view : Mod -> List (String) -> (Msg -> msg) -> Html msg
 view mod attrs cap =
     div []
         [ inputText ("name" :: attrs) "Name" mod.name (cap << Name)
-        , inputBool ("published" :: attrs) "Published" mod.published (cap << Pub)
+        , inputBool ("published" :: attrs) ("Published", "yes", "no") mod.published (cap << Pub)
         , textArea ("desc" :: attrs) "Description" mod.desc (cap << Desc)
-        , viewModFile mod.sse ("sse" :: attrs) "Skyrim Special Edition" (cap << SSE)
-        , viewModFile mod.oldrim ("oldrim" :: attrs) "Skyrim Legendary Edition" (cap << Oldrim)
+        , viewModFile ("sse" :: attrs) "Skyrim Special Edition" mod.sse (cap << SSE)
+        , viewModFile ("oldrim" :: attrs) "Skyrim Legendary Edition" mod.oldrim (cap << Oldrim)
         , submit "btn-success" "Update" ]
 
-viewModFile : Maybe ModFile -> List (String) -> String -> (ModFileUpdate -> msg) -> Html msg
-viewModFile mm attrs name cap =
+viewModFile : List (String) -> String -> Maybe ModFile -> (ModFileUpdate -> msg) -> Html msg
+viewModFile attrs name mm  cap =
     case mm of
         Just modfile ->
-            div [ class "modfilebox"]
+            div [ class "modfilebox" ]
                 [ Html.h4 [] [ Html.text name ]
                 , bbutton "Delete" ((cap << New) Nothing)
                 , ModFile.view modfile attrs name (cap << Update) ]

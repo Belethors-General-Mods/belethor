@@ -44,7 +44,7 @@ update msg old_mod =
 view : ModFile -> List (String) -> String -> (Msg -> msg) -> Html msg
 view modfile attrs descName cap =
     div []
-    [ inputBool ("console_compat" :: attrs) "Compability on Consoles" modfile.console_compat (cap << CC)
+    [ inputBool ("console_compat" :: attrs) ("Compability on Consoles", "yes", "no") modfile.console_compat (cap << CC)
     , inputUrl ("bethesda" :: attrs) "Bethesda Url" modfile.beth (cap << Beth)
     , inputUrl ("nexus" :: attrs) "Nexus Url" modfile.nexus (cap << Nexus)
     , inputUrl ("steam" :: attrs) "Steam Url" modfile.steam (cap << Steam)
