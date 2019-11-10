@@ -15,10 +15,17 @@ type alias Option msgt = { value : String
                          , path : List (String)
                          , msg : msgt }
 
+{-| return a bootstrap submit button -}
 submit : String -> String -> Html msg
 submit cl t =
   button [ class ("btn " ++ cl), type_ "submit"] [ text t ]
 
+{-| return a bootstrap button -}
+bbutton : String -> msg -> Html msg
+bbutton desc click =
+    button [ type_ "button", class "btn btn-primary", onClick click ] [ text desc ]
+
+{-| return a bootstrap textarea -}
 textArea : List(String) -> String -> String -> (String -> msg) -> Html msg
 textArea path desc val msg =
   let htmlId = buildId path
@@ -27,10 +34,7 @@ textArea path desc val msg =
     [ label [ for htmlId ] [ text desc ]
     , textarea [ id htmlId, class "form-control", rows 10, name htmlName, value val, onInput msg ] [] ]
 
-bbutton : String -> msg -> Html msg
-bbutton desc click =
-    button [ type_ "button", class "btn btn-primary", onClick click ] [ text desc ]
-
+{-| input field for text -}
 inputText : List(String) -> String -> String -> (String -> msg) -> Html msg
 inputText path desc val msg =
   let htmlId = buildId path
@@ -39,6 +43,23 @@ inputText path desc val msg =
       [ label [ for htmlId ] [ text desc ]
       , input [ id htmlId, class "form-control", type_ "text", name htmlName, value val, onInput msg ] [] ]
 
+
+
+{-| input field for an url, this is still has a lot more potential than just one text input -}
+inputUrl : List(String) -> String -> Maybe Url -> (Maybe Url -> msg) -> Html msg
+inputUrl path desc val msg =
+    inputText path desc (Utils.Url.toString val) (msg << Utils.Url.fromString)
+
+
+{-| input field for a boolean value -}
+inputBool : List(String) -> (String, String, String) -> Bool -> (Bool -> msg) -> Html msg
+inputBool path (desc, trueText, falseText) val msg =
+    optionSelect path desc
+        [ Option "true" (val) trueText "blue" ("true" :: path) (msg True)
+        , Option "false" (not val) falseText "red" ("false" :: path) (msg False)
+        ]
+
+-- private utils
 optionSelect : List(String) -> String -> List(Option msg) -> Html msg
 optionSelect path desc options =
   let htmlId = buildId path
@@ -53,21 +74,6 @@ optionView opt =
         [ input [ id htmlId, type_ "radio", name htmlName, checked opt.enabled, value opt.value ] []
         , label [ for htmlId ] [ text opt.text ] ]
 
-
--- this is still has a lot more potential than just one text input
-inputUrl : List(String) -> String -> Maybe Url -> (Maybe Url -> msg) -> Html msg
-inputUrl path desc val msg =
-    inputText path desc (Utils.Url.toString val) (msg << Utils.Url.fromString)
-
-
-inputBool : List(String) -> (String, String, String) -> Bool -> (Bool -> msg) -> Html msg
-inputBool path (desc, trueText, falseText) val msg =
-    optionSelect path desc
-        [ Option "true" (val) trueText "blue" ("true" :: path) (msg True)
-        , Option "false" (not val) falseText "red" ("false" :: path) (msg False)
-        ]
-
--- private utils
 buildId : List(String) -> String
 buildId path =
     List.reverse path |> String.join "_"
