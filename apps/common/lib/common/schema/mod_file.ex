@@ -18,7 +18,7 @@ defmodule Common.Schema.ModFile do
     modfile
     |> cast(changes, [:console_compat, :steam, :nexus, :bethesda])
     |> validate_required([:console_compat])
-    #todo add url constraint
-  end
 
+    # todo add url constraint
+  end
 end

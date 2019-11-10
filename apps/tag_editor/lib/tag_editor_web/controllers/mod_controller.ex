@@ -9,9 +9,9 @@ defmodule TagEditorWeb.ModController do
   alias Common.Schema.ModList
   alias Ecto.Changeset
 
-
   def all(conn, %{}) do
-    render(conn, "all.html", mod: Repo.all(Mod)) #TODO add paging and a search filter
+    # TODO add paging and a search filter
+    render(conn, "all.html", mod: Repo.all(Mod))
   end
 
   def view(conn, %{"id" => id}) do
@@ -32,7 +32,7 @@ defmodule TagEditorWeb.ModController do
   def create(conn, %{"mod" => changes}) do
     %Mod{}
     |> Mod.changeset(changes)
-    |> Repo.insert!
+    |> Repo.insert!()
 
     redirect(conn, to: "/mod/")
   end
@@ -41,7 +41,7 @@ defmodule TagEditorWeb.ModController do
     Mod
     |> Repo.get(id)
     |> Mod.changeset(changes)
-    |> Repo.update!
+    |> Repo.update!()
 
     redirect(conn, to: "/mod/")
   end
@@ -50,5 +50,4 @@ defmodule TagEditorWeb.ModController do
     Mod.delete!(id)
     redirect(conn, to: "/mod/")
   end
-
 end

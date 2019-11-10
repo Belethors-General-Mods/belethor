@@ -26,7 +26,7 @@ defmodule Common.Schema.Mod do
   def delete!(id) do
     __MODULE__
     |> Repo.get(id)
-    |> Repo.delete!
+    |> Repo.delete!()
   end
 
   def changeset(mod, changes \\ %{}) do
@@ -39,11 +39,12 @@ defmodule Common.Schema.Mod do
   end
 
   defp optional_cast_embed(cs, change, name, opts \\ []) do
-    if Map.has_key?(change, Atom.to_string(name))  do
-      Changeset.cast_embed(cs, name, opts) # create/update the modfile
+    if Map.has_key?(change, Atom.to_string(name)) do
+      # create/update the modfile
+      Changeset.cast_embed(cs, name, opts)
     else
-      Changeset.put_embed(cs, name, opts) # delete the modfile
+      # delete the modfile
+      Changeset.put_embed(cs, name, opts)
     end
   end
-
 end
