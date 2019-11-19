@@ -1,5 +1,5 @@
 module Utils.Html exposing (submit, textArea, bbutton, inputText, inputUrl, inputBool,
-                            optionSelect,  Option)
+                            optionSelect, optionMultiSelect, Option)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -51,6 +51,7 @@ inputUrl path desc val msg =
     inputText path desc (Utils.Url.toString val) (msg << Utils.Url.fromString)
 
 -- see for styling https://codepen.io/CameronFitzwilliam/pen/RxYbgg
+-- or https://codepen.io/adamstuartclark/pen/pbYVYR/
 {-| input field for a boolean value -}
 inputBool : List(String) -> (String, String, String) -> Bool -> (Bool -> msg) -> Html msg
 inputBool path (desc, trueText, falseText) val msg =
@@ -64,21 +65,33 @@ optionSelect : List(String) -> String -> List(Option msg) -> Html msg
 optionSelect path desc options =
   let htmlId = buildId path
   in div [ id htmlId, class "custom-control custom-rad"]
-      ([ p [ class "option-toplabel" ] [ text desc ] ] ++ (List.map optionView options))
--- todo
---optionMultiSelect : List(String) -> String -> List (Option msg) -> Html msg
---optionMultiSelect path desc options = Debug.todo
+      ([ p [ class "option-toplabel" ] [ text desc ] ] ++ (List.map optionViewRadio options))
+
+
+optionMultiSelect : List(String) -> String -> List (Option msg) -> Html msg
+optionMultiSelect path desc options =
+    let htmlId = buildId path
+    in div [ id htmlId ] ([ h5 [] [ text desc]] ++ (List.map optionViewButton options))
 
 
 -- private utils
-optionView : Option msg -> Html msg
-optionView opt =
+optionViewButton : Option msg -> Html msg
+optionViewButton opt =
+    let htmlId = buildId opt.path
+        htmlName = buildName ("id" :: opt.path)
+    in span [ class "multi_option" ]
+        [ input [ id htmlId, name htmlName, type_ "hidden", onClick opt.msg, value opt.value ] [  ]
+        , label [ for htmlId ] [ text opt.text ]
+        , input [ type_ "button", class "btn btn-danger btn-sm  remove" , onClick opt.msg, value "x" ] [  ]
+        ]
+
+optionViewRadio : Option msg -> Html msg
+optionViewRadio opt =
     let htmlId = buildId opt.path
         htmlName = buildNameBase opt.path
     in div [ class "custom-control-inline" ]
         [ input [ id htmlId, type_ "radio", name htmlName, checked opt.enabled, value opt.value ] []
         , label [ for htmlId ] [ text opt.text ] ]
-
 buildId : List(String) -> String
 buildId path =
     List.reverse path |> String.join "_"

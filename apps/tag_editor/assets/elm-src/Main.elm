@@ -1,9 +1,9 @@
 module Main exposing (..)
 
 import Mod exposing (Mod)
-import ModFile exposing (ModFile)
+import Tag exposing (Tag)
 import Utils.Bool
-import Utils.MsgBuilder
+import Utils.MsgBuilder as MB
 import Utils.Html exposing(..)
 
 import Browser
@@ -21,30 +21,47 @@ main =
       , view = view }
 
 -- MODEL
-type alias Model = { mod : Mod }
+type alias Model = { mod : Mod
+                   , tags : List(Tag)}
 
-init : JD.Value -> (Model, Cmd Msg)
+init : JD.Value -> (Result String Model, Cmd Msg)
 init flag =
-    let mod = case JD.decodeValue Mod.decoder flag of
-                Ok result -> result
-                Err todo -> Mod.default
-    in (Model mod, Cmd.none)
+    let state = case JD.decodeValue decoder flag of
+                Ok model -> Ok model
+                Err err -> Err (JD.errorToString err)
+    in (state, Cmd.none)
 
 -- UPDATE
 type Msg = ChangeMod Mod.Msg
 
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-    case msg of
-        ChangeMod modMsg ->
-            ({ model | mod = Mod.update modMsg model.mod }, Cmd.none)
+update : Msg -> Result String Model -> (Result String Model, Cmd Msg)
+update msg state =
+    case state of
+        Ok model -> case msg of
+                        ChangeMod modMsg ->
+                            (Ok { model | mod = Mod.update modMsg model.mod }, Cmd.none)
+        Err err -> (Err err, Cmd.none)
 
 -- VIEW
-view : Model -> Html Msg
-view model =
-    Mod.view model.mod ["mod"] ChangeMod
+view : Result String Model -> Html Msg
+view state =
+    case state of
+        Ok model -> div []
+                    [ Mod.view model.mod ["mod"] ChangeMod
+                    , viewTags model.tags
+                    ]
+        Err errs -> Html.text errs
 
-sub: Model -> Sub Msg
-sub model =
+sub : Result String Model -> Sub Msg
+sub state =
     Sub.none
 
+decoder : JD.Decoder Model
+decoder =
+    JD.map2 Model
+        (JD.field "mod" Mod.decoder)
+        (JD.field "tags" (JD.list Tag.decoder))
+
+viewTags : List (Tag) -> Html Msg
+viewTags tags =
+    optionMultiSelect [] "Tags to select: (click on the red x to add a tag)" (List.map (Mod.tag2option [] (ChangeMod << Mod.Tags << MB.Edit << MB.Add)) tags)

@@ -9,6 +9,10 @@ defmodule TagEditorWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
   scope "/", TagEditorWeb do
     pipe_through :browser
 
@@ -30,6 +34,17 @@ defmodule TagEditorWeb.Router do
     post "/:id", ModListController, :create
     put "/:id", ModListController, :update
     delete "/:id", ModListController, :delete
+  end
+
+  scope "/tag", TagEditorWeb do
+    pipe_through :browser
+
+    # view a list of all tags
+    get "/", TagController, :all
+  end
+
+  scope "/api", TagEditorWeb do
+    get "/tags/search.json", TagController, :api_search
   end
 
   scope "/mod", TagEditorWeb do

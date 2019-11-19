@@ -24,5 +24,5 @@ import Elm from "../elm-src/Main.elm";
 
 let node  = document.getElementById('elm-form');
 if(node != null) {
-    Elm.Elm.Main.init({node: node, flags: mod});
+    Elm.Elm.Main.init({node: node, flags: flags});
 }

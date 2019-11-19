@@ -17,5 +17,8 @@
     <% _ -> %>
 <% end %>
 <script>
- mod = <%= raw Jason.encode!(@mod) %>;
+ flags = {
+     "mod": <%= raw Jason.encode!(@mod) %>,
+     "tags": <%= raw Jason.encode!(@all_tags) %>
+ };
 </script>
