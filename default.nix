@@ -6,15 +6,16 @@ let
   inherit (lib) optional optionals;
 
   elm = elmPackages.elm;
+  elm_test = elmPackages.elm-test;
+  elm_format = elmPackages.elm-format;
   elixir = beam.packages.erlangR21.elixir_1_8;
-  nodejs = nodejs-11_x;
+  nodejs = nodejs-12_x;
 in
 
 mkShell {
   buildInputs = [
       elixir
-      nodejs
-      elm
+      nodejs elm elm_format elm_test
       git
     ]
   ++ optional stdenv.isLinux glibcLocales # To allow setting consistent locale on linux
