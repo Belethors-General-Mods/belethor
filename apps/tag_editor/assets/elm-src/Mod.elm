@@ -14,6 +14,7 @@ import Maybe
 import Html exposing (Html, div)
 import Html.Attributes exposing (class)
 import Json.Decode as JD
+import Json.Encode as JE
 import Url exposing(Url)
 
 
@@ -80,6 +81,18 @@ decoder =
         (Utils.Json.field "sse" (JD.maybe ModFile.decoder) default.sse)
         (Utils.Json.field "oldrim" (JD.maybe ModFile.decoder) default.oldrim)
         (Utils.Json.field "tags" (JD.list Tag.decoder) default.tags)
+
+encode : JE.Value
+encode mod =
+    JE.object
+        [ ("name", JE.string mod.name)
+        , ("desc", JE.string mod.desc)
+        , ("published", JE.bool mod.published)
+        , ("image", Utils.Url.encode mod.customFile)
+        , ("sse", ModFile.encode mod.sse)
+        , ("oldrim", ModFile.encode mod.oldrim)
+        , ("tags", JE.list Tag.encode mod.tags)
+        ]
 
 view : Mod -> List (String) -> (Msg -> msg) -> Html msg
 view mod attrs cap =

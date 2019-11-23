@@ -1,8 +1,9 @@
-module ModFile exposing (ModFile, Msg(..), default, update, view, decoder)
+module ModFile exposing (ModFile, Msg(..), default, update, view, decoder, encode)
 
 import Maybe
 import Url exposing (Url)
 import Json.Decode as JD
+import Json.Encode as JE
 
 import Html exposing (Html, div)
 import Utils.Html exposing (..)
@@ -32,6 +33,17 @@ decoder =
         (JD.field "nexus" Utils.Url.decoder)
         (JD.field "steam" Utils.Url.decoder)
         (JD.field "console_compat" JD.bool)
+
+encode : ModFile -> JE.Value
+encode modfile =
+    JE.object
+        [ ("bethesda", Utils.Url.encode modfile.beth)
+        , ("nexus", Utils.Url.encode modfile.nexus)
+        , ("steam", Utils.Url.encode modfile.steam)
+        , ("console_compat", Utils.Url.encode modfile.console_compat)
+        ]
+
+
 
 update : Msg -> ModFile -> ModFile
 update msg old_mod =

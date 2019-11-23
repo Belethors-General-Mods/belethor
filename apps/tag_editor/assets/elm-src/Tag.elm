@@ -1,6 +1,7 @@
-module Tag exposing (Tag, view, decoder)
+module Tag exposing (Tag, view, decoder, encode)
 
 import Json.Decode as JD
+import Json.Encode as JE
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class)
 
@@ -13,6 +14,11 @@ decoder =
     JD.map2 Tag
         (JD.field "id" JD.int)
         (JD.field "name" JD.string)
+
+encode : Tag  -> JD.Value
+encode tag =
+    JE.object [ ("id", JE.int), ("name", JE.string) ]
+
 
 view : Tag -> List (String) -> msg -> Html msg
 view tag attrs cap =

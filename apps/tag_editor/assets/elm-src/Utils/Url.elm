@@ -1,8 +1,9 @@
 module Utils.Url exposing (..)
 
-import Url exposing (..)
+import Url exposing (Url)
 import Maybe
 import Json.Decode as JD
+import Json.Decode as JE
 
 decoder : JD.Decoder (Maybe Url)
 decoder =
@@ -10,6 +11,10 @@ decoder =
         [ JD.null Nothing
         , JD.map fromString JD.string
         ]
+
+encode : JE.Value
+encode url =
+    JE.string <| toString url
 
 toString : Maybe Url -> String
 toString val =
