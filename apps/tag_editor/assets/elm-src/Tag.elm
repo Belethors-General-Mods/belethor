@@ -17,7 +17,7 @@ decoder =
 
 encode : Tag  -> JD.Value
 encode tag =
-    JE.object [ ("id", JE.int), ("name", JE.string) ]
+    JE.object [ ("id", JE.int tag.id), ("name", JE.string tag.name) ]
 
 
 view : Tag -> List (String) -> msg -> Html msg
