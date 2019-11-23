@@ -40,7 +40,7 @@ encode modfile =
         [ ("bethesda", Utils.Url.encode modfile.beth)
         , ("nexus", Utils.Url.encode modfile.nexus)
         , ("steam", Utils.Url.encode modfile.steam)
-        , ("console_compat", Utils.Url.encode modfile.console_compat)
+        , ("console_compat", JE.bool modfile.console_compat)
         ]
 
 

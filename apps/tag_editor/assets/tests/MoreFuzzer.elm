@@ -1,20 +1,31 @@
-module MoreFuzzer exposing(..)
+module MoreFuzzer exposing (..)
 
+import Mod exposing (Mod)
 import ModFile exposing (ModFile)
 import Tag exposing (Tag)
 
-import Fuzz
+import Regex
+import Fuzz exposing (Fuzzer)
 import Url exposing (Url)
 import Url.Builder
 
 
-tag : Fuzzer (Tag)
+tag : Fuzzer Tag
 tag =
-    Fuzz.map (\(id, name) -> Tag id name) <| Fuzz.tuple (Fuzz.int, json_string)
+    Fuzz.map (\(id, name) -> Tag id name) <| Fuzz.tuple (Fuzz.int, Fuzz.string)
 
-modFile : Fuzzer (ModFile)
+
+mod : Fuzzer Mod
+mod =
+    let fuzz_params = Fuzz.tuple3 ( Fuzz.tuple3 (Fuzz.string, Fuzz.string, Fuzz.bool)
+                                  , Fuzz.tuple3 (url, maybe modFile, maybe modFile)
+                                  , Fuzz.list tag)
+        create = \((name, desc, published), (cf, sse, oldrim), tags) -> Mod name desc published cf sse oldrim tags
+    in Fuzz.map create fuzz_params
+
+modFile : Fuzzer ModFile
 modFile =
-    let create = \((beth, steam, nexus), cc) -> ModFile beth steam nexus url
+    let create = \((beth, steam, nexus), cc) -> ModFile beth steam nexus cc
     in Fuzz.map create <| Fuzz.tuple (Fuzz.tuple3 (url, url, url), Fuzz.bool)
 
 url : Fuzzer (Maybe Url)
@@ -24,9 +35,9 @@ url =
     in Fuzz.map parse <| Fuzz.tuple3 (Fuzz.string, Fuzz.list Fuzz.string, Fuzz.list fuz_query_params)
 
 maybe : Fuzzer a -> Fuzzer (Maybe a)
-maybe =
-    let capsule = (\boolean -> if boolean then Just a else Nothing)
-    in Fuzz.map capsule Fuzz.bool
+maybe fuz =
+    let capsule = (\boolean val -> if boolean then Just val else Nothing)
+    in Fuzz.map2 capsule Fuzz.bool fuz
 
 jsonString : Fuzzer String
 jsonString =

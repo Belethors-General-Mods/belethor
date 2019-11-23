@@ -1,4 +1,4 @@
-module Mod exposing (Mod, Msg(..), default, update, view, decoder, tag2option )
+module Mod exposing (Mod, Msg(..), default, update, view, encode, decoder, tag2option )
 
 import ModFile exposing(ModFile)
 import Tag exposing(Tag)
@@ -82,17 +82,23 @@ decoder =
         (Utils.Json.field "oldrim" (JD.maybe ModFile.decoder) default.oldrim)
         (Utils.Json.field "tags" (JD.list Tag.decoder) default.tags)
 
-encode : JE.Value
+encode : Mod -> JE.Value
 encode mod =
     JE.object
         [ ("name", JE.string mod.name)
         , ("desc", JE.string mod.desc)
         , ("published", JE.bool mod.published)
         , ("image", Utils.Url.encode mod.customFile)
-        , ("sse", ModFile.encode mod.sse)
-        , ("oldrim", ModFile.encode mod.oldrim)
+        , ("sse", encodeMaybeModFile mod.sse)
+        , ("oldrim", encodeMaybeModFile mod.oldrim)
         , ("tags", JE.list Tag.encode mod.tags)
         ]
+
+encodeMaybeModFile : Maybe ModFile -> JE.Value
+encodeMaybeModFile mm =
+    case mm of
+        Nothing -> JE.null
+        Just m -> ModFile.encode m
 
 view : Mod -> List (String) -> (Msg -> msg) -> Html msg
 view mod attrs cap =
