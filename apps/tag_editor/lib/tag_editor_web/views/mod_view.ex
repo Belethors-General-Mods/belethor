@@ -3,7 +3,6 @@ defmodule TagEditorWeb.ModView do
 
   import Common.Schema.ModTag
 
-
   def render_tags_small([]) do
     ""
   end
@@ -12,5 +11,4 @@ defmodule TagEditorWeb.ModView do
     [first | rest] = tags
     Enum.reduce(rest, first.name, fn tag, acc -> acc <> ", " <> tag.name end)
   end
-
 end

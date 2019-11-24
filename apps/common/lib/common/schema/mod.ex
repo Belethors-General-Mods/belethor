@@ -41,7 +41,7 @@ defmodule Common.Schema.Mod do
   end
 
   def changeset(mod, changes) do
-    debug("changeset: #{inspect changes, pretty: true}")
+    debug("changeset: #{inspect(changes, pretty: true)}")
 
     mod
     |> Repo.preload([:tags])
@@ -54,7 +54,7 @@ defmodule Common.Schema.Mod do
   end
 
   defp get_tags(changes) do
-    case Map.get(changes,"tags") do
+    case Map.get(changes, "tags") do
       nil -> []
       tags -> Enum.map(tags, &ModTag.get/1)
     end

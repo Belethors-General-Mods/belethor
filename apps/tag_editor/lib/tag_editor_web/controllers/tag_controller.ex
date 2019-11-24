@@ -4,7 +4,7 @@ defmodule TagEditorWeb.TagController do
   require Logger
   import Common.Utils, only: [debug: 1]
   import Ecto.Query, only: [from: 2]
-  import  Ecto.Query.API, only: [ like: 2]
+  import Ecto.Query.API, only: [like: 2]
 
   alias Common.Repo
   alias Common.Schema.Mod
@@ -17,7 +17,6 @@ defmodule TagEditorWeb.TagController do
     render(conn, "all.html", tags: tags)
   end
 
-
   def api_search(conn, %{"name" => name}) do
     l = name <> "%"
     q = from(t in ModTag, where: like(t.name, ^l))
@@ -25,7 +24,6 @@ defmodule TagEditorWeb.TagController do
   end
 
   def api_search(conn, params = %{}) do
-    api_search(conn, Map.put(params, "name", "") )
+    api_search(conn, Map.put(params, "name", ""))
   end
-
 end

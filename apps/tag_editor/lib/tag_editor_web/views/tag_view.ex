@@ -4,5 +4,4 @@ defmodule TagEditorWeb.TagView do
   def render("search.json", %{result: page}) do
     page
   end
-
 end
