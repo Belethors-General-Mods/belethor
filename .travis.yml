@@ -27,6 +27,9 @@ install:
   - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
   - mix deps.compile
+  - pushd apps/tag_editor/assets
+  - npm install
+
 script:
   - mix format --check-formatted
   - for f in $(mix format --check-formatted 2>&1 | cut -s -d' ' -f4- | grep -E '^.+\.exs?$'); do echo $f; cat $f | mix format - | diff $f -; done
@@ -36,12 +39,15 @@ script:
   - mix coveralls.travis -u
   - mix credo --strict
   - travis_wait mix dialyzer --halt-exit-status
+  - pushd apps/tag_editor/assets
+  - travis_wait elm-test
 
 # Cache as much as possible
 cache:
   directories:
     - deps
     - _build
+    - apps/tag_editor/assets/tests/elm-stuff/build-artifacts
 
 # Trigger our discord webhook
 after_success:
