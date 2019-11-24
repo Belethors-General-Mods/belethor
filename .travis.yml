@@ -29,6 +29,7 @@ install:
   - mix deps.compile
   - pushd apps/tag_editor/assets
   - npm install
+  - popd
 
 script:
   - mix format --check-formatted
@@ -39,15 +40,17 @@ script:
   - mix coveralls.travis -u
   - mix credo --strict
   - travis_wait mix dialyzer --halt-exit-status
-  - pushd apps/tag_editor/assets
+  - pushd apps/tag_editor/assets/
   - travis_wait elm-test
+  - find elm-src -name '*.elm' -exec elm-format {} --validate \;
+  - popd
 
 # Cache as much as possible
 cache:
   directories:
     - deps
     - _build
-    - apps/tag_editor/assets/tests/elm-stuff/build-artifacts
+    - apps/tag_editor/assets/tests/elm-stuff
 
 # Trigger our discord webhook
 after_success:
