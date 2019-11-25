@@ -43,7 +43,7 @@ script:
   - travis_wait mix dialyzer --halt-exit-status
   - pushd apps/tag_editor/assets/
   - travis_wait elm-test
-  - find elm-src -name '*.elm' -exec elm-format {} --validate \;
+  - elm-format $(find tests elm-src -name '*.elm') --validate | jq '.[] | .path + ":\t" + .message' -r
   - popd
 
 # Cache as much as possible
