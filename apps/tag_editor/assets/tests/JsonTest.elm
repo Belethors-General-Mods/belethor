@@ -1,15 +1,15 @@
 module JsonTest exposing (..)
 
-import Mod exposing (Mod)
-import ModFile exposing (ModFile)
-import Tag exposing (Tag)
-
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer)
-import Test exposing (Test)
-import MoreFuzzer
 import Json.Decode as JD
 import Json.Encode as JE
+import Mod exposing (Mod)
+import ModFile exposing (ModFile)
+import MoreFuzzer
+import Tag exposing (Tag)
+import Test exposing (Test)
+
 
 suite : Test
 suite =
@@ -19,14 +19,21 @@ suite =
         , jsonFuzzer { desc = "fuzz Mod", fuzzer = MoreFuzzer.mod, enc = Mod.encode, dec = Mod.decoder }
         ]
 
-jsonFuzzer : { desc: String, fuzzer: Fuzzer t, enc: (t -> JE.Value), dec: JD.Decoder t} -> Test
+
+jsonFuzzer : { desc : String, fuzzer : Fuzzer t, enc : t -> JE.Value, dec : JD.Decoder t } -> Test
 jsonFuzzer args =
     Test.fuzz args.fuzzer args.desc <|
-        \(val) ->
-            let encoded = JE.encode 0 (args.enc val)
-                decoded = JD.decodeString args.dec encoded
-            in case decoded of
-                   Ok jback -> Expect.equal jback val
-                   Err err -> Expect.fail <| JD.errorToString err
+        \val ->
+            let
+                encoded =
+                    JE.encode 0 (args.enc val)
 
+                decoded =
+                    JD.decodeString args.dec encoded
+            in
+            case decoded of
+                Ok jback ->
+                    Expect.equal jback val
 
+                Err err ->
+                    Expect.fail <| JD.errorToString err
