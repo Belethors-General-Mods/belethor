@@ -27,6 +27,7 @@ install:
   - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
   - mix deps.compile
+  - npm install -g elm-format elm-test
   - pushd apps/tag_editor/assets
   - npm install
   - popd
