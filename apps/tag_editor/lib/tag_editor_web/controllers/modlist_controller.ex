@@ -2,7 +2,6 @@ defmodule TagEditorWeb.ModListController do
   use TagEditorWeb, :controller
 
   alias Common.Repo
-  alias Common.Schema.Mod
 
   def all(conn, %{}) do
     render(conn, "all.html", mod_lists: Repo.all(ModList))
