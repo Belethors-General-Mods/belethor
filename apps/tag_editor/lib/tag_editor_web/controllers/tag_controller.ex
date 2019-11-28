@@ -1,15 +1,10 @@
 defmodule TagEditorWeb.TagController do
   use TagEditorWeb, :controller
 
-  require Logger
-  import Common.Utils, only: [debug: 1]
   import Ecto.Query, only: [from: 2]
-  import Ecto.Query.API, only: [like: 2]
 
   alias Common.Repo
-  alias Common.Schema.Mod
   alias Common.Schema.ModTag
-  alias Ecto.Changeset
 
   def all(conn, %{}) do
     # TODO add paging and a search filter

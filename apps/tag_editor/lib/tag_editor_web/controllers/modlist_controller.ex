@@ -3,7 +3,6 @@ defmodule TagEditorWeb.ModListController do
 
   alias Common.Repo
   alias Common.Schema.Mod
-  alias Common.Schema.ModList
 
   def all(conn, %{}) do
     render(conn, "all.html", mod_lists: Repo.all(ModList))

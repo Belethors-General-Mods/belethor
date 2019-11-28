@@ -1,8 +1,6 @@
 defmodule TagEditorWeb.ModView do
   use TagEditorWeb, :view
 
-  import Common.Schema.ModTag
-
   def render_tags_small([]) do
     ""
   end

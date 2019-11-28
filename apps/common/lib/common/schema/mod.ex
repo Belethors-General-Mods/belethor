@@ -10,9 +10,7 @@ defmodule Common.Schema.Mod do
   alias Common.Repo
   alias Common.Schema.ModFile
   alias Common.Schema.ModTag
-  alias Common.Utils
   alias Ecto.Changeset
-  alias Ecto.Multi
 
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
   schema "mod" do

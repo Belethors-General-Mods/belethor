@@ -1,14 +1,9 @@
 defmodule TagEditorWeb.ModController do
   use TagEditorWeb, :controller
 
-  require Logger
-  import Common.Utils, only: [debug: 1]
-
   alias Common.Repo
   alias Common.Schema.Mod
-  alias Common.Schema.ModFile
   alias Common.Schema.ModTag
-  alias Common.Schema.ModList
   alias Ecto.Changeset
 
   def all(conn, %{}) do
