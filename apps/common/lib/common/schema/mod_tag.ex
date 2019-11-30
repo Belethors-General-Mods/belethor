@@ -19,11 +19,11 @@ defmodule Common.Schema.ModTag do
 
   def get(%{"id" => id}) do
     fixed_id =
-      if not is_integer(id) do
+      if is_integer(id) do
+        id
+      else
         {fixid, ""} = Integer.parse(id)
         fixid
-      else
-        id
       end
 
     Repo.get(__MODULE__, fixed_id)

@@ -7,7 +7,6 @@ defmodule TagEditorWeb.TagController do
   alias Common.Schema.ModTag
 
   def all(conn, %{}) do
-    # TODO add paging and a search filter
     tags = Repo.all(ModTag)
     render(conn, "all.html", tags: tags)
   end

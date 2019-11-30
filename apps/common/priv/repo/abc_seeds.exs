@@ -39,7 +39,6 @@ mod_c = %Mod{name: "Mod C", desc: "ccccccccccccccc", image: favi, published: fal
 |> Changeset.put_assoc(:tags, [tag_b])
 |> Repo.update!()
 
-
 %ModList{name: "A B C", desc: "ABC liste :>"}
 |> Repo.insert!()
 |> Repo.preload([:mods])

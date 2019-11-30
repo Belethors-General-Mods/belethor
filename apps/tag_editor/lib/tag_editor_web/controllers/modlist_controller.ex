@@ -8,8 +8,7 @@ defmodule TagEditorWeb.ModListController do
   end
 
   def view(conn, %{"id" => id}) do
-    ml = Repo.get(ModList, id) |> Repo.preload([:mods])
-    # TODO get modlist tags
+    ml = ModList |> Repo.get(id) |> Repo.preload([:mods])
     tags = []
     render(conn, "edit.html", mod_list: ml, tags: tags)
   end

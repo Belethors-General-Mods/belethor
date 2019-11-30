@@ -6,14 +6,13 @@ defmodule TagEditorWeb.ModController do
   alias Common.Schema.ModTag
   alias Ecto.Changeset
 
+  # TODO add paging and a search filter to all/2
   def all(conn, %{}) do
-    # TODO add paging and a search filter
     mods = Repo.all(Mod)
     render(conn, "all.html", mods: Enum.map(mods, fn m -> Repo.preload(m, [:tags]) end))
   end
 
   def all(conn, %{"q" => query}) do
-    # TODO add paging and a search filter
     mods = Repo.all(Mod)
 
     render(conn, "all.html",
@@ -23,7 +22,7 @@ defmodule TagEditorWeb.ModController do
   end
 
   def view(conn, %{"id" => id}) do
-    mod = Repo.get(Mod, id) |> Repo.preload([:tags])
+    mod = Mod |> Repo.get(id) |> Repo.preload([:tags])
     all_tags = Repo.all(ModTag)
     changeset = Mod.changeset(mod)
     action = Routes.mod_path(conn, :update, mod.id)
