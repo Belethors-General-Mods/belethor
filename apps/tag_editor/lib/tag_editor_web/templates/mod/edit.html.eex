@@ -1,13 +1,13 @@
 <% alias Common.Schema.Mod %>
 <% alias Common.Schema.ModFile %>
 
-<%= form_for @changeset, @action, fn _f -> %>
+<%= form_for @changeset, @action, [], fn _f -> %>
     <div id="elm-form">
     </div>
 <% end %>
 
 <%= case Access.fetch(assigns, :delete) do %>
-    <%= {:ok, daction } -> %>
+    <%= {:ok, daction} -> %>
         <p>
             <%= form_for @changeset, daction, [method: "DELETE"], fn _f -> %>
                 <%= submit "Delete", class: "btn btn-danger" %>
