@@ -18,7 +18,7 @@ assets/website/images/mockups_old/mockup5dark.png
 assets/website/images/mockups_old/mockup5dark2.png
 assets/website/images/mockups_old/mockup5darkbevel.png
 assets/website/images/mockups_old/mockup5darkinset.png
-dist/sidebar_items-59db41b657.js
+dist/sidebar_items-8c76153db8.js
 api-reference.html
 readme.html
 website-readme.html
@@ -32,9 +32,11 @@ submitting_a_mod.html
 search.html
 404.html
 Common.html
+Common.ModDB.html
 Common.Repo.html
 Common.Schema.Mod.html
 Common.Schema.ModFile.html
+Common.Schema.ModList.html
 Common.Schema.ModTag.html
 Common.Utils.html
 Crawler.html
@@ -54,11 +56,16 @@ TagEditorWeb.ErrorHelpers.html
 TagEditorWeb.ErrorView.html
 TagEditorWeb.Gettext.html
 TagEditorWeb.LayoutView.html
+TagEditorWeb.ModController.html
 TagEditorWeb.ModListController.html
+TagEditorWeb.ModListView.html
+TagEditorWeb.ModView.html
 TagEditorWeb.PageController.html
 TagEditorWeb.PageView.html
 TagEditorWeb.Router.html
 TagEditorWeb.Router.Helpers.html
+TagEditorWeb.TagController.html
+TagEditorWeb.TagView.html
 TagEditorWeb.UserSocket.html
 Website.html
 WebsiteWeb.html
