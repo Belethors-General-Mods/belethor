@@ -1,35 +1,40 @@
 defmodule Common.Schema.ModTag do
   @moduledoc """
   Stores info about each tag
+
+  | Attribute | Meaning           |
+  | ---------|:------------- |
+  | `name` | the tag's name |
+  | `mods`  | mods described with this tag |
   """
   use Ecto.Schema
 
-  alias Common.Repo
+  alias Common.Schema.Mod
+
+  @type id :: term()
+  @type t :: %__MODULE__{
+    id: id,
+    name: String.t(),
+    mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
+  }
 
   @derive {Jason.Encoder, only: [:id, :name]}
   schema "mod_tag" do
     field(:name, :string)
 
-    many_to_many(:mods, Common.Schema.Mod,
+    many_to_many(:mods, Mod,
       join_through: "mods_tags",
       unique: true,
       on_replace: :delete
     )
   end
 
-  def get(%{"id" => id}) do
-    fixed_id =
-      if is_integer(id) do
-        id
-      else
-        {fixid, ""} = Integer.parse(id)
-        fixid
-      end
+  @doc false
+  def changeset(tag, attrs) do
+    import Ecto.Changeset
 
-    Repo.get(__MODULE__, fixed_id)
-  end
-
-  def get(%{"name" => name}) when is_bitstring(name) do
-    Repo.get_by(__MODULE__, name: name)
+    tag
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
   end
 end
