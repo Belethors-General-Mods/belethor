@@ -6,21 +6,20 @@ defmodule Common.Repo.Migrations.CreateCommon do
   def change do
     create table(:mod_tag) do
       add(:name, :string, null: false)
-      add(:desc, :text)
     end
 
     create table(:mod) do
       add(:name, :string, null: false)
       add(:desc, :text, null: false)
-      add(:published, :boolean, null: false)
+      add(:published, :boolean)
+      add(:image, :string, null: false)
       add(:oldrim, :map)
       add(:sse, :map)
-      add(:image, :string)
     end
 
-    create table(:mod_list) do
+    create table(:modlist) do
       add(:name, :string, null: false)
-      add(:desc, :string)
+      add(:desc, :string, null: false)
     end
 
     create table(:mods_tags) do
@@ -28,15 +27,15 @@ defmodule Common.Repo.Migrations.CreateCommon do
       add(:mod_id, references(:mod), null: false)
     end
 
-    create table(:mods_mod_lists) do
+    create table(:mods_modlists) do
       add(:mod_id, references(:mod), null: false)
-      add(:mod_list_id, references(:mod_list), null: false)
+      add(:modlist_id, references(:modlist), null: false)
     end
 
     create(unique_index(:mod, [:name]))
     create(unique_index(:mod_tag, [:name]))
     create(unique_index(:mods_tags, [:mod_id, :mod_tag_id]))
-    create(unique_index(:mod_list, [:name]))
+    create(unique_index(:modlist, [:name]))
 
     flush()
 

@@ -2,7 +2,7 @@ alias Common.Repo
 alias Common.Schema.Mod
 alias Common.Schema.ModTag
 alias Common.Schema.ModFile
-alias Common.Schema.ModList
+alias Common.Schema.Modlist
 alias Ecto.Changeset
 
 favi = "/images/bgm_logo.svg"
@@ -39,7 +39,7 @@ mod_c = %Mod{name: "Mod C", desc: "ccccccccccccccc", image: favi, published: fal
 |> Changeset.put_assoc(:tags, [tag_b])
 |> Repo.update!()
 
-%ModList{name: "A B C", desc: "ABC liste :>"}
+%Modlist{name: "A B C", desc: "ABC liste :>"}
 |> Repo.insert!()
 |> Repo.preload([:mods])
 |> Changeset.change()

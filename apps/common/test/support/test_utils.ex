@@ -1,6 +1,8 @@
 defmodule Common.TestUtils do
   import ExUnit.Assertions
 
+  alias Common.Schema.Mod
+
   def assert_purelist(list, module) do
     assert is_list(list)
 
@@ -10,4 +12,5 @@ defmodule Common.TestUtils do
       assert Map.get(el, :__struct__) == module
     end)
   end
+
 end

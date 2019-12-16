@@ -14,7 +14,7 @@ defmodule Common.Schema.Mod do
   """
   use Ecto.Schema
 
-  # require Logger
+  require Logger
   # import Common.Utils, only: [debug: 1]
 
   alias Common.ModDB
@@ -24,7 +24,6 @@ defmodule Common.Schema.Mod do
   alias Ecto.Changeset
 
   @type id :: term()
-
   @type t :: %__MODULE__{
           id: id,
           name: String.t(),
@@ -34,7 +33,21 @@ defmodule Common.Schema.Mod do
           sse: ModFile.t() | nil,
           oldrim: ModFile.t() | nil,
           tags: [ModTag.t()] | Ecto.Association.NotLoaded.t()
-        }
+  }
+
+  @type change :: %{
+    optional(:name) => binary(),
+    optional(:desc) => binary(),
+    optional(:published) => binary(),
+    optional(:image) => binary(),
+    optional(:sse) => ModFile.change(),
+    optional(:oldrim) => ModFile.change()
+  }
+
+  @default %{
+    desc: "todo: add a description",
+    image: "no_image.jpg"
+  }
 
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
   schema "mod" do
@@ -45,18 +58,42 @@ defmodule Common.Schema.Mod do
 
     embeds_one(:oldrim, ModFile, on_replace: :delete)
     embeds_one(:sse, ModFile, on_replace: :delete)
-    many_to_many(:tags, ModTag, join_through: "mods_tags", unique: true, on_replace: :delete)
+    many_to_many(:tags, ModTag,
+      join_through: "mods_tags",
+      unique: true,
+      on_replace: :delete
+    )
   end
 
+  @doc false
   def changeset(mod, changes \\ %{}) do
+    changing = Map.keys(changes)
+
     mod
-    |> Repo.preload([:tags])
+    |> preload()
     |> Changeset.cast(changes, [:name, :desc, :published, :image])
     |> change_modfile(changes, :oldrim)
     |> change_modfile(changes, :sse)
     |> Changeset.put_assoc(:tags, get_tags(changes))
-    |> Changeset.validate_required([:name, :published])
+    |> Changeset.validate_required([:name, :desc, :published, :image])
     |> Changeset.unique_constraint(:name)
+  end
+
+  @doc """
+  Loads data, from other data.
+  `mods.tags` is filled, with that.
+  """
+  @spec preload(mod :: t) :: [ModTag.t]
+  def preload(mod) do
+    Repo.preload(mod, [:tags])
+  end
+
+  @doc """
+  Creates a new %Mod to be fed into `Repo.insert!/2` for example.
+  Sets default values, if they are not present in the arguments.
+  """
+  def new(changes \\ %{}) do
+    %__MODULE__{} |> changeset(Map.merge(@default, changes))
   end
 
   defp get_tags(changes) do
@@ -75,4 +112,5 @@ defmodule Common.Schema.Mod do
       Changeset.put_embed(cs, name, opts)
     end
   end
+
 end

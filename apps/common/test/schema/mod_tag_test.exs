@@ -20,8 +20,8 @@ defmodule Common.ModTagTest do
     end
 
     test "ModDB.list_tags/0 does return a list of %ModTag{}" do
-      ModDB.list_tags()
-      |> TestUtils.assert_purelist(Common.Schema.ModTag)
+      ModDB.list_tags() |> TestUtils.assert_purelist(ModTag)
     end
+
   end
 end
