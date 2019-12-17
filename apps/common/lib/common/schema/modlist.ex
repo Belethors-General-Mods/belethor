@@ -5,6 +5,7 @@ defmodule Common.Schema.Modlist do
   | Attribute | Meaning     |
   | ---------|:------------- |
   | `name` | the tag's name |
+  | `desc` | a description about what the list is all about |
   | `mods` | mods described with this tag |
   """
   use Ecto.Schema
@@ -19,6 +20,15 @@ defmodule Common.Schema.Modlist do
     mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
   }
 
+  @type changes :: %{
+    optional(:name) => String.t(),
+    optional(:desc) => String.t()
+  }
+
+  @default %{
+    desc: "TODO, add a description"
+  }
+
   @derive {Jason.Encoder, only: [:name, :desc]}
   schema "modlist" do
     field(:name, :string)
@@ -31,14 +41,22 @@ defmodule Common.Schema.Modlist do
     )
   end
 
+  @doc """
+  Creates a new %Modlist to be fed into `Repo.insert!/2` for example.
+  Sets default values, if they are not present in the arguments.
+  """
+  @spec new(changes :: changes()) :: t()
+  def new(changes) do
+    %__MODULE__{} |> changeset(Map.merge(@default, changes))
+  end
+
   @doc false
   def changeset(tag, attrs \\ %{}) do
     import Ecto.Changeset
-    changing = Map.keys(attrs)
 
     tag
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :desc])
+    |> validate_required([:name, :desc])
   end
 
 end

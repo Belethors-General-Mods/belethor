@@ -20,6 +20,8 @@ defmodule Common.Schema.ModFile do
     console_compat: bool
   }
 
+  @valid_changes %{}
+
   @derive {Jason.Encoder, only: [:console_compat, :nexus, :steam, :bethesda]}
   embedded_schema do
     field(:console_compat, :boolean)

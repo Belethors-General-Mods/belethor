@@ -111,9 +111,7 @@ defmodule Common.ModDB do
   @spec create_modlist(change :: Modlist.change)
   :: {:ok, Modlist.t} | {:error, Changeset.t(Modlist.t)}
   def create_modlist(change \\ %{}) do
-    %Modlist{}
-    |> Modlist.changeset(change)
-    |> Repo.insert()
+    Modlist.new(change) |> Repo.insert()
   end
 
   @doc """

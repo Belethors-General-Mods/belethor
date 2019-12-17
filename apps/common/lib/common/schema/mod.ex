@@ -21,6 +21,7 @@ defmodule Common.Schema.Mod do
   alias Common.Repo
   alias Common.Schema.ModFile
   alias Common.Schema.ModTag
+  alias Common.Utils
   alias Ecto.Changeset
 
   @type id :: term()
@@ -44,9 +45,23 @@ defmodule Common.Schema.Mod do
     optional(:oldrim) => ModFile.change()
   }
 
+  @type unclean_change :: %{
+    optional(binary) => binary() | unclean_change()
+  }
+
+  @valid_changes %{
+    "name" => :ok,
+    "desc" => :ok,
+    "published" => &Utils.to_bool/1,
+    "image" => :ok,
+    "sse" => &ModFile.clean_changes/1,
+    "oldrim" => &ModFile.clean_changes/1
+  }
+
   @default %{
     desc: "todo: add a description",
-    image: "no_image.jpg"
+    image: "no_image.jpg",
+    published: false
   }
 
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
@@ -65,10 +80,32 @@ defmodule Common.Schema.Mod do
     )
   end
 
-  @doc false
-  def changeset(mod, changes \\ %{}) do
-    changing = Map.keys(changes)
+  @doc """
+  """
+  @spec clean_changes(unclean :: unclean_change()) :: change()
+  def clean_changes(unclean) do
+    unclean
+    |> Map.to_list()
+    |> List.foldl(%{},
+    fn {attr, value}, acc ->
+      case Map.get(@valid_changes, attr) do
+        nil -> acc
+        found ->
+          clean_attr = String.to_atom(attr)
+          clean_value = case found do
+                          :ok -> value
+                          f when is_function(f, 1) -> f.(value)
+                        end
+          unless Map.has_key?(acc, clean_attr) do
+            Map.put(acc, clean_attr, clean_value)
+          end
+      end
+    end)
+  end
 
+  @doc false
+  @spec changeset(mod :: t(), changes :: change()) :: Changeset.t
+  def changeset(mod, changes \\ %{}) do
     mod
     |> preload()
     |> Changeset.cast(changes, [:name, :desc, :published, :image])
@@ -92,6 +129,7 @@ defmodule Common.Schema.Mod do
   Creates a new %Mod to be fed into `Repo.insert!/2` for example.
   Sets default values, if they are not present in the arguments.
   """
+  @spec new(changes :: change()) :: Changeset.t()
   def new(changes \\ %{}) do
     %__MODULE__{} |> changeset(Map.merge(@default, changes))
   end
