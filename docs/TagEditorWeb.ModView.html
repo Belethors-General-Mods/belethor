@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.19.3">
-    <title>WebsiteWeb.Router.Helpers — Belethor's General Mods v0.0.1-2</title>
+    <title>TagEditorWeb.ModView — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
     <script src="dist/sidebar_items-0d93bc0ca0.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
@@ -59,17 +59,14 @@ Belethor's General Mods      </h1>
 
       <h1>
         <small class="visible-xs">Belethor's General Mods v0.0.1-2</small>
-WebsiteWeb.Router.Helpers        
-          <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" title="View Source" class="view-source" rel="help">
+TagEditorWeb.ModView        
+          <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
       </h1>
 
 
-        <section id="moduledoc">
-<p>Module with named helpers generated from WebsiteWeb.Router.</p>
-        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -85,50 +82,44 @@ WebsiteWeb.Router.Helpers
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#page_path/2">page_path(conn_or_endpoint, action)</a>
+    <a href="#__phoenix_recompile__?/0">__phoenix_recompile__?()</a>
   </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#page_path/3">page_path(conn_or_endpoint, action, params)</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#page_url/2">page_url(conn_or_endpoint, action)</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#page_url/3">page_url(conn_or_endpoint, action, params)</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#path/2">path(data, path)</a>
-  </div>
-    <div class="summary-synopsis"><p>Generates the path information including any necessary prefix</p>
+    <div class="summary-synopsis"><p>Returns true whenever the list of templates changes in the filesystem</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#static_path/2">static_path(conn, path)</a>
+    <a href="#__resource__/0">__resource__()</a>
   </div>
-    <div class="summary-synopsis"><p>Generates path to a static asset given its file path</p>
+    <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#static_url/2">static_url(conn, path)</a>
+    <a href="#__templates__/0">__templates__()</a>
   </div>
-    <div class="summary-synopsis"><p>Generates url to a static asset given its file path</p>
+    <div class="summary-synopsis"><p>Returns the template root alongside all templates</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#url/1">url(data)</a>
+    <a href="#render/2">render(template, assigns \\ %{})</a>
   </div>
-    <div class="summary-synopsis"><p>Generates the connection/endpoint base URL without any path information</p>
+    <div class="summary-synopsis"><p>Renders the given template locally</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render_tags_small/1">render_tags_small(tags)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#template_not_found/2">template_not_found(template, assigns)</a>
+  </div>
+    <div class="summary-synopsis"><p>Callback invoked when no template is found.
+By default it raises but can be customized
+to render a particular template</p>
 </div>
 </div>
   </div>
@@ -142,14 +133,80 @@ WebsiteWeb.Router.Helpers
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="page_path/2">
+<section class="detail" id="__phoenix_recompile__?/0">
     <div class="detail-header">
-    <a href="#page_path/2" class="detail-link" title="Link to this function">
+    <a href="#__phoenix_recompile__?/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">page_path(conn_or_endpoint, action)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">__phoenix_recompile__?()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L1" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+          </div>
+  <section class="docstring">
+<p>Returns true whenever the list of templates changes in the filesystem.</p>
+  </section>
+</section>
+<section class="detail" id="__resource__/0">
+    <div class="detail-header">
+    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">__resource__()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+          </div>
+  <section class="docstring">
+<p>The resource name, as an atom, for this view</p>
+  </section>
+</section>
+<section class="detail" id="__templates__/0">
+    <div class="detail-header">
+    <a href="#__templates__/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">__templates__()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L1" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+          </div>
+  <section class="docstring">
+<p>Returns the template root alongside all templates.</p>
+  </section>
+</section>
+<section class="detail" id="render/2">
+  
+    <span id="render/1"></span>
+  <div class="detail-header">
+    <a href="#render/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render(template, assigns \\ %{})</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+          </div>
+  <section class="docstring">
+<p>Renders the given template locally.</p>
+  </section>
+</section>
+<section class="detail" id="render_tags_small/1">
+    <div class="detail-header">
+    <a href="#render_tags_small/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render_tags_small(tags)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L4" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -157,113 +214,26 @@ Functions          </h1>
   <section class="docstring">
   </section>
 </section>
-<section class="detail" id="page_path/3">
+<section class="detail" id="template_not_found/2">
     <div class="detail-header">
-    <a href="#page_path/3" class="detail-link" title="Link to this function">
+    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">page_path(conn_or_endpoint, action, params)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">template_not_found(template, assigns)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/mod_view.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
-          </div>
+        
+      <div class="specs">
+          <pre>template_not_found(<a href="https://hexdocs.pm/phoenix/1.4.0/Phoenix.Template.html#t:name/0">Phoenix.Template.name</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+      </div>
+  </div>
   <section class="docstring">
-  </section>
-</section>
-<section class="detail" id="page_url/2">
-    <div class="detail-header">
-    <a href="#page_url/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">page_url(conn_or_endpoint, action)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-  </section>
-</section>
-<section class="detail" id="page_url/3">
-    <div class="detail-header">
-    <a href="#page_url/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">page_url(conn_or_endpoint, action, params)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-  </section>
-</section>
-<section class="detail" id="path/2">
-    <div class="detail-header">
-    <a href="#path/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">path(data, path)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Generates the path information including any necessary prefix.</p>
-  </section>
-</section>
-<section class="detail" id="static_path/2">
-    <div class="detail-header">
-    <a href="#static_path/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">static_path(conn, path)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Generates path to a static asset given its file path.</p>
-  </section>
-</section>
-<section class="detail" id="static_url/2">
-    <div class="detail-header">
-    <a href="#static_url/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">static_url(conn, path)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Generates url to a static asset given its file path.</p>
-  </section>
-</section>
-<section class="detail" id="url/1">
-    <div class="detail-header">
-    <a href="#url/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">url(data)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/website/lib/website_web/router.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Generates the connection/endpoint base URL without any path information.</p>
+<p>Callback invoked when no template is found.
+By default it raises but can be customized
+to render a particular template.</p>
   </section>
 </section>
           </div>

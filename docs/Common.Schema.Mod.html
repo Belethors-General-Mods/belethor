@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>Common.Schema.Mod — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-8c76153db8.js"></script>
+    <script src="dist/sidebar_items-0d93bc0ca0.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -69,6 +69,38 @@ Common.Schema.Mod
 
         <section id="moduledoc">
 <p>Store information about a mod</p>
+<table>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left">Attribute</th><th style="text-align: left">Meaning</th>
+</tr>
+</thead>
+<tr>
+<td style="text-align: left"><code class="inline">name</code></td><td style="text-align: left">the mods name</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">desc</code></td><td style="text-align: left">the mods description</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">published</code></td><td style="text-align: left">wether the mod should be publicly accessibly</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">image</code></td><td style="text-align: left">an url to an image</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">sse</code></td><td style="text-align: left">a number of links for its Skyrim Special Edition implementation</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">oldrim</code></td><td style="text-align: left">a number of links for the OG Skyrim Engine released in 11.11.2011</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">tags</code></td><td style="text-align: left">the number of tags</td>
+</tr>
+</table>
         </section>
 
         <section id="summary" class="details-list">
@@ -79,23 +111,163 @@ Common.Schema.Mod
             </a>
             Summary
           </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:change/0">change()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:id/0">id()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:unclean_change/0">unclean_change()</a>
+  </div>
+</div>
+  </div>
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#changeset/1">changeset(mod)</a>
+    <a href="#clean_changes/1">clean_changes(unclean)</a>
   </div>
+    <div class="summary-synopsis"></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#changeset/2">changeset(mod, changes)</a>
+    <a href="#new/1">new(changes \\ %{})</a>
   </div>
+    <div class="summary-synopsis"><p>Creates a new %Mod to be fed into <code class="inline">Repo.insert!/2</code> for example.
+Sets default values, if they are not present in the arguments</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload/1">preload(mod)</a>
+  </div>
+    <div class="summary-synopsis"><p>Loads data, from other data.
+<code class="inline">mods.tags</code> is filled, with that</p>
+</div>
 </div>
   </div>
         </section>
 
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:change/0">
+    <div class="detail-header">
+    <a href="#t:change/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">change()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L39" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>change() :: %{
+  optional(:name) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(:desc) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(:published) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(:image) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(:sse) => <a href="Common.Schema.ModFile.html#t:change/0">Common.Schema.ModFile.change</a>(),
+  optional(:oldrim) => <a href="Common.Schema.ModFile.html#t:change/0">Common.Schema.ModFile.change</a>()
+}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:id/0">
+    <div class="detail-header">
+    <a href="#t:id/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">id()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L27" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>id() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:t/0">
+    <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">t()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L28" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>t() :: %Common.Schema.Mod{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  desc: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  id: <a href="#t:id/0">id</a>(),
+  image: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  name: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  oldrim: <a href="Common.Schema.ModFile.html#t:t/0">Common.Schema.ModFile.t</a>() | nil,
+  published: bool(),
+  sse: <a href="Common.Schema.ModFile.html#t:t/0">Common.Schema.ModFile.t</a>() | nil,
+  tags: [<a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()] | <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Association.NotLoaded.html#t:t/0">Ecto.Association.NotLoaded.t</a>()
+}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:unclean_change/0">
+    <div class="detail-header">
+    <a href="#t:unclean_change/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">unclean_change()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L48" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>unclean_change() :: %{optional(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="#t:unclean_change/0">unclean_change</a>()}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+          </div>
+        </section>
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
@@ -104,34 +276,67 @@ Common.Schema.Mod
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="changeset/1">
+<section class="detail" id="clean_changes/1">
     <div class="detail-header">
-    <a href="#changeset/1" class="detail-link" title="Link to this function">
+    <a href="#clean_changes/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(mod)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L28" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">clean_changes(unclean)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L86" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
-          </div>
+        
+      <div class="specs">
+          <pre>clean_changes(unclean :: <a href="#t:unclean_change/0">unclean_change</a>()) :: <a href="#t:change/0">change</a>()</pre>
+      </div>
+  </div>
   <section class="docstring">
   </section>
 </section>
-<section class="detail" id="changeset/2">
-    <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
+<section class="detail" id="new/1">
+  
+    <span id="new/0"></span>
+  <div class="detail-header">
+    <a href="#new/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(mod, changes)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L36" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">new(changes \\ %{})</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L133" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
-          </div>
+        
+      <div class="specs">
+          <pre>new(changes :: <a href="#t:change/0">change</a>()) :: <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+      </div>
+  </div>
   <section class="docstring">
+<p>Creates a new %Mod to be fed into <code class="inline">Repo.insert!/2</code> for example.
+Sets default values, if they are not present in the arguments.</p>
+  </section>
+</section>
+<section class="detail" id="preload/1">
+    <div class="detail-header">
+    <a href="#preload/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload(mod)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L124" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>preload(mod :: <a href="#t:t/0">t</a>()) :: [<a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Loads data, from other data.
+<code class="inline">mods.tags</code> is filled, with that.</p>
   </section>
 </section>
           </div>

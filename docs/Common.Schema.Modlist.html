@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.19.3">
-    <title>TagEditorWeb.PageView — Belethor's General Mods v0.0.1-2</title>
+    <title>Common.Schema.Modlist — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
     <script src="dist/sidebar_items-0d93bc0ca0.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
@@ -59,14 +59,37 @@ Belethor's General Mods      </h1>
 
       <h1>
         <small class="visible-xs">Belethor's General Mods v0.0.1-2</small>
-TagEditorWeb.PageView        
-          <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L1" title="View Source" class="view-source" rel="help">
+Common.Schema.Modlist        
+          <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
       </h1>
 
 
+        <section id="moduledoc">
+<p>Stores lists of mods</p>
+<table>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left">Attribute</th><th style="text-align: left">Meaning</th>
+</tr>
+</thead>
+<tr>
+<td style="text-align: left"><code class="inline">name</code></td><td style="text-align: left">the tag&#39;s name</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">desc</code></td><td style="text-align: left">a description about what the list is all about</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="inline">mods</code></td><td style="text-align: left">mods described with this tag</td>
+</tr>
+</table>
+        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -76,50 +99,114 @@ TagEditorWeb.PageView
             </a>
             Summary
           </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:changes/0">changes()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:id/0">id()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+</div>
+  </div>
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#__phoenix_recompile__?/0">__phoenix_recompile__?()</a>
+    <a href="#new/1">new(changes)</a>
   </div>
-    <div class="summary-synopsis"><p>Returns true whenever the list of templates changes in the filesystem</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#__resource__/0">__resource__()</a>
-  </div>
-    <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#__templates__/0">__templates__()</a>
-  </div>
-    <div class="summary-synopsis"><p>Returns the template root alongside all templates</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#render/2">render(template, assigns \\ %{})</a>
-  </div>
-    <div class="summary-synopsis"><p>Renders the given template locally</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#template_not_found/2">template_not_found(template, assigns)</a>
-  </div>
-    <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template</p>
+    <div class="summary-synopsis"><p>Creates a new %Modlist to be fed into <code class="inline">Repo.insert!/2</code> for example.
+Sets default values, if they are not present in the arguments</p>
 </div>
 </div>
   </div>
         </section>
 
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:changes/0">
+    <div class="detail-header">
+    <a href="#t:changes/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">changes()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L23" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>changes() :: %{optional(:name) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), optional(:desc) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:id/0">
+    <div class="detail-header">
+    <a href="#t:id/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">id()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L15" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>id() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:t/0">
+    <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">t()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L16" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>t() :: %Common.Schema.Modlist{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  desc: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  id: <a href="#t:id/0">id</a>(),
+  mods: [<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()] | <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Association.NotLoaded.html#t:t/0">Ecto.Association.NotLoaded.t</a>(),
+  name: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+          </div>
+        </section>
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
@@ -128,92 +215,25 @@ to render a particular template</p>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="__phoenix_recompile__?/0">
+<section class="detail" id="new/1">
     <div class="detail-header">
-    <a href="#__phoenix_recompile__?/0" class="detail-link" title="Link to this function">
+    <a href="#new/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">__phoenix_recompile__?()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Returns true whenever the list of templates changes in the filesystem.</p>
-  </section>
-</section>
-<section class="detail" id="__resource__/0">
-    <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">__resource__()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L2" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>The resource name, as an atom, for this view</p>
-  </section>
-</section>
-<section class="detail" id="__templates__/0">
-    <div class="detail-header">
-    <a href="#__templates__/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">__templates__()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L1" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Returns the template root alongside all templates.</p>
-  </section>
-</section>
-<section class="detail" id="render/2">
-  
-    <span id="render/1"></span>
-  <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">render(template, assigns \\ %{})</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L2" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-          </div>
-  <section class="docstring">
-<p>Renders the given template locally.</p>
-  </section>
-</section>
-<section class="detail" id="template_not_found/2">
-    <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">template_not_found(template, assigns)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/tag_editor/lib/tag_editor_web/views/page_view.ex#L2" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">new(changes)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L49" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
         
       <div class="specs">
-          <pre>template_not_found(<a href="https://hexdocs.pm/phoenix/1.4.0/Phoenix.Template.html#t:name/0">Phoenix.Template.name</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+          <pre>new(changes :: <a href="#t:changes/0">changes</a>()) :: <a href="#t:t/0">t</a>()</pre>
       </div>
   </div>
   <section class="docstring">
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>
+<p>Creates a new %Modlist to be fed into <code class="inline">Repo.insert!/2</code> for example.
+Sets default values, if they are not present in the arguments.</p>
   </section>
 </section>
           </div>
