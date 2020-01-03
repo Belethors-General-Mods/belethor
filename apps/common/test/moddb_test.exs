@@ -126,19 +126,19 @@ defmodule Common.ModDBTest do
     test "ModDB CRUD operations on mods" do
       assert {:ok, %Mod{} = m1} = ModDB.create_mod(@valid_attrs)
       id = m1.id
-      assert m1 == get_mod!(id)
+      assert m1 == ModDB.get_mod!(id)
 
       assert {:ok, %Mod{} = m2} = ModDB.update_mod(m1, @updated_attrs)
-      assert m2 == get_mod!(id)
+      assert m2 == ModDB.get_mod!(id)
 
       assert {:ok, %Mod{} = m3} = ModDB.update_mod(m2, @valid_modfile)
-      assert m3 == get_mod!(id)
+      assert m3 == ModDB.get_mod!(id)
 
       assert {:ok, %Mod{} = m4} = ModDB.update_mod(m3, @updated_modfile)
-      assert m4 == get_mod!(id)
+      assert m4 == ModDB.get_mod!(id)
 
       assert {:ok, %Mod{} = m5} = ModDB.update_mod(m4, @clean_modfile)
-      assert m5 == get_mod!(id)
+      assert m5 == ModDB.get_mod!(id)
 
       # assert changed attributes
       assert m2.name == "some new name"
@@ -157,7 +157,7 @@ defmodule Common.ModDBTest do
       assert m5.sse == nil
 
       # assert deleted mod
-      assert {:ok, %Mod{}} == ModDB.delete_mod(m5)
+      assert {:ok, %Mod{}} = ModDB.delete_mod(m5)
     end
 
     test "ModDB.change_mod/1" do

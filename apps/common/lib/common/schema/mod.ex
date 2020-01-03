@@ -100,7 +100,7 @@ defmodule Common.Schema.Mod do
     fn embed_key, changeset ->
       case Map.get(changeset.data, embed_key) do
         nil -> Changeset.put_embed(changeset, embed_key, changes[embed_key])
-        val -> Changeset.cast_embed(changeset, embed_key, changes[embed_key])
+        val -> Changeset.cast_embed(changeset, embed_key)
       end
     end)
 #   |> Changeset.put_assoc(:tags, get_tags(changes))
