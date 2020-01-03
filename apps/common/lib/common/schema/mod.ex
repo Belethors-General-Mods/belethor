@@ -45,17 +45,13 @@ defmodule Common.Schema.Mod do
     optional(:oldrim) => ModFile.change()
   }
 
-  @type unclean_change :: %{
-    optional(binary) => binary() | unclean_change()
-  }
-
   @valid_changes %{
-    "name" => :ok,
-    "desc" => :ok,
-    "published" => &Utils.to_bool/1,
-    "image" => :ok,
-    "sse" => &ModFile.clean_changes/1,
-    "oldrim" => &ModFile.clean_changes/1
+    "name" => {:name, &Utils.to_string/1},
+    "desc" => {:desc, &Utils.to_string/1},
+    "published" => {:published, &Utils.to_bool/1},
+    "image" => {:image, &Utils.to_bool/1},
+    "sse" => {:sse, &ModFile.clean_changes/1},
+    "oldrim" => {:oldrim, &ModFile.clean_changes/1}
   }
 
   @default %{
@@ -63,6 +59,7 @@ defmodule Common.Schema.Mod do
     image: "no_image.jpg",
     published: false
   }
+
 
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
   schema "mod" do
@@ -81,39 +78,34 @@ defmodule Common.Schema.Mod do
   end
 
   @doc """
+  if you want to to change the tags, this won't be enough.
   """
-  @spec clean_changes(unclean :: unclean_change()) :: change()
-  def clean_changes(unclean) do
-    unclean
-    |> Map.to_list()
-    |> List.foldl(%{},
-    fn {attr, value}, acc ->
-      case Map.get(@valid_changes, attr) do
-        nil -> acc
-        found ->
-          clean_attr = String.to_atom(attr)
-          clean_value = case found do
-                          :ok -> value
-                          f when is_function(f, 1) -> f.(value)
-                        end
-          unless Map.has_key?(acc, clean_attr) do
-            Map.put(acc, clean_attr, clean_value)
-          end
-      end
-    end)
-  end
+  @spec clean_changes(unclean :: Common.unclean_change()) :: change()
+  def clean_changes(unclean), do: Utils.clean_changes(unclean, @valid_changes)
 
   @doc false
   @spec changeset(mod :: t(), changes :: change()) :: Changeset.t
   def changeset(mod, changes \\ %{}) do
-    mod
-    |> preload()
-    |> Changeset.cast(changes, [:name, :desc, :published, :image])
-    |> change_modfile(changes, :oldrim)
-    |> change_modfile(changes, :sse)
-    |> Changeset.put_assoc(:tags, get_tags(changes))
-    |> Changeset.validate_required([:name, :desc, :published, :image])
-    |> Changeset.unique_constraint(:name)
+    fields = [:name, :desc, :published, :image] |> MapSet.new
+    embeds = [:oldrim, :sse] |> MapSet.new
+    affected = Map.keys(changes) |> MapSet.new
+    affected_embeds = MapSet.intersection(embeds, affected)
+    affected_fields = MapSet.intersection(fields, affected)
+
+    cs = Changeset.cast(mod, changes, MapSet.to_list(affected_fields))
+
+    cs = affected_embeds
+    |> MapSet.to_list
+    |> List.foldl(cs,
+    fn embed_key, changeset ->
+      case Map.get(changeset.data, embed_key) do
+        nil -> Changeset.put_embed(changeset, embed_key, changes[embed_key])
+        val -> Changeset.cast_embed(changeset, embed_key, changes[embed_key])
+      end
+    end)
+#   |> Changeset.put_assoc(:tags, get_tags(changes))
+#   |> Changeset.validate_required([:name, :desc, :published, :image])
+#   |> Changeset.unique_constraint(:name)
   end
 
   @doc """

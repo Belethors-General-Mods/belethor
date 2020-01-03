@@ -92,7 +92,7 @@ defmodule Common.ModDB do
   Returns the list of _all_ modlists.
   """
   @spec list_modlists() :: [Modlist.t]
-  def list_modlists, do: Repo.all(Modlist)
+  def list_modlists(), do: Repo.all(Modlist)
 
 
   @doc """
