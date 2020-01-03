@@ -13,12 +13,12 @@ defmodule Common.Schema.ModFile do
   use Ecto.Schema
 
   @type t :: %__MODULE__{
-    id: term(),
-    steam: String.t(),
-    nexus: String.t(),
-    bethesda: String.t(),
-    console_compat: bool
-  }
+          id: term(),
+          steam: String.t(),
+          nexus: String.t(),
+          bethesda: String.t(),
+          console_compat: bool
+        }
 
   @valid_changes %{}
 

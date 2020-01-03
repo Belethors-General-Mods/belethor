@@ -8,13 +8,12 @@ defmodule Common.ModDBTest do
   alias Common.Schema.Modlist
 
   describe "Modlist" do
-
-    @valid_mod %{name: "I am here to test mod lists",  published: false}
+    @valid_mod %{name: "I am here to test mod lists", published: false}
     @valid_attrs %{name: "some list's name", desc: "some description, what this is about"}
     @valid_update %{name: "just a test"}
     @invalid_attrs %{name: nil}
 
-   test "ModDB.create_modlist/1 with valid data, returns a %Modlist{}" do
+    test "ModDB.create_modlist/1 with valid data, returns a %Modlist{}" do
       assert {:ok, %Modlist{} = ml1} = ModDB.create_modlist(@valid_attrs)
       assert ml1.name == "some list's name"
     end
@@ -37,11 +36,11 @@ defmodule Common.ModDBTest do
     end
 
     test "CRUD Modlist tests" do
-      assert {:ok, %Modlist{} = l0 } = ModDB.create_modlist(@valid_attrs)
+      assert {:ok, %Modlist{} = l0} = ModDB.create_modlist(@valid_attrs)
       id = l0.id
       assert l0 == ModDB.get_modlist!(id)
 
-      assert {:ok, %Modlist{} = l1 } = ModDB.update_modlist(l0, @valid_update)
+      assert {:ok, %Modlist{} = l1} = ModDB.update_modlist(l0, @valid_update)
       assert l1 == ModDB.get_modlist!(id)
 
       assert {:ok, %Modlist{}} = ModDB.delete_modlist(l1)
@@ -71,11 +70,9 @@ defmodule Common.ModDBTest do
     test "ModDB.list_tags/0 does return a list of %ModTag{}" do
       ModDB.list_tags() |> TestUtils.assert_purelist(ModTag)
     end
-
   end
 
   describe "Mod" do
-
     defp get_mod!(id) do
       ModDB.get_mod!(id) |> Mod.preload()
     end
@@ -165,7 +162,5 @@ defmodule Common.ModDBTest do
       assert (%Ecto.Changeset{} = cs) = ModDB.change_mod(m)
       assert cs.data == m
     end
-
   end
-
 end

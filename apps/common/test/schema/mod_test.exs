@@ -20,11 +20,13 @@ defmodule Common.ModTest do
         "desc" => "test desc",
         "published" => "false"
       }
+
       expected = %{
         name: "test name",
         desc: "test desc",
         published: false
       }
+
       assert expected == Mod.clean_changes(input)
     end
   end

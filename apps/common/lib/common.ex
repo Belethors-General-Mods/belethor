@@ -4,7 +4,6 @@ defmodule Common do
   """
 
   @type unclean_change :: %{
-    optional(binary) => binary() | unclean_change()
-  }
-
+          optional(binary) => binary() | unclean_change()
+        }
 end

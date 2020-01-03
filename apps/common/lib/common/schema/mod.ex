@@ -34,16 +34,16 @@ defmodule Common.Schema.Mod do
           sse: ModFile.t() | nil,
           oldrim: ModFile.t() | nil,
           tags: [ModTag.t()] | Ecto.Association.NotLoaded.t()
-  }
+        }
 
   @type change :: %{
-    optional(:name) => binary(),
-    optional(:desc) => binary(),
-    optional(:published) => binary(),
-    optional(:image) => binary(),
-    optional(:sse) => ModFile.change(),
-    optional(:oldrim) => ModFile.change()
-  }
+          optional(:name) => binary(),
+          optional(:desc) => binary(),
+          optional(:published) => binary(),
+          optional(:image) => binary(),
+          optional(:sse) => ModFile.change(),
+          optional(:oldrim) => ModFile.change()
+        }
 
   @valid_changes %{
     "name" => {:name, &Utils.to_string/1},
@@ -60,7 +60,6 @@ defmodule Common.Schema.Mod do
     published: false
   }
 
-
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
   schema "mod" do
     field(:name, :string)
@@ -70,6 +69,7 @@ defmodule Common.Schema.Mod do
 
     embeds_one(:oldrim, ModFile, on_replace: :delete)
     embeds_one(:sse, ModFile, on_replace: :delete)
+
     many_to_many(:tags, ModTag,
       join_through: "mods_tags",
       unique: true,
@@ -84,35 +84,39 @@ defmodule Common.Schema.Mod do
   def clean_changes(unclean), do: Utils.clean_changes(unclean, @valid_changes)
 
   @doc false
-  @spec changeset(mod :: t(), changes :: change()) :: Changeset.t
+  @spec changeset(mod :: t(), changes :: change()) :: Changeset.t()
   def changeset(mod, changes \\ %{}) do
-    fields = [:name, :desc, :published, :image] |> MapSet.new
-    embeds = [:oldrim, :sse] |> MapSet.new
-    affected = Map.keys(changes) |> MapSet.new
+    fields = [:name, :desc, :published, :image] |> MapSet.new()
+    embeds = [:oldrim, :sse] |> MapSet.new()
+    affected = Map.keys(changes) |> MapSet.new()
     affected_embeds = MapSet.intersection(embeds, affected)
     affected_fields = MapSet.intersection(fields, affected)
 
     cs = Changeset.cast(mod, changes, MapSet.to_list(affected_fields))
 
-    cs = affected_embeds
-    |> MapSet.to_list
-    |> List.foldl(cs,
-    fn embed_key, changeset ->
-      case Map.get(changeset.data, embed_key) do
-        nil -> Changeset.put_embed(changeset, embed_key, changes[embed_key])
-        val -> Changeset.cast_embed(changeset, embed_key)
-      end
-    end)
-#   |> Changeset.put_assoc(:tags, get_tags(changes))
-#   |> Changeset.validate_required([:name, :desc, :published, :image])
-#   |> Changeset.unique_constraint(:name)
+    cs =
+      affected_embeds
+      |> MapSet.to_list()
+      |> List.foldl(
+        cs,
+        fn embed_key, changeset ->
+          case Map.get(changeset.data, embed_key) do
+            nil -> Changeset.put_embed(changeset, embed_key, changes[embed_key])
+            val -> Changeset.cast_embed(changeset, embed_key)
+          end
+        end
+      )
+
+    #   |> Changeset.put_assoc(:tags, get_tags(changes))
+    #   |> Changeset.validate_required([:name, :desc, :published, :image])
+    #   |> Changeset.unique_constraint(:name)
   end
 
   @doc """
   Loads data, from other data.
   `mods.tags` is filled, with that.
   """
-  @spec preload(mod :: t) :: [ModTag.t]
+  @spec preload(mod :: t) :: [ModTag.t()]
   def preload(mod) do
     Repo.preload(mod, [:tags])
   end
@@ -142,5 +146,4 @@ defmodule Common.Schema.Mod do
       Changeset.put_embed(cs, name, opts)
     end
   end
-
 end

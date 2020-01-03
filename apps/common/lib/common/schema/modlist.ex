@@ -14,16 +14,16 @@ defmodule Common.Schema.Modlist do
 
   @type id :: term()
   @type t :: %__MODULE__{
-    id: id,
-    name: String.t(),
-    desc: String.t(),
-    mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
-  }
+          id: id,
+          name: String.t(),
+          desc: String.t(),
+          mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
+        }
 
   @type changes :: %{
-    optional(:name) => String.t(),
-    optional(:desc) => String.t()
-  }
+          optional(:name) => String.t(),
+          optional(:desc) => String.t()
+        }
 
   @default %{
     desc: "TODO, add a description"
@@ -58,6 +58,4 @@ defmodule Common.Schema.Modlist do
     |> cast(attrs, [:name, :desc])
     |> validate_required([:name, :desc])
   end
-
 end
-

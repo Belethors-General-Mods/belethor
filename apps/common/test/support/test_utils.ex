@@ -12,5 +12,4 @@ defmodule Common.TestUtils do
       assert Map.get(el, :__struct__) == module
     end)
   end
-
 end

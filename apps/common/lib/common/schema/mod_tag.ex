@@ -14,14 +14,15 @@ defmodule Common.Schema.ModTag do
 
   @type id :: term()
   @type t :: %__MODULE__{
-    id: id,
-    name: String.t(),
-    mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
-  }
+          id: id,
+          name: String.t(),
+          mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
+        }
 
   @type change :: %{
-    optional(:name) => String.t(), # change the name
-  }
+          # change the name
+          optional(:name) => String.t()
+        }
 
   @derive {Jason.Encoder, only: [:id, :name]}
   schema "mod_tag" do

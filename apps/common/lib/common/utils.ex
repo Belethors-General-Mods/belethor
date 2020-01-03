@@ -13,29 +13,33 @@ defmodule Common.Utils do
   end
 
   @type valid_changes() :: %{
-    optional(atom) => {atom(), (term() -> term())}
-  }
+          optional(atom) => {atom(), (term() -> term())}
+        }
 
   @type change() :: %{
-    optional(atom) => term()
-  }
+          optional(atom) => term()
+        }
 
   @doc """
   Clean changes from a maybe dirty map (with unexpected keys for example), to a sanitized.
   """
-  @spec clean_changes(unclean :: Common.unclean_change(), vc:: valid_changes()) :: change()
+  @spec clean_changes(unclean :: Common.unclean_change(), vc :: valid_changes()) :: change()
   def clean_changes(unclean, vc) do
     unclean
     |> Map.to_list()
-    |> List.foldl(%{},
-    fn {attr, value}, acc ->
-      case Map.get(vc, attr, :notfound) do
-        :notfound -> acc
-        {clean_attr, trans} ->
-          clean_value = trans.(value)
-          Map.put(acc, clean_attr, clean_value)
+    |> List.foldl(
+      %{},
+      fn {attr, value}, acc ->
+        case Map.get(vc, attr, :notfound) do
+          :notfound ->
+            acc
+
+          {clean_attr, trans} ->
+            clean_value = trans.(value)
+            Map.put(acc, clean_attr, clean_value)
+        end
       end
-    end)
+    )
   end
 
   @doc """
@@ -54,5 +58,4 @@ defmodule Common.Utils do
       "false" -> false
     end
   end
-
 end
