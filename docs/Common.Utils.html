@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>Common.Utils — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-0d93bc0ca0.js"></script>
+    <script src="dist/sidebar_items-ab5664d6ff.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -79,10 +79,32 @@ Common.Utils
             </a>
             Summary
           </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:change/0">change()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:valid_changes/0">valid_changes()</a>
+  </div>
+</div>
+  </div>
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#clean_changes/2">clean_changes(unclean, vc)</a>
+  </div>
+    <div class="summary-synopsis"><p>Clean changes from a maybe dirty map (with unexpected keys for example), to a sanitized</p>
+</div>
+</div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#debug/1">debug(msg)</a>
@@ -95,9 +117,65 @@ Common.Utils
     <a href="#to_bool/1">to_bool(input)</a>
   </div>
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_string/1">to_string(input)</a>
+  </div>
+    <div class="summary-synopsis"><p>this ensures you get a binary string back.
+only accepts binary inputs for now, duh</p>
+</div>
+</div>
   </div>
         </section>
 
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:change/0">
+    <div class="detail-header">
+    <a href="#t:change/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">change()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L19" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>change() :: %{optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:valid_changes/0">
+    <div class="detail-header">
+    <a href="#t:valid_changes/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">valid_changes()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L15" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>valid_changes() :: %{optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) => {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), (<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>() -> <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>())}}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+          </div>
+        </section>
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
@@ -106,6 +184,27 @@ Common.Utils
             </a>
 Functions          </h1>
           <div class="functions-list">
+<section class="detail" id="clean_changes/2">
+    <div class="detail-header">
+    <a href="#clean_changes/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">clean_changes(unclean, vc)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L27" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>clean_changes(unclean :: <a href="Common.html#t:unclean_change/0">Common.unclean_change</a>(), vc :: <a href="#t:valid_changes/0">valid_changes</a>()) ::
+  <a href="#t:change/0">change</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Clean changes from a maybe dirty map (with unexpected keys for example), to a sanitized.</p>
+  </section>
+</section>
 <section class="detail" id="debug/1">
     <div class="detail-header">
     <a href="#debug/1" class="detail-link" title="Link to this macro">
@@ -132,7 +231,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">to_bool(input)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L16" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L51" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -142,6 +241,27 @@ Functions          </h1>
       </div>
   </div>
   <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="to_string/1">
+    <div class="detail-header">
+    <a href="#to_string/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">to_string(input)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/utils.ex#L46" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>to_string(input :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>this ensures you get a binary string back.
+only accepts binary inputs for now, duh.</p>
   </section>
 </section>
           </div>

@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>Common.Schema.Mod — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-0d93bc0ca0.js"></script>
+    <script src="dist/sidebar_items-ab5664d6ff.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -130,11 +130,6 @@ Common.Schema.Mod
     <a href="#t:t/0">t()</a>
   </div>
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:unclean_change/0">unclean_change()</a>
-  </div>
-</div>
   </div>
   <div class="summary-functions summary">
     <h2>
@@ -144,7 +139,8 @@ Common.Schema.Mod
   <div class="summary-signature">
     <a href="#clean_changes/1">clean_changes(unclean)</a>
   </div>
-    <div class="summary-synopsis"></div>
+    <div class="summary-synopsis"><p>if you want to to change the tags, this won&#39;t be enough</p>
+</div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -247,25 +243,6 @@ Types          </h1>
   <section class="docstring">
   </section>
 </section>
-<section class="detail" id="t:unclean_change/0">
-    <div class="detail-header">
-    <a href="#t:unclean_change/0" class="detail-link" title="Link to this type">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature">unclean_change()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L48" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-        
-      <div class="specs">
-          <pre>unclean_change() :: %{optional(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="#t:unclean_change/0">unclean_change</a>()}</pre>
-      </div>
-  </div>
-  <section class="docstring">
-  </section>
-</section>
           </div>
         </section>
         <section id="functions" class="details-list">
@@ -283,16 +260,17 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">clean_changes(unclean)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L86" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L84" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
         
       <div class="specs">
-          <pre>clean_changes(unclean :: <a href="#t:unclean_change/0">unclean_change</a>()) :: <a href="#t:change/0">change</a>()</pre>
+          <pre>clean_changes(unclean :: <a href="Common.html#t:unclean_change/0">Common.unclean_change</a>()) :: <a href="#t:change/0">change</a>()</pre>
       </div>
   </div>
   <section class="docstring">
+<p>if you want to to change the tags, this won&#39;t be enough.</p>
   </section>
 </section>
 <section class="detail" id="new/1">
@@ -304,7 +282,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">new(changes \\ %{})</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L133" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L125" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -325,7 +303,7 @@ Sets default values, if they are not present in the arguments.</p>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">preload(mod)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L124" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L116" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
