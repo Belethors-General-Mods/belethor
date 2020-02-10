@@ -42,7 +42,8 @@ defmodule Common.Schema.Mod do
           optional(:published) => binary(),
           optional(:image) => binary(),
           optional(:sse) => ModFile.change(),
-          optional(:oldrim) => ModFile.change()
+          optional(:oldrim) => ModFile.change(),
+          optional(:tags) => tag_change()
         }
 
   @valid_changes %{
@@ -51,13 +52,20 @@ defmodule Common.Schema.Mod do
     "published" => {:published, &Utils.to_bool/1},
     "image" => {:image, &Utils.to_bool/1},
     "sse" => {:sse, &ModFile.clean_changes/1},
-    "oldrim" => {:oldrim, &ModFile.clean_changes/1}
+    "oldrim" => {:oldrim, &ModFile.clean_changes/1},
+    "tags" => {:tags, &__MODULE__.clean_tag_changes/1}
   }
 
   @default %{
     desc: "todo: add a description",
     image: "no_image.jpg",
     published: false
+  }
+
+  @type tag_change :: [ {:add, ModTag.t()} | {:delete, ModTag.t()} ]
+  @valid_type_changes %{
+    "add" => {:add, &__MODULE__.ensure_tag!/1},
+    "delete" => {:delete, &__MODULE__.ensure_tag!/1}
   }
 
   @derive {Jason.Encoder, only: [:id, :name, :desc, :published, :image, :oldrim, :sse, :tags]}
@@ -83,8 +91,13 @@ defmodule Common.Schema.Mod do
   @spec clean_changes(unclean :: Common.unclean_change()) :: change()
   def clean_changes(unclean), do: Utils.clean_changes(unclean, @valid_changes)
 
+  @spec clean_tag_changes(unclean :: Common.unclean_change()) :: tag_change()
+  def clean_tag_changes(unclean) do
+    :todo
+  end
+
   @doc false
-  @spec changeset(mod :: t(), changes :: change()) :: Changeset.t()
+  @spec changeset(mod :: t() | Changeset.t(), changes :: change()) :: Changeset.t()
   def changeset(mod, changes \\ %{}) do
     fields = [:name, :desc, :published, :image] |> MapSet.new()
     embeds = [:oldrim, :sse] |> MapSet.new()
@@ -92,12 +105,13 @@ defmodule Common.Schema.Mod do
     affected_embeds = MapSet.intersection(embeds, affected)
     affected_fields = MapSet.intersection(fields, affected)
 
+    # set simple fields into changeset
     cs = Changeset.cast(mod, changes, MapSet.to_list(affected_fields))
 
+    # set the embeded fields
     cs =
-      affected_embeds
-      |> MapSet.to_list()
-      |> List.foldl(
+      Enum.reduce(
+        affected_embeds,
         cs,
         fn embed_key, changeset ->
           case Map.get(changeset.data, embed_key) do
@@ -107,9 +121,22 @@ defmodule Common.Schema.Mod do
         end
       )
 
-    #   |> Changeset.put_assoc(:tags, get_tags(changes))
-    #   |> Changeset.validate_required([:name, :desc, :published, :image])
-    #   |> Changeset.unique_constraint(:name)
+    # handle the assoc on tags
+    if MapSet.member?(affected, :tags) do
+      cs = Enum.reduce(
+        changes.tags,
+        cs,
+        fn {:add, tag} -> :todo # Changeset.put_assoc(fucking)
+          {:delete, tag} -> :todo # remove tag assoc call
+        end
+      )
+    end
+
+    # TODO
+    # |> Changeset.validate_required([:name, :desc, :published, :image])
+    # |> Changeset.unique_constraint(:name)
+
+    cs
   end
 
   @doc """
@@ -129,6 +156,9 @@ defmodule Common.Schema.Mod do
   def new(changes \\ %{}) do
     %__MODULE__{} |> changeset(Map.merge(@default, changes))
   end
+
+  defp ensure_tag!(%ModTag{} = t), do: t
+  defp ensure_tag!(id), do: ModDB.get_tag!(id)
 
   defp get_tags(changes) do
     case Map.get(changes, "tags") do

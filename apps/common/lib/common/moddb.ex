@@ -101,7 +101,7 @@ defmodule Common.ModDB do
           {:ok, Modlist.t()} | {:error, Changeset.t(Modlist.t())}
   def add_mod_to_list(list, _mod) do
     cs = Modlist.changeset(list)
-    :todo
+    {:ok}
   end
 
   @doc """

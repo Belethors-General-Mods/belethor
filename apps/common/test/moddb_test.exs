@@ -32,6 +32,7 @@ defmodule Common.ModDBTest do
       assert {:ok, l1} = ModDB.add_mod_to_list(mod, l0)
       assert l0.name == l1.name
       assert l0.desc == l1.desc
+      assert l1 == ModDB.get_modlist(l0.id)
       assert mod in l1.mods
     end
 

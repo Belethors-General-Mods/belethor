@@ -35,6 +35,9 @@ defmodule Common.Schema.ModTag do
     )
   end
 
+  def tag_change() do
+  end
+
   @doc false
   def changeset(tag, attrs) do
     import Ecto.Changeset
