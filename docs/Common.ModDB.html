@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.19.3">
+    <title>Common.ModDB — Belethor's General Mods v0.0.1-2</title>
+    <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
+    <script src="dist/sidebar_items-3fd93c786d.js"></script>
+    <script async src="dist/html-399e30b9b028e3059575.js"></script>
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  <a href="https://bgm.tetrarch.co" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+Belethor's General Mods      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.1-2
+      </h2>
+    </div>
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">GUIDES</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Belethor's General Mods v0.0.1-2</small>
+Common.ModDB        
+          <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>The Mods context.</p>
+        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#add_mod_to_list/2">add_mod_to_list(list, mod)</a>
+  </div>
+    <div class="summary-synopsis"><p>Return the list of <em>all</em> modlist</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_mod/1">change_mod(mod)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking mod changes</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_modlist/1">change_modlist(modlist)</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking modlist changes</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_mod/1">create_mod(change \\ %{})</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a mod</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_modlist/1">create_modlist(change \\ %{})</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a modlist</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_tag/1">create_tag(change \\ %{})</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a tag</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_mod/1">delete_mod(mod)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a mod</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_modlist/1">delete_modlist(modlist)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a modlist</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_mod!/1">get_mod!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single mod. The tags are not loaded, to access <code class="inline">mod.tags</code> do <code class="inline">Repo.preload(mod, [:tags])</code> before try to access them</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_modlist!/1">get_modlist!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single modlist</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_tag!/1">get_tag!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single tag</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_modlists/0">list_modlists()</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns the list of <em>all</em> modlists</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_mods/0">list_mods()</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns the list of <em>all</em> mods</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#list_tags/0">list_tags()</a>
+  </div>
+    <div class="summary-synopsis"><p>Returns the list of <em>all</em> tags</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_mod/2">update_mod(mod, change)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a mod</p>
+</div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_modlist/2">update_modlist(modlist, change)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a modlist</p>
+</div>
+</div>
+  </div>
+        </section>
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="add_mod_to_list/2">
+    <div class="detail-header">
+    <a href="#add_mod_to_list/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">add_mod_to_list(list, mod)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L118" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>add_mod_to_list(list :: <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>(), mod :: <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()) ::
+  {:ok, <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Return the list of <em>all</em> modlist.</p>
+  </section>
+</section>
+<section class="detail" id="change_mod/1">
+    <div class="detail-header">
+    <a href="#change_mod/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_mod(mod)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L102" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>change_mod(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>())</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking mod changes.</p>
+  </section>
+</section>
+<section class="detail" id="change_modlist/1">
+    <div class="detail-header">
+    <a href="#change_modlist/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_modlist(modlist)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L164" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>change_modlist(modlist :: <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>())</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Returns an <code class="inline">%Ecto.Changeset{}</code> for tracking modlist changes.</p>
+  </section>
+</section>
+<section class="detail" id="create_mod/1">
+  
+    <span id="create_mod/0"></span>
+  <div class="detail-header">
+    <a href="#create_mod/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_mod(change \\ %{})</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L60" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>create_mod(change :: <a href="Common.Utils.html#t:change/0">Common.Utils.change</a>()) ::
+  {:ok, <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Creates a mod.</p>
+  </section>
+</section>
+<section class="detail" id="create_modlist/1">
+  
+    <span id="create_modlist/0"></span>
+  <div class="detail-header">
+    <a href="#create_modlist/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_modlist(change \\ %{})</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L128" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>create_modlist(change :: <a href="Common.Utils.html#t:unclean_change/0">Common.Utils.unclean_change</a>()) ::
+  {:ok, <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Creates a modlist.</p>
+  </section>
+</section>
+<section class="detail" id="create_tag/1">
+  
+    <span id="create_tag/0"></span>
+  <div class="detail-header">
+    <a href="#create_tag/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_tag(change \\ %{})</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L39" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>create_tag(change :: <a href="Common.Utils.html#t:unclean_change/0">Common.Utils.unclean_change</a>()) ::
+  {:ok, <a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Creates a tag.</p>
+  </section>
+</section>
+<section class="detail" id="delete_mod/1">
+    <div class="detail-header">
+    <a href="#delete_mod/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_mod(mod)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L96" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>delete_mod(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()) ::
+  {:ok, <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Deletes a mod.</p>
+  </section>
+</section>
+<section class="detail" id="delete_modlist/1">
+    <div class="detail-header">
+    <a href="#delete_modlist/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_modlist(modlist)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L158" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>delete_modlist(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()) ::
+  {:ok, <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Deletes a modlist.</p>
+  </section>
+</section>
+<section class="detail" id="get_mod!/1">
+    <div class="detail-header">
+    <a href="#get_mod!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_mod!(id)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L77" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>get_mod!(id :: <a href="Common.Schema.Mod.html#t:id/0">Common.Schema.Mod.id</a>()) :: <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Gets a single mod. The tags are not loaded, to access <code class="inline">mod.tags</code> do <code class="inline">Repo.preload(mod, [:tags])</code> before try to access them.</p>
+<p>Raises <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the ModTag does not exist.</p>
+  </section>
+</section>
+<section class="detail" id="get_modlist!/1">
+    <div class="detail-header">
+    <a href="#get_modlist!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_modlist!(id)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L141" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>get_modlist!(id :: <a href="Common.Schema.Modlist.html#t:id/0">Common.Schema.Modlist.id</a>()) :: <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Gets a single modlist.</p>
+<p>Raises <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the ModTag does not exist.</p>
+  </section>
+</section>
+<section class="detail" id="get_tag!/1">
+    <div class="detail-header">
+    <a href="#get_tag!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_tag!(id)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L32" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>get_tag!(id :: <a href="Common.Schema.ModTag.html#t:id/0">Common.Schema.ModTag.id</a>()) :: <a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Gets a single tag.</p>
+<p>Raises <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the ModTag does not exist.</p>
+  </section>
+</section>
+<section class="detail" id="list_modlists/0">
+    <div class="detail-header">
+    <a href="#list_modlists/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">list_modlists()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L110" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>list_modlists() :: [<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Returns the list of <em>all</em> modlists.</p>
+  </section>
+</section>
+<section class="detail" id="list_mods/0">
+    <div class="detail-header">
+    <a href="#list_mods/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">list_mods()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L53" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>list_mods() :: [<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Returns the list of <em>all</em> mods.</p>
+  </section>
+</section>
+<section class="detail" id="list_tags/0">
+    <div class="detail-header">
+    <a href="#list_tags/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">list_tags()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L24" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>list_tags() :: [<a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Returns the list of <em>all</em> tags.</p>
+  </section>
+</section>
+<section class="detail" id="update_mod/2">
+    <div class="detail-header">
+    <a href="#update_mod/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_mod(mod, change)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L84" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>update_mod(
+  mod :: <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>(),
+  change :: <a href="Common.Utils.html#t:unclean_change/0">Common.Utils.unclean_change</a>()
+) ::
+  {:ok, <a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Mod.html#t:t/0">Common.Schema.Mod.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Updates a mod.</p>
+  </section>
+</section>
+<section class="detail" id="update_modlist/2">
+    <div class="detail-header">
+    <a href="#update_modlist/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_modlist(modlist, change)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/moddb.ex#L148" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>update_modlist(
+  <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>(),
+  change :: <a href="Common.Utils.html#t:unclean_change/0">Common.Utils.unclean_change</a>()
+) ::
+  {:ok, <a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/ecto/3.0.5/Ecto.Changeset.html#t:t/1">Ecto.Changeset.t</a>(<a href="Common.Schema.Modlist.html#t:t/0">Common.Schema.Modlist.t</a>())}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Updates a modlist.</p>
+  </section>
+</section>
+          </div>
+        </section>
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.19.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+<% alias Common.Schema.Mod %>
+<% alias Common.Schema.ModFile %>
+
+<%= form_for @changeset, @action, [], fn _f -> %>
+    <div id="elm-form">
+    </div>
+<% end %>
+
+<%= case Access.fetch(assigns, :delete) do %>
+    <%= {:ok, daction} -> %>
+        <p>
+            <%= form_for @changeset, daction, [method: "DELETE"], fn _f -> %>
+                <%= submit "Delete", class: "btn btn-danger" %>
+            <% end %>
+        </p>
+
+    <% _ -> %>
+<% end %>
+<script>
+ flags = {
+     "mod": <%= raw Jason.encode!(@mod) %>,
+     "tags": <%= raw Jason.encode!(@all_tags) %>
+ };
+</script>

@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>TagEditorWeb.Gettext — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-cc6117ac3b.js"></script>
+    <script src="dist/sidebar_items-3fd93c786d.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -74,15 +74,15 @@ your module gains a set of macros for translations, for example:</p>
 <pre><code class="nohighlight makeup elixir"><span class="kn">import</span><span class="w"> </span><span class="nc">TagEditorWeb.Gettext</span><span class="w">
 
 </span><span class="c1"># Simple translation</span><span class="w">
-</span><span class="n">gettext</span><span class="p" data-group-id="8265892867-1">(</span><span class="s">&quot;Here is the string to translate&quot;</span><span class="p" data-group-id="8265892867-1">)</span><span class="w">
+</span><span class="n">gettext</span><span class="p" data-group-id="1488101822-1">(</span><span class="s">&quot;Here is the string to translate&quot;</span><span class="p" data-group-id="1488101822-1">)</span><span class="w">
 
 </span><span class="c1"># Plural translation</span><span class="w">
-</span><span class="n">ngettext</span><span class="p" data-group-id="8265892867-2">(</span><span class="s">&quot;Here is the string to translate&quot;</span><span class="p">,</span><span class="w">
+</span><span class="n">ngettext</span><span class="p" data-group-id="1488101822-2">(</span><span class="s">&quot;Here is the string to translate&quot;</span><span class="p">,</span><span class="w">
          </span><span class="s">&quot;Here are the strings to translate&quot;</span><span class="p">,</span><span class="w">
-         </span><span class="mi">3</span><span class="p" data-group-id="8265892867-2">)</span><span class="w">
+         </span><span class="mi">3</span><span class="p" data-group-id="1488101822-2">)</span><span class="w">
 
 </span><span class="c1"># Domain-based translation</span><span class="w">
-</span><span class="n">dgettext</span><span class="p" data-group-id="8265892867-3">(</span><span class="s">&quot;errors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Here is the error message to translate&quot;</span><span class="p" data-group-id="8265892867-3">)</span></code></pre>
+</span><span class="n">dgettext</span><span class="p" data-group-id="1488101822-3">(</span><span class="s">&quot;errors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Here is the error message to translate&quot;</span><span class="p" data-group-id="1488101822-3">)</span></code></pre>
 <p>See the <a href="https://hexdocs.pm/gettext">Gettext Docs</a> for detailed usage.</p>
         </section>
 
@@ -328,20 +328,20 @@ Functions          </h1>
 takes a <a href="https://hexdocs.pm/gettext/0.16.1/Gettext.MissingBindingsError.html"><code class="inline">Gettext.MissingBindingsError</code></a> struct and the translation with the
 wrong bindings left as is with the <code class="inline">%{}</code> syntax.</p>
 <p>For example, if something like this is called:</p>
-<pre><code class="nohighlight makeup elixir"><span class="nc">MyApp.Gettext</span><span class="o">.</span><span class="n">gettext</span><span class="p" data-group-id="5840747042-1">(</span><span class="s">&quot;Hello %{name}, welcome to %{country}&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">country</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Italy&quot;</span><span class="p" data-group-id="5840747042-1">)</span></code></pre>
+<pre><code class="nohighlight makeup elixir"><span class="nc">MyApp.Gettext</span><span class="o">.</span><span class="n">gettext</span><span class="p" data-group-id="2640063956-1">(</span><span class="s">&quot;Hello %{name}, welcome to %{country}&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">country</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Italy&quot;</span><span class="p" data-group-id="2640063956-1">)</span></code></pre>
 <p>and our <code class="inline">it/LC_MESSAGES/default.po</code> looks like this:</p>
 <pre><code class="nohighlight makeup elixir"><span class="n">msgid</span><span class="w"> </span><span class="s">&quot;Hello %{name}, welcome to %{country}&quot;</span><span class="w">
 </span><span class="n">msgstr</span><span class="w"> </span><span class="s">&quot;Ciao %{name}, benvenuto in %{cowntry}&quot;</span><span class="w"> </span><span class="c1"># (typo)</span></code></pre>
 <p>then Gettext will call:</p>
-<pre><code class="nohighlight makeup elixir"><span class="nc">MyApp.Gettext</span><span class="o">.</span><span class="n">handle_missing_bindings</span><span class="p" data-group-id="3812666033-1">(</span><span class="n">exception</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ciao Jane, benvenuto in %{cowntry}&quot;</span><span class="p" data-group-id="3812666033-1">)</span></code></pre>
+<pre><code class="nohighlight makeup elixir"><span class="nc">MyApp.Gettext</span><span class="o">.</span><span class="n">handle_missing_bindings</span><span class="p" data-group-id="4580769846-1">(</span><span class="n">exception</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ciao Jane, benvenuto in %{cowntry}&quot;</span><span class="p" data-group-id="4580769846-1">)</span></code></pre>
 <p>where <code class="inline">exception</code> is a struct that looks like this:</p>
-<pre><code class="nohighlight makeup elixir"><span class="p" data-group-id="2522636318-1">%</span><span class="nc" data-group-id="2522636318-1">Gettext.MissingBindingsError</span><span class="p" data-group-id="2522636318-1">{</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="p" data-group-id="1596903036-1">%</span><span class="nc" data-group-id="1596903036-1">Gettext.MissingBindingsError</span><span class="p" data-group-id="1596903036-1">{</span><span class="w">
   </span><span class="ss">backend</span><span class="p">:</span><span class="w"> </span><span class="nc">MyApp.Gettext</span><span class="p">,</span><span class="w">
   </span><span class="ss">domain</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;it&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">msgid</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello %{name}, welcome to %{country}&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">bindings</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2522636318-2">[</span><span class="ss">:country</span><span class="p" data-group-id="2522636318-2">]</span><span class="p">,</span><span class="w">
-</span><span class="p" data-group-id="2522636318-1">}</span></code></pre>
+  </span><span class="ss">bindings</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1596903036-2">[</span><span class="ss">:country</span><span class="p" data-group-id="1596903036-2">]</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="1596903036-1">}</span></code></pre>
 <p>The return value of the <code class="inline">c:handle_missing_bindings/2</code> callback is used as the
 translated string that the translation macros and functions return.</p>
 <p>The default implementation for this function uses <a href="https://hexdocs.pm/logger/Logger.html#error/1"><code class="inline">Logger.error/1</code></a> to warn
@@ -349,9 +349,9 @@ about the missing binding and returns the translated message with the
 incomplete bindings.</p>
 <p>This function can be overridden. For example, to raise when there are missing
 bindings:</p>
-<pre><code class="nohighlight makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">handle_missing_bindings</span><span class="p" data-group-id="7356526481-1">(</span><span class="n">exception</span><span class="p">,</span><span class="w"> </span><span class="c">_incomplete</span><span class="p" data-group-id="7356526481-1">)</span><span class="w"> </span><span class="k" data-group-id="7356526481-2">do</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">handle_missing_bindings</span><span class="p" data-group-id="3259072300-1">(</span><span class="n">exception</span><span class="p">,</span><span class="w"> </span><span class="c">_incomplete</span><span class="p" data-group-id="3259072300-1">)</span><span class="w"> </span><span class="k" data-group-id="3259072300-2">do</span><span class="w">
   </span><span class="k">raise</span><span class="w"> </span><span class="n">exception</span><span class="w">
-</span><span class="k" data-group-id="7356526481-2">end</span></code></pre>
+</span><span class="k" data-group-id="3259072300-2">end</span></code></pre>
 <p>Callback implementation for <a href="https://hexdocs.pm/gettext/0.16.1/Gettext.Backend.html#c:handle_missing_bindings/2"><code class="inline">Gettext.Backend.handle_missing_bindings/2</code></a>.</p>
   </section>
 </section>

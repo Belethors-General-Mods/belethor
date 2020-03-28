@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Mods <a href="/mod/new" class="badge badge-primary">create new</a> </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <ul class="list-group">
+                <%= Enum.map(@mods, fn m -> render(@view_module, "preview.html", Map.put(assigns, :m,  m)) end) %>
+            </ul>
+        </div>
+    </div>
+</div>

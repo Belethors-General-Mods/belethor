@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>API Reference — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-cc6117ac3b.js"></script>
+    <script src="dist/sidebar_items-3fd93c786d.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -78,37 +78,42 @@ Belethor's General Mods      </h1>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Common.Struct.html">Common.Struct</a>
+    <a href="Common.ModDB.html">Common.ModDB</a>
   </div>
-    <div class="summary-synopsis"><p>common behaviour for structs used in common</p>
+    <div class="summary-synopsis"><p>The Mods context</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Common.Struct.Image.html">Common.Struct.Image</a>
+    <a href="Common.Repo.html">Common.Repo</a>
   </div>
-    <div class="summary-synopsis"><p>Represents a image</p>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Common.Schema.Mod.html">Common.Schema.Mod</a>
+  </div>
+    <div class="summary-synopsis"><p>Store information about a mod</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Common.Struct.Mod.html">Common.Struct.Mod</a>
+    <a href="Common.Schema.ModFile.html">Common.Schema.ModFile</a>
   </div>
-    <div class="summary-synopsis"><p>Represents a mod</p>
+    <div class="summary-synopsis"><p>Store information about a game-version-specific file from a mod</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Common.Struct.Modfile.html">Common.Struct.Modfile</a>
+    <a href="Common.Schema.ModTag.html">Common.Schema.ModTag</a>
   </div>
-    <div class="summary-synopsis"><p>Represents a mod file somewhere to download</p>
+    <div class="summary-synopsis"><p>Stores info about each tag</p>
 </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Common.Struct.Tag.html">Common.Struct.Tag</a>
+    <a href="Common.Schema.Modlist.html">Common.Schema.Modlist</a>
   </div>
-    <div class="summary-synopsis"><p>A map representation of <a href="Database.Schema.ModTag.html"><code class="inline">Database.Schema.ModTag</code></a></p>
+    <div class="summary-synopsis"><p>Stores lists of mods</p>
 </div>
 </div>
 <div class="summary-row">
@@ -192,46 +197,6 @@ If the task maximum is reached, the request will be queued</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Database.html">Database</a>
-  </div>
-    <div class="summary-synopsis"><p>Documentation for Database</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Database.Repo.html">Database.Repo</a>
-  </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Database.Schema.Mod.html">Database.Schema.Mod</a>
-  </div>
-    <div class="summary-synopsis"><p>Store information about a mod</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Database.Schema.ModFile.html">Database.Schema.ModFile</a>
-  </div>
-    <div class="summary-synopsis"><p>Store information about a game-version-specific file from a mod</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Database.Schema.ModImage.html">Database.Schema.ModImage</a>
-  </div>
-    <div class="summary-synopsis"><p>Stores images as either links or binary blobs (or both?)</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Database.Schema.ModTag.html">Database.Schema.ModTag</a>
-  </div>
-    <div class="summary-synopsis"><p>Stores info about each tag</p>
-</div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="TagEditor.html">TagEditor</a>
   </div>
     <div class="summary-synopsis"><p>TagEditor keeps the contexts that define your domain
@@ -277,6 +242,26 @@ as controllers, views, channels and so on</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="TagEditorWeb.ModController.html">TagEditorWeb.ModController</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TagEditorWeb.ModListController.html">TagEditorWeb.ModListController</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TagEditorWeb.ModListView.html">TagEditorWeb.ModListView</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TagEditorWeb.ModView.html">TagEditorWeb.ModView</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="TagEditorWeb.PageController.html">TagEditorWeb.PageController</a>
   </div>
 </div>
@@ -296,6 +281,16 @@ as controllers, views, channels and so on</p>
   </div>
     <div class="summary-synopsis"><p>Module with named helpers generated from TagEditorWeb.Router</p>
 </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TagEditorWeb.TagController.html">TagEditorWeb.TagController</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TagEditorWeb.TagView.html">TagEditorWeb.TagView</a>
+  </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">

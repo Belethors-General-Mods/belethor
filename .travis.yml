@@ -15,6 +15,9 @@ git:
 
 sudo: false
 
+addons:
+  postgresql: '9.6'
+
 env:
   global:
     - ELIXIR_ASSERT_TIMEOUT=2000
@@ -24,6 +27,11 @@ install:
   - mix do local.hex --force, local.rebar --force || echo "WARNING! Unable to update hex or rebar"
   - mix deps.get
   - mix deps.compile
+  - npm install -g elm elm-format elm-test
+  - pushd apps/tag_editor/assets
+  - npm install
+  - popd
+
 script:
   - mix format --check-formatted
   - for f in $(mix format --check-formatted 2>&1 | cut -s -d' ' -f4- | grep -E '^.+\.exs?$'); do echo $f; cat $f | mix format - | diff $f -; done
@@ -33,12 +41,17 @@ script:
   - mix coveralls.travis -u
   - mix credo --strict
   - travis_wait mix dialyzer --halt-exit-status
+  - pushd apps/tag_editor/assets/
+  - travis_wait elm-test
+  - elm-format $(find tests elm-src -name '*.elm') --validate #| jq '.[] | .path + ":\t" + .message' -r
+  - popd
 
 # Cache as much as possible
 cache:
   directories:
     - deps
     - _build
+    - apps/tag_editor/assets/tests/elm-stuff
 
 # Trigger our discord webhook
 after_success:

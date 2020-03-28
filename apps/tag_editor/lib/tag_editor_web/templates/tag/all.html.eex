@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Tags</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <ul class="list-group">
+                <%= Enum.map(@tags, fn t -> render(@view_module, "preview.html", Map.put(assigns, :t,  t)) end) %>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :common, key: :value
+#     config :database, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:common, :key)
+#     Application.get_env(:database, :key)
 #
 # You can also configure a 3rd-party app:
 #
@@ -27,4 +27,11 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-#     import_config "#{Mix.env()}.exs"
+#     import_config "#{Mix.env}.exs"
+
+config :common,
+  namespace: Common,
+  ecto_repos: [Common.Repo]
+
+import_config "#{Mix.env()}.exs"
+import_config "config.mappings.exs"
