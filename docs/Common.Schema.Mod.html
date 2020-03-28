@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>Common.Schema.Mod — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-ab5664d6ff.js"></script>
+    <script src="dist/sidebar_items-3fd93c786d.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -73,32 +73,33 @@ Common.Schema.Mod
 <colgroup>
 <col>
 <col>
+<col>
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left">Attribute</th><th style="text-align: left">Meaning</th>
+<th style="text-align: left">Attribute</th><th style="text-align: left">Default Value</th><th style="text-align: left">Meaning</th>
 </tr>
 </thead>
 <tr>
-<td style="text-align: left"><code class="inline">name</code></td><td style="text-align: left">the mods name</td>
+<td style="text-align: left"><code class="inline">name</code></td><td style="text-align: left"><em>no default</em></td><td style="text-align: left">the mods name</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">desc</code></td><td style="text-align: left">the mods description</td>
+<td style="text-align: left"><code class="inline">desc</code></td><td style="text-align: left"><code class="inline">&quot;todo: add description&quot;</code></td><td style="text-align: left">the mods description</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">published</code></td><td style="text-align: left">wether the mod should be publicly accessibly</td>
+<td style="text-align: left"><code class="inline">published</code></td><td style="text-align: left"><code class="inline">false</code></td><td style="text-align: left">wether the mod should be publicly accessibly</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">image</code></td><td style="text-align: left">an url to an image</td>
+<td style="text-align: left"><code class="inline">image</code></td><td style="text-align: left"><code class="inline">no_image.jpg</code></td><td style="text-align: left">an url to an image</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">sse</code></td><td style="text-align: left">a number of links for its Skyrim Special Edition implementation</td>
+<td style="text-align: left"><code class="inline">sse</code></td><td style="text-align: left"><code class="inline">nil</code></td><td style="text-align: left">a number of links for its Skyrim Special Edition implementation</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">oldrim</code></td><td style="text-align: left">a number of links for the OG Skyrim Engine released in 11.11.2011</td>
+<td style="text-align: left"><code class="inline">oldrim</code></td><td style="text-align: left"><code class="inline">nil</code></td><td style="text-align: left">a number of links for the OG Skyrim Engine released in 11.11.2011</td>
 </tr>
 <tr>
-<td style="text-align: left"><code class="inline">tags</code></td><td style="text-align: left">the number of tags</td>
+<td style="text-align: left"><code class="inline">tags</code></td><td style="text-align: left"><code class="inline">[]</code></td><td style="text-align: left">the number of tags</td>
 </tr>
 </table>
         </section>
@@ -130,6 +131,11 @@ Common.Schema.Mod
     <a href="#t:t/0">t()</a>
   </div>
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:tag_change/0">tag_change()</a>
+  </div>
+</div>
   </div>
   <div class="summary-functions summary">
     <h2>
@@ -144,10 +150,15 @@ Common.Schema.Mod
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#clean_tag_changes/1">clean_tag_changes(unclean)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#new/1">new(changes \\ %{})</a>
   </div>
     <div class="summary-synopsis"><p>Creates a new %Mod to be fed into <code class="inline">Repo.insert!/2</code> for example.
-Sets default values, if they are not present in the arguments</p>
+Sets default values, if they are not present in the change argument</p>
 </div>
 </div>
 <div class="summary-row">
@@ -188,7 +199,8 @@ Types          </h1>
   optional(:published) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
   optional(:image) => <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
   optional(:sse) => <a href="Common.Schema.ModFile.html#t:change/0">Common.Schema.ModFile.change</a>(),
-  optional(:oldrim) => <a href="Common.Schema.ModFile.html#t:change/0">Common.Schema.ModFile.change</a>()
+  optional(:oldrim) => <a href="Common.Schema.ModFile.html#t:change/0">Common.Schema.ModFile.change</a>(),
+  optional(:tags) => <a href="#t:tag_change/0">tag_change</a>()
 }</pre>
       </div>
   </div>
@@ -243,6 +255,28 @@ Types          </h1>
   <section class="docstring">
   </section>
 </section>
+<section class="detail" id="t:tag_change/0">
+    <div class="detail-header">
+    <a href="#t:tag_change/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">tag_change()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L65" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>tag_change() :: [
+  add: <a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>(),
+  delete: <a href="Common.Schema.ModTag.html#t:t/0">Common.Schema.ModTag.t</a>()
+]</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
           </div>
         </section>
         <section id="functions" class="details-list">
@@ -260,7 +294,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">clean_changes(unclean)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L84" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L92" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -273,6 +307,25 @@ Functions          </h1>
 <p>if you want to to change the tags, this won&#39;t be enough.</p>
   </section>
 </section>
+<section class="detail" id="clean_tag_changes/1">
+    <div class="detail-header">
+    <a href="#clean_tag_changes/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">clean_tag_changes(unclean)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L95" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>clean_tag_changes(unclean :: <a href="Common.html#t:unclean_change/0">Common.unclean_change</a>()) :: <a href="#t:tag_change/0">tag_change</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
 <section class="detail" id="new/1">
   
     <span id="new/0"></span>
@@ -282,7 +335,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">new(changes \\ %{})</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L125" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L159" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -293,7 +346,7 @@ Functions          </h1>
   </div>
   <section class="docstring">
 <p>Creates a new %Mod to be fed into <code class="inline">Repo.insert!/2</code> for example.
-Sets default values, if they are not present in the arguments.</p>
+Sets default values, if they are not present in the change argument.</p>
   </section>
 </section>
 <section class="detail" id="preload/1">
@@ -303,7 +356,7 @@ Sets default values, if they are not present in the arguments.</p>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">preload(mod)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L116" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/mod.ex#L150" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>

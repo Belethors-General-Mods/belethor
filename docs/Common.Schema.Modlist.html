@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.19.3">
     <title>Common.Schema.Modlist — Belethor's General Mods v0.0.1-2</title>
     <link rel="stylesheet" href="dist/html-399e30b9b028e3059575.css" />
-    <script src="dist/sidebar_items-ab5664d6ff.js"></script>
+    <script src="dist/sidebar_items-3fd93c786d.js"></script>
     <script async src="dist/html-399e30b9b028e3059575.js"></script>
     
   </head>
@@ -105,7 +105,7 @@ Common.Schema.Modlist
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:changes/0">changes()</a>
+    <a href="#t:change/0">change()</a>
   </div>
 </div>
 <div class="summary-row">
@@ -125,6 +125,11 @@ Common.Schema.Modlist
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#clean_changes/1">clean_changes(unclean)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#new/1">new(changes)</a>
   </div>
     <div class="summary-synopsis"><p>Creates a new %Modlist to be fed into <code class="inline">Repo.insert!/2</code> for example.
@@ -142,20 +147,20 @@ Sets default values, if they are not present in the arguments</p>
             </a>
 Types          </h1>
           <div class="types-list">
-<section class="detail" id="t:changes/0">
+<section class="detail" id="t:change/0">
     <div class="detail-header">
-    <a href="#t:changes/0" class="detail-link" title="Link to this type">
+    <a href="#t:change/0" class="detail-link" title="Link to this type">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this type</span>
     </a>
-    <h1 class="signature">changes()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L23" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">change()</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L24" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
         
       <div class="specs">
-          <pre>changes() :: %{optional(:name) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), optional(:desc) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+          <pre>change() :: %{optional(:name) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), optional(:desc) => <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
       </div>
   </div>
   <section class="docstring">
@@ -168,7 +173,7 @@ Types          </h1>
       <span class="sr-only">Link to this type</span>
     </a>
     <h1 class="signature">id()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L15" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L16" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -187,7 +192,7 @@ Types          </h1>
       <span class="sr-only">Link to this type</span>
     </a>
     <h1 class="signature">t()</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L16" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L17" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -215,6 +220,25 @@ Types          </h1>
             </a>
 Functions          </h1>
           <div class="functions-list">
+<section class="detail" id="clean_changes/1">
+    <div class="detail-header">
+    <a href="#clean_changes/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">clean_changes(unclean)</span>
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L50" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+        
+      <div class="specs">
+          <pre>clean_changes(unclean :: <a href="Common.html#t:unclean_change/0">Common.unclean_change</a>()) :: <a href="#t:change/0">change</a>()</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
 <section class="detail" id="new/1">
     <div class="detail-header">
     <a href="#new/1" class="detail-link" title="Link to this function">
@@ -222,13 +246,13 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">new(changes)</span>
-      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L49" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/Belethors-General-Mods/belethor/blob/master/apps/common/lib/common/schema/modlist.ex#L59" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
         
       <div class="specs">
-          <pre>new(changes :: <a href="#t:changes/0">changes</a>()) :: <a href="#t:t/0">t</a>()</pre>
+          <pre>new(changes :: <a href="#t:change/0">change</a>()) :: <a href="#t:t/0">t</a>()</pre>
       </div>
   </div>
   <section class="docstring">
