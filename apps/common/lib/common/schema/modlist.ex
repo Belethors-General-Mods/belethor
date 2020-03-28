@@ -11,6 +11,7 @@ defmodule Common.Schema.Modlist do
   use Ecto.Schema
 
   alias Common.Schema.Mod
+  alias Common.Utils
 
   @type id :: term()
   @type t :: %__MODULE__{
@@ -20,10 +21,14 @@ defmodule Common.Schema.Modlist do
           mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
         }
 
-  @type changes :: %{
+  @type change :: %{
           optional(:name) => String.t(),
           optional(:desc) => String.t()
         }
+
+  @valid_changes %{
+    "name" => {:name, &Utils.to_string/1}
+  }
 
   @default %{
     desc: "TODO, add a description"
@@ -41,11 +46,16 @@ defmodule Common.Schema.Modlist do
     )
   end
 
+  @spec clean_changes(unclean :: Common.unclean_change()) :: change()
+  def clean_changes(unclean) do
+    Utils.clean_changes(unclean, @valid_changes)
+  end
+
   @doc """
   Creates a new %Modlist to be fed into `Repo.insert!/2` for example.
   Sets default values, if they are not present in the arguments.
   """
-  @spec new(changes :: changes()) :: t()
+  @spec new(changes :: change()) :: t()
   def new(changes) do
     %__MODULE__{} |> changeset(Map.merge(@default, changes))
   end

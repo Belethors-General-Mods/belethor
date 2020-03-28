@@ -11,6 +11,7 @@ defmodule Common.Schema.ModTag do
 
   alias Common.Repo
   alias Common.Schema.Mod
+  alias Common.Utils
 
   @type id :: term()
   @type t :: %__MODULE__{
@@ -18,6 +19,10 @@ defmodule Common.Schema.ModTag do
           name: String.t(),
           mods: [Mod.t()] | Ecto.Association.NotLoaded.t()
         }
+
+  @valid_changes %{
+    "name" => {:name, &Utils.to_string/1}
+  }
 
   @type change :: %{
           # change the name
@@ -35,7 +40,9 @@ defmodule Common.Schema.ModTag do
     )
   end
 
-  def tag_change() do
+  @spec clean_changes(unclean :: Common.unclean_change()) :: change()
+  def clean_changes(unclean) do
+    Utils.clean_changes(unclean, @valid_changes)
   end
 
   @doc false

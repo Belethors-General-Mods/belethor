@@ -2,15 +2,15 @@ defmodule Common.Schema.Mod do
   @moduledoc """
   Store information about a mod
 
-  | Attribute | Meaning           |
-  | ------------- |:------------- |
-  | `name`        | the mods name |
-  | `desc`      | the mods description |
-  | `published` | wether the mod should be publicly accessibly |
-  | `image` | an url to an image |
-  | `sse` | a number of links for its Skyrim Special Edition implementation |
-  | `oldrim` | a number of links for the OG Skyrim Engine released in 11.11.2011 |
-  | `tags` | the number of tags |
+  | Attribute   | Default Value | Meaning       |
+  | ----------- | ------------- | ------------- |
+  | `name`      | _no default_  | the mods name |
+  | `desc`      | `"todo: add description"` | the mods description |
+  | `published` | `false` | wether the mod should be publicly accessibly |
+  | `image`     | `no_image.jpg` | an url to an image |
+  | `sse`       | `nil` | a number of links for its Skyrim Special Edition implementation |
+  | `oldrim`    | `nil`  | a number of links for the OG Skyrim Engine released in 11.11.2011 |
+  | `tags`      | `[]` | the number of tags |
   """
   use Ecto.Schema
 
@@ -50,7 +50,7 @@ defmodule Common.Schema.Mod do
     "name" => {:name, &Utils.to_string/1},
     "desc" => {:desc, &Utils.to_string/1},
     "published" => {:published, &Utils.to_bool/1},
-    "image" => {:image, &Utils.to_bool/1},
+    "image" => {:image, &Utils.to_string/1},
     "sse" => {:sse, &ModFile.clean_changes/1},
     "oldrim" => {:oldrim, &ModFile.clean_changes/1},
     "tags" => {:tags, &__MODULE__.clean_tag_changes/1}
@@ -62,7 +62,7 @@ defmodule Common.Schema.Mod do
     published: false
   }
 
-  @type tag_change :: [ {:add, ModTag.t()} | {:delete, ModTag.t()} ]
+  @type tag_change :: [{:add, ModTag.t()} | {:delete, ModTag.t()}]
   @valid_type_changes %{
     "add" => {:add, &__MODULE__.ensure_tag!/1},
     "delete" => {:delete, &__MODULE__.ensure_tag!/1}
@@ -123,20 +123,22 @@ defmodule Common.Schema.Mod do
 
     # handle the assoc on tags
     if MapSet.member?(affected, :tags) do
-      cs = Enum.reduce(
-        changes.tags,
-        cs,
-        fn {:add, tag} -> :todo # Changeset.put_assoc(fucking)
-          {:delete, tag} -> :todo # remove tag assoc call
-        end
-      )
+      cs =
+        Enum.reduce(
+          changes.tags,
+          cs,
+          # Changeset.put_assoc(fucking)
+          fn
+            {:add, tag} -> :todo
+            # remove tag assoc call
+            {:delete, tag} -> :todo
+          end
+        )
     end
 
-    # TODO
-    # |> Changeset.validate_required([:name, :desc, :published, :image])
-    # |> Changeset.unique_constraint(:name)
-
     cs
+    |> Changeset.validate_required([:name, :desc, :published, :image])
+    |> Changeset.unique_constraint(:name)
   end
 
   @doc """
@@ -150,7 +152,7 @@ defmodule Common.Schema.Mod do
 
   @doc """
   Creates a new %Mod to be fed into `Repo.insert!/2` for example.
-  Sets default values, if they are not present in the arguments.
+  Sets default values, if they are not present in the change argument.
   """
   @spec new(changes :: change()) :: Changeset.t()
   def new(changes \\ %{}) do

@@ -6,15 +6,16 @@ defmodule Common.ModDBTest do
   alias Common.Schema.Mod
   alias Common.Schema.ModTag
   alias Common.Schema.Modlist
+  alias Common.Repo
 
   describe "Modlist" do
-    @valid_mod %{name: "I am here to test mod lists", published: false}
-    @valid_attrs %{name: "some list's name", desc: "some description, what this is about"}
-    @valid_update %{name: "just a test"}
-    @invalid_attrs %{name: nil}
+    @valid_mod %{"name" => "I am a mod, here to test mod lists", "published" => false}
+    @valid_modlist %{"name" => "some list's name", "desc" => "some description, what this is about"}
+    @valid_update %{"name" => "just a test"}
+    @invalid_attrs %{"name" => nil}
 
     test "ModDB.create_modlist/1 with valid data, returns a %Modlist{}" do
-      assert {:ok, %Modlist{} = ml1} = ModDB.create_modlist(@valid_attrs)
+      assert {:ok, %Modlist{} = ml1} = ModDB.create_modlist(@valid_modlist)
       assert ml1.name == "some list's name"
     end
 
@@ -28,40 +29,42 @@ defmodule Common.ModDBTest do
 
     test "add_mod_to_list/2" do
       assert {:ok, %Mod{} = mod} = ModDB.create_mod(@valid_mod)
-      assert {:ok, %Modlist{} = l0} = ModDB.create_modlist(@valid_attrs)
-      assert {:ok, l1} = ModDB.add_mod_to_list(mod, l0)
+      assert {:ok, %Modlist{} = l0} = ModDB.create_modlist(@valid_modlist)
+      assert {:ok, l1} = ModDB.add_mod_to_list(l0, mod)
       assert l0.name == l1.name
       assert l0.desc == l1.desc
-      assert l1 == ModDB.get_modlist(l0.id)
-      assert mod in l1.mods
+      assert l1 == ModDB.get_modlist!(l0.id)
+      assert mod in Repo.preload(l1, [:mods]).mods
     end
 
     test "CRUD Modlist tests" do
-      assert {:ok, %Modlist{} = l0} = ModDB.create_modlist(@valid_attrs)
+      assert {:ok, %Modlist{} = l0} = ModDB.create_modlist(@valid_modlist)
       id = l0.id
       assert l0 == ModDB.get_modlist!(id)
 
       assert {:ok, %Modlist{} = l1} = ModDB.update_modlist(l0, @valid_update)
       assert l1 == ModDB.get_modlist!(id)
 
-      assert {:ok, %Modlist{}} = ModDB.delete_modlist(l1)
+      assert {:ok, %Modlist{} = l2} = ModDB.update_modlist(l1, @valid_update)
+
+      assert {:ok, %Modlist{}} = ModDB.delete_modlist(l2)
       # delete_modlist/1
     end
 
     test "change_modlist/1" do
-      assert {:ok, %Modlist{} = ml} = ModDB.create_modlist(@valid_attrs)
+      assert {:ok, %Modlist{} = ml} = ModDB.create_modlist(@valid_modlist)
       assert (%Ecto.Changeset{} = cs) = ModDB.change_modlist(ml)
       assert cs.data == ml
     end
   end
 
   describe "ModTag" do
-    @valid_attrs %{name: "some name"}
-    @invalid_attrs %{name: nil}
+    @valid_attrs %{"name" => "some name"}
+    @invalid_attrs %{"name" => nil}
 
     test "ModDB.create_tag/1 with valid data, returns a %ModTag{}" do
       assert {:ok, %ModTag{} = mt1} = ModDB.create_tag(@valid_attrs)
-      assert mt1.name == @valid_attrs.name
+      assert mt1.name == @valid_attrs["name"]
     end
 
     test "ModDB.create_tag/1 with invalid data, returns a Changeset" do
@@ -79,34 +82,37 @@ defmodule Common.ModDBTest do
     end
 
     @valid_attrs %{
-      name: "some name",
-      desc: "some desc",
-      published: false,
-      image: "/test.jpg"
+      "name" => "some name",
+      "desc" => "some desc",
+      "published" => "false",
+      "image" => "/test.jpg"
     }
 
     @updated_attrs %{
-      name: "some new name",
-      desc: "some new desc",
-      published: true
+      "name" => "some new name",
+      "desc" => "some new desc",
+      "published" => "true"
     }
 
     @valid_modfile %{
-      sse: %{
-        console_compat: true,
-        nexus: "test url for nexus"
+      "sse" => %{
+        "console_compat" => true,
+        "nexus" => "test url for nexus"
       }
     }
 
     @updated_modfile %{
-      sse: %{
-        console_compat: false,
-        nexus: "updated test url for nexus"
+      "sse" => %{
+        "console_compat" => false,
+        "nexus" => "updated test url for nexus"
       }
     }
 
-    @clean_modfile %{sse: nil}
-    @invalid_attrs %{name: nil, published: "nope"}
+    @tag_a %{"name" => "test tag a for moddb testing"}
+    @tag_b %{"name" => "zweiter test tag um moddb zu testen"}
+
+    @clean_modfile %{"sse" => nil}
+    @invalid_attrs %{"name" => nil, "published" => "nope"}
 
     test "ModDB.create_mod/1 with valid data, returns a %Mod{}" do
       assert {:ok, %Mod{} = m} = ModDB.create_mod(@valid_attrs)
@@ -138,13 +144,21 @@ defmodule Common.ModDBTest do
       assert {:ok, %Mod{} = m5} = ModDB.update_mod(m4, @clean_modfile)
       assert m5 == ModDB.get_mod!(id)
 
+      # assert attributes on created mod
+      assert m1.name == @valid_attrs["name"]
+      assert m1.desc == @valid_attrs["desc"]
+      # @valid_attrs["published"] converted to boolean
+      assert m1.published == false
+      assert m1.image == @valid_attrs["image"]
+
       # assert changed attributes
-      assert m2.name == "some new name"
-      assert m2.desc == "some new desc"
+      assert m2.name == @updated_attrs["name"]
+      assert m2.desc == @updated_attrs["desc"]
+      # @updated_attrs["published"] converted to boolean
       assert m2.published == true
 
       # assert untoched attribute is still the same
-      assert m2.image == "/test.jpg"
+      assert m2.image == @valid_attrs["image"]
 
       # assert embedded modfile is done correctly
       assert m2.sse == nil

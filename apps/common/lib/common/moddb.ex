@@ -3,11 +3,15 @@ defmodule Common.ModDB do
   The Mods context.
   """
 
+  require Logger
+  import Common.Utils, only: [debug: 1]
+
   alias Common.Repo
   alias Common.Schema.Mod
   # alias Common.Schema.ModFile
   alias Common.Schema.ModTag
   alias Common.Schema.Modlist
+  alias Common.Utils
 
   alias Ecto.Changeset
 
@@ -30,11 +34,13 @@ defmodule Common.ModDB do
   @doc """
   Creates a tag.
   """
-  @spec create_tag(change :: ModTag.change()) ::
+  @spec create_tag(change :: Utils.unclean_change()) ::
           {:ok, ModTag.t()} | {:error, Changeset.t(Mod.t())}
   def create_tag(change \\ %{}) do
+    clean_ch = ModTag.clean_changes(change)
+
     %ModTag{}
-    |> ModTag.changeset(change)
+    |> ModTag.changeset(clean_ch)
     |> Repo.insert()
   end
 
@@ -50,9 +56,18 @@ defmodule Common.ModDB do
   @doc """
   Creates a mod.
   """
-  @spec create_mod(change :: Mod.change()) :: {:ok, Mod.t()} | {:error, Changeset.t(Mod.t())}
+  @spec create_mod(change :: Utils.change()) :: {:ok, Mod.t()} | {:error, Changeset.t(Mod.t())}
   def create_mod(change \\ %{}) do
-    Mod.new(change) |> Repo.insert()
+    cs =
+      change
+      |> Mod.clean_changes()
+      |> Mod.new()
+
+    if cs.valid? do
+      Repo.insert(cs)
+    else
+      {:error, cs}
+    end
   end
 
   @doc """
@@ -66,11 +81,13 @@ defmodule Common.ModDB do
   @doc """
   Updates a mod.
   """
-  @spec update_mod(mod :: Mod.t(), change :: Mod.change()) ::
+  @spec update_mod(mod :: Mod.t(), change :: Utils.unclean_change()) ::
           {:ok, Mod.t()} | {:error, Changeset.t(Mod.t())}
   def update_mod(%Mod{} = mod, change) do
+    clean_change = Mod.clean_changes(change)
+
     mod
-    |> Mod.changeset(change)
+    |> Mod.changeset(clean_change)
     |> Repo.update()
   end
 
@@ -93,24 +110,32 @@ defmodule Common.ModDB do
   """
   @spec list_modlists() :: [Modlist.t()]
   def list_modlists(), do: Repo.all(Modlist)
+  # TODO needs paging
+
+  @spec get_modlist!(id :: Modlist.id()) :: Modlist.t()
+  def get_modlist!(id), do: Repo.get!(Modlist, id)
 
   @doc """
   Return the list of _all_ modlist.
   """
   @spec add_mod_to_list(list :: Modlist.t(), mod :: Mod.t()) ::
           {:ok, Modlist.t()} | {:error, Changeset.t(Modlist.t())}
-  def add_mod_to_list(list, _mod) do
-    cs = Modlist.changeset(list)
-    {:ok}
+  def add_mod_to_list(list, mod) do
+    _cs = Modlist.changeset(list)
+    # TODO
+    {:ok, list}
   end
 
   @doc """
   Creates a modlist.
   """
-  @spec create_modlist(change :: Modlist.change()) ::
+  @spec create_modlist(change :: Utils.unclean_change()) ::
           {:ok, Modlist.t()} | {:error, Changeset.t(Modlist.t())}
   def create_modlist(change \\ %{}) do
-    Modlist.new(change) |> Repo.insert()
+    change
+    |> Modlist.clean_changes()
+    |> Modlist.new()
+    |> Repo.insert()
   end
 
   @doc """
@@ -124,7 +149,7 @@ defmodule Common.ModDB do
   @doc """
   Updates a modlist.
   """
-  @spec update_modlist(Modlist.t(), change :: Modlist.change()) ::
+  @spec update_modlist(Modlist.t(), change :: Utils.unclean_change()) ::
           {:ok, Modlist.t()} | {:error, Changeset.t(Modlist.t())}
   def update_modlist(%Modlist{} = modlist, change) do
     modlist

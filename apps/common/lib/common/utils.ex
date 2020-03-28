@@ -1,6 +1,8 @@
 defmodule Common.Utils do
   @moduledoc "Module for utilities used across belethor."
 
+  require Logger
+
   @doc """
   Macro to correctly log debug messages.
 
@@ -32,11 +34,18 @@ defmodule Common.Utils do
       fn {attr, value}, acc ->
         case Map.get(vc, attr, :notfound) do
           :notfound ->
+            debug("cleaning changes: key '#{attr}' not found (and thus ignored)")
             acc
 
           {clean_attr, trans} ->
-            clean_value = trans.(value)
-            Map.put(acc, clean_attr, clean_value)
+            try do
+              clean_value = trans.(value)
+              Map.put(acc, clean_attr, clean_value)
+            rescue
+              x ->
+                debug("Errors during cleaning changes: #{inspect(x)}")
+                acc
+            end
         end
       end
     )
@@ -46,12 +55,16 @@ defmodule Common.Utils do
   this ensures you get a binary string back.
   only accepts binary inputs for now, duh.
   """
-  @spec to_string(input :: binary()) :: binary()
+  @spec to_string(input :: binary() | nil) :: binary()
+  def to_string(nil), do: ""
+
   def to_string(input) when is_binary(input) do
     input
   end
 
-  @spec to_bool(input :: binary()) :: bool()
+  @spec to_bool(input :: binary() | bool()) :: bool()
+  def to_bool(input) when is_boolean(input), do: input
+
   def to_bool(input) when is_binary(input) do
     case input do
       "true" -> true
